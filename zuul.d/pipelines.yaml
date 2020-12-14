@@ -4,7 +4,9 @@
       Newly uploaded patchsets enter this pipeline to receive an
       initial +/-1 Verified vote.
     success-message: Build succeeded (check pipeline).
-    failure-message: Build failed (check pipeline).
+    failure-message: |
+      Build failed (check pipeline).  For information on how to proceed, see
+      https://docs.opendev.org/opendev/infra-manual/latest/developers.html#automated-testing
     manager: independent
     precedence: low
     require:
@@ -27,5 +29,6 @@
       gerrit:
         # Note that gerrit keywords are case-sensitive.
         Verified: 1
+    failure:
       gerrit:
         Verified: -1
