@@ -2,7 +2,7 @@
     name: osci-lint
     description: "Run OSCI's lint task"
     run: playbooks/osci-lint/run.yaml
-    parent: base
+    parent: tox
     nodeset:
       nodes:
         - name: test-node
