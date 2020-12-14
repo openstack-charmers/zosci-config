@@ -1,6 +1,6 @@
-# - hosts: all
-#   roles:
-#     - fetch-tox-output
+- hosts: all
+  roles:
+    - fetch-tox-output
 - hosts: localhost
   gather_facts: False
   roles:

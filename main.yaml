@@ -9,6 +9,7 @@
       opendev:
         untrusted-projects:
           - zuul/zuul-jobs
+              shadow: chrismacnaughton/zosci-config
       gerrit:
         untrusted-projects:
           - openstack/charm-ceph-mon:
