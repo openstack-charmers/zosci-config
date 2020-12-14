@@ -1,0 +1,11 @@
+- job:
+    name: base
+    pre-run: copy-git-repos
+    post-run: copy-logs
+- job:
+    name: osci-lint
+    parent: base
+    nodeset:
+      nodes:
+        - name: test-node
+          label: bionic-small
