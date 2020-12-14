@@ -1,7 +1,10 @@
 - hosts: all
+  # tasks:
+  #   - name: Ensure tox
+  #     include_role:
+  #       name: ensure-tox
+  #   - name: Run tox
+  #     command: "tox -e pep8"
   tasks:
-    - name: Ensure tox
-      include_role:
-        name: ensure-tox
-    - name: Run tox
-      command: "tox -e pep8"
+    - name: 'Echo True!'
+      command: 'echo True'
