@@ -9,6 +9,9 @@
       nodes:
         - name: bionic-small
           label: bionic-small
+
+    secrets: &log_clouds
+      - serverstack_cloud
 - job:
     name: osci-lint
     description: "Run OSCI's lint task"
