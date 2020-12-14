@@ -4,6 +4,8 @@
     post-run: copy-logs
 - job:
     name: osci-lint
+
+    run: playbooks/osci-lint/run.yaml
     parent: base
     nodeset:
       nodes:

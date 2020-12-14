@@ -5,7 +5,9 @@
     source:
       gerrit:
         untrusted-projects:
-          - openstack/charm-ceph-mon
+          - openstack/charm-ceph-mon:
+              extra-config-paths:
+                - osci.yaml
       github-git:
         config-projects:
           - chrismacnaughton/zosci-config
