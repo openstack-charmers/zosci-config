@@ -7,8 +7,8 @@
     timeout: 1800
     nodeset:
       nodes:
-        - name: ubuntu-bionic
-          label: ubuntu-bionic
+        - name: bionic-small
+          label: bionic-small
 - job:
     name: osci-lint
     description: "Run OSCI's lint task"
