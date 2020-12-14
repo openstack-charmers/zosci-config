@@ -8,7 +8,7 @@
           - chrismacnaughton/zosci-config
       opendev:
         untrusted-projects:
-          - zuul/zuul-jobs
+          - zuul/zuul-jobs:
               shadow: chrismacnaughton/zosci-config
       gerrit:
         untrusted-projects:
