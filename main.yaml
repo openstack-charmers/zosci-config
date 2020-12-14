@@ -4,7 +4,8 @@
     report-build-page: true
     source:
       gerrit:
-        # config-projects:
-        #   - chrismacnaughton/zosci-config
         untrusted-projects:
           - openstack/charm-ceph-mon
+      github-git:
+        config-projects:
+          - chrismacnaughton/zosci-config
