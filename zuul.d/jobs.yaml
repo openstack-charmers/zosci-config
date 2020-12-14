@@ -2,6 +2,13 @@
     name: base
     pre-run: playbooks/osci-lint/pre.yaml
     post-run: playbooks/osci-lint/post.yaml
+    roles:
+      - zuul: zuul/zuul-jobs
+    timeout: 1800
+    nodeset:
+      nodes:
+        - name: ubuntu-bionic
+          label: ubuntu-bionic
 - job:
     name: osci-lint
     description: "Run OSCI's lint task"
