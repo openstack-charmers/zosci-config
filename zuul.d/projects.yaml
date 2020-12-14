@@ -1,4 +1,6 @@
 - project:
     name: openstack/charm-ceph-mon
+    extra-config-paths: 
+      - osci.yaml
     # templates:
     #   - official-openstack-repo-jobs
