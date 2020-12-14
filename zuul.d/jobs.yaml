@@ -1,7 +1,7 @@
 - job:
     name: base
-#     pre-run: playbooks/osci-lint/pre.yaml
-#     post-run: playbooks/osci-lint/post.yaml
+    pre-run: playbooks/osci-lint/pre.yaml
+    post-run: playbooks/osci-lint/post.yaml
 - job:
     name: osci-lint
     description: "Run OSCI's lint task"
