@@ -1,0 +1,12 @@
+- project-template:
+    name: python35-charm-jobs
+    description: |
+      placeholder
+- project-template:
+    name: openstack-python3-ussuri-jobs
+    description: |
+      placeholder
+- project-template:
+    name: openstack-cover-jobs
+    description: |
+      placeholder
