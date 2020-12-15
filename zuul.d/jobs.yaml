@@ -28,7 +28,7 @@
     secrets:
       - serverstack_cloud
     run: playbooks/juju-bootstrap/run.yaml
-    post: playbooks/juju-bootstrap/post.yaml
+    post-run: playbooks/juju-bootstrap/post.yaml
 
 - job:
     name: func-target
