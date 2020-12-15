@@ -1,4 +1,4 @@
-- hosts: localhost
+- hosts: all
   tasks:
   - name: Include Zuul manifest role
     include_role:
