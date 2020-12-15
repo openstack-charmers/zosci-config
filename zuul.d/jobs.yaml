@@ -22,9 +22,18 @@
           label: bionic-small
 
 - job:
+    name: juju-bootstrap
+    description: Bootstrap a Juju controller on OpenStack
+    parent: tox
+    secrets:
+      - serverstack_cloud
+    run: playbooks/juju-bootstrap/run.yaml
+    post: playbooks/juju-bootstrap/post.yaml
+
+- job:
     name: func-target
     description: Run a functional test
-    parent: tox
+    parent: juju-bootstrap
     vars:
       tox_envlist: func-target
 

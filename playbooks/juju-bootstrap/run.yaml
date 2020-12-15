@@ -1,0 +1,18 @@
+- hosts: all
+  tasks:
+    - name: 'Install Juju'
+      command: snap install juju --classic
+    - name: Render juju cloud.yaml
+      template:
+        src: cloud.yaml.j2
+        dest: cloud.yaml
+    - name: Add cloud
+      command: juju add-cloud --client {{ region }} cloud.yaml
+    - name: 'render credentials.yaml'
+      template:
+        src: credentials.yaml.j2
+        dest: credentials.yaml
+    - name: Add credential
+      command: juju add-credentials {{ region }} --client -f credentials.yaml
+    - name: 'Bootstrap Controller'
+      command: juju bootstrap {{ region }}/{{ region }}
