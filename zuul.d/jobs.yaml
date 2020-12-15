@@ -9,7 +9,6 @@
       nodes:
         - name: bionic-small
           label: bionic-small
-
     secrets: &log_clouds
       - serverstack_cloud
 - job:
@@ -21,3 +20,17 @@
       nodes:
         - name: test-node
           label: bionic-small
+
+- job:
+    name: func-target
+    description: Run a functional test
+    parent: tox
+    vars:
+      tox_envlist: func-target
+
+- job:
+    name: bionic-queens
+    description: Run a functional test against bionic-queens
+    parent: func-target
+    vars:
+      tox_extra_args: bionic-queens
