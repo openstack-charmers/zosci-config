@@ -49,7 +49,7 @@
     # queue: functional-test
     vars:
       tox_envlist: func-target
-    secrets: &log_clouds
+    secrets:
       - serverstack_cloud
 
 - job:
