@@ -42,6 +42,16 @@
     # dependencies:
     #   - charm-build
     semaphore: functional-test
+    # as an alternate to semaphores, or along side them, we could define
+    # a custom node label to use for the func jobs. This would have a potential
+    # advantage of allowing us to pre-bake in cloud credentials and such in
+    # addition to other node preparation we could do (snap install juju,
+    # juju add-cloud, etc)
+    #
+    # nodeset:
+    #   nodes:
+    #     - name: bionic-small
+    #       label: bionic-small
     # requires: charm
     # queue: functional-test
     vars:
