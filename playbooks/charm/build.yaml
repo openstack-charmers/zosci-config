@@ -1,0 +1,27 @@
+- hosts: all
+  tasks:
+    - name: 'source charm'
+      when: charm_buildable.rc == 0
+      command: {{ tox_executable }} -e build
+      zuul_return:
+        data:
+          zuul:
+            artifacts:
+              - name: charm
+                url: builds/build/*
+    - name: 'classic charm'
+      when: charm_buildable.rc == 1
+      command: /bin/true
+      zuul_return:
+        data:
+          zuul:
+            artifacts:
+              - name: charm
+                url: {{ zuul.executor.src_root }}
+    - name: Check if charm is source charm
+      shell: |
+        [[ -d src ]]
+      args:
+        executable: /bin/bash
+      register: charm_buildable
+      failed_when: false

@@ -27,16 +27,17 @@
     run: playbooks/juju-bootstrap/run.yaml
     post-run: playbooks/juju-bootstrap/post.yaml
 
-# - job:
-#     name: charm-build
-#     description: Build a charm if necessary
-#     provides: deployable-charm
+- job:
+    name: charm-build
+    description: Build a charm if necessary
+    provides: deployable-charm
+    run: playbooks/charm/build.yaml
 
 - job:
     name: func-target
     description: Run a functional test
     parent: juju-bootstrap
-    # requires: deployable-charm
+    requires: deployable-charm
     vars:
       tox_envlist: func-target
 
