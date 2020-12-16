@@ -7,12 +7,12 @@
         src: clouds.yaml.j2
         dest: clouds.yaml
     - name: Add cloud
-      command: juju add-cloud --client {{ region }} clouds.yaml
+      command: juju add-cloud --client {{ region_name }} clouds.yaml
     - name: 'render credentials.yaml'
       template:
         src: credentials.yaml.j2
         dest: credentials.yaml
     - name: Add credential
-      command: juju add-credentials {{ region }} --client -f credentials.yaml
+      command: juju add-credentials {{ region_name }} --client -f credentials.yaml
     - name: 'Bootstrap Controller'
-      command: juju bootstrap {{ region }}/{{ region }}
+      command: juju bootstrap {{ region_name }}/{{ region_name }}

@@ -2,5 +2,5 @@
   tasks:
     - name: 'tear down controller'
       command: >
-        timeout 900 juju destroy-controller --destroy-storage --destroy-all-models -y {{ region }} ||\
-        timeout 900 juju kill-controller -t 60s -y {{ region }}
+        timeout 900 juju destroy-controller --destroy-storage --destroy-all-models -y {{ region_name }} ||\
+        timeout 900 juju kill-controller -t 60s -y {{ region_name }}
