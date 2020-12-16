@@ -26,19 +26,12 @@
 #     run: playbooks/charm/build.yaml
 
 - job:
-    name: juju-bootstrap
-    description: Bootstrap a Juju controller on OpenStack
-    parent: tox
-    secrets:
-      - serverstack_cloud
-    run: playbooks/juju-bootstrap/run.yaml
-    post-run: playbooks/juju-bootstrap/post.yaml
-
-- job:
     name: func-target
     description: Run a functional test
     parent: juju-bootstrap
     attempts: 2
+    pre-run: playbooks/juju-bootstrap/run.yaml
+    post-run: playbooks/juju-bootstrap/post.yaml
     # dependencies:
     #   - charm-build
     semaphore: functional-test
