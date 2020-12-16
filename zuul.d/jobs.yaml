@@ -29,7 +29,7 @@
     name: func-target
     description: Run a functional test
     parent: tox
-    attempts: 2
+    attempts: 1 # this should be updated to two once the jobs are stable
     pre-run: playbooks/juju-bootstrap/run.yaml
     post-run: playbooks/juju-bootstrap/post.yaml
     # dependencies:
