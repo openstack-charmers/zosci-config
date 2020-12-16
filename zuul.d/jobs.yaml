@@ -37,6 +37,7 @@
     name: func-target
     description: Run a functional test
     parent: juju-bootstrap
+    attempts: 2
     dependencies:
       - charm-build
     # queue: functional-test
