@@ -30,8 +30,8 @@
     description: Run a functional test
     parent: tox
     attempts: 1 # this should be updated to two once the jobs are stable
-    pre-run: playbooks/juju-bootstrap/run.yaml
-    post-run: playbooks/juju-bootstrap/post.yaml
+    pre-run: playbooks/juju/pre.yaml
+    post-run: playbooks/juju/post.yaml
     # dependencies:
     #   - charm-build
     semaphore: functional-test
