@@ -1,8 +1,8 @@
 clouds:
-  {{ region_name }}:
+  {{ serverstack_cloud.region_name }}:
     type: openstack
     auth-types: [userpass]
-    endpoint: {{ auth_url }}
+    endpoint: {{ serverstack_cloud.auth_url }}
     regions:
-      {{ region_name }}:
-        endpoint: {{ auth_url }}
+      {{ serverstack_cloud.region_name }}:
+        endpoint: {{ serverstack_cloud.auth_url }}
