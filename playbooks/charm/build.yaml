@@ -24,4 +24,4 @@
           zuul:
             artifacts:
               - name: charm
-                url: {{ zuul.executor.src_root }}
+                url: "{{ zuul.executor.src_root }}"
