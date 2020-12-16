@@ -10,18 +10,10 @@
     - name: 'source charm'
       when: charm_buildable.rc == 0
       command: "{{ tox_executable }} -e build"
-      zuul_return:
-        data:
-          zuul:
-            artifacts:
-              - name: charm
-                url: builds/build/*
+      set_fact:
+        charm_path: "{{ zuul.executor.src_root }}/builds/build/*"
     - name: 'classic charm'
       when: charm_buildable.rc == 1
       command: /bin/true
-      zuul_return:
-        data:
-          zuul:
-            artifacts:
-              - name: charm
-                url: "{{ zuul.executor.src_root }}"
+      set_fact:
+        charm_path: "{{ zuul.executor.src_root }}"
