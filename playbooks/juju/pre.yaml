@@ -21,3 +21,6 @@
       copy:
         src: "{{ zuul.executor.work_root }}/{{ zuul.project.src_dir }}"
         dest: "{{ zuul.executor.work_root }}/{{ zuul.project.src_dir | replace('charm-', '') }}"
+    - name: Log what the charm's parent directory looks like
+      command: >
+        ls -al {{ zuul.executor.work_root }}/{{ zuul.project.src_dir }}/../        
