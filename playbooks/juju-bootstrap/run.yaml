@@ -13,6 +13,6 @@
         src: credentials.yaml.j2
         dest: credentials.yaml
     - name: Add credential
-      command: /snap/bin/juju add-credentials {{ serverstack_cloud.region_name }} --client -f credentials.yaml
+      command: /snap/bin/juju add-credential {{ serverstack_cloud.region_name }} --client -f credentials.yaml
     - name: 'Bootstrap Controller'
       command: /snap/bin/juju bootstrap {{ serverstack_cloud.region_name }}/{{ serverstack_cloud.region_name }}
