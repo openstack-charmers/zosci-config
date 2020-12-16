@@ -7,7 +7,7 @@
         dest: "{{ zuul.executor.work_root }}/{{ zuul.project.src_dir | replace('charm-', '') }}"
     - name: Log what the charm's parent directory looks like
       command: >
-        ls -al {{ zuul.executor.work_root }}/{{ zuul.project.src_dir }}/../
+        ls -al {{ zuul.executor.work_root }}/src/10.245.164.94/openstack
     - name: 'Install Juju'
       command: sudo snap install juju --classic
     - name: Render juju clouds.yaml
