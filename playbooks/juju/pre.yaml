@@ -1,5 +1,13 @@
 - hosts: all
   tasks:
+    - name: hack around juju's reluctance to deploy misnamed directories
+      become: true
+      copy:
+        src: "{{ zuul_work_dir }}"
+        dest: "{{ zuul_work_dir | replace('charm-', '') }}"
+    - name: Log what the charm's parent directory looks like
+      command: >
+        ls -al {{ zuul.executor.work_root }}/{{ zuul.project.src_dir }}/../  
     - name: 'Install Juju'
       command: sudo snap install juju --classic
     - name: Render juju clouds.yaml
@@ -16,11 +24,4 @@
       command: /snap/bin/juju add-credential {{ serverstack_cloud.region_name }} --client -f credentials.yaml
     - name: 'Bootstrap Controller'
       command: /snap/bin/juju bootstrap {{ serverstack_cloud.region_name }}/{{ serverstack_cloud.region_name }}
-    - name: hack around juju's reluctance to deploy misnamed directories
-      become: true
-      copy:
-        src: "{{ zuul_work_dir }}"
-        dest: "{{ zuul_work_dir | replace('charm-', '') }}"
-    - name: Log what the charm's parent directory looks like
-      command: >
-        ls -al {{ zuul.executor.work_root }}/{{ zuul.project.src_dir }}/../        
+      
