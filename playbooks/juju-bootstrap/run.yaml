@@ -2,7 +2,7 @@
   tasks:
     - name: 'Install Juju'
       command: sudo snap install juju --classic
-    - name: Render juju cloud.yaml
+    - name: Render juju clouds.yaml
       template:
         src: clouds.yaml.j2
         dest: clouds.yaml
