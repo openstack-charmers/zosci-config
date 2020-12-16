@@ -19,6 +19,12 @@
       tox_envlist: pep8
 
 - job:
+    name: charm-build
+    description: Build a source charm into a deployable charm
+    parent: tox
+    run: playbooks/charm/build.yaml
+
+- job:
     name: juju-bootstrap
     description: Bootstrap a Juju controller on OpenStack
     parent: tox
@@ -31,7 +37,8 @@
     name: func-target
     description: Run a functional test
     parent: juju-bootstrap
-    pre-run: playbooks/charm/build.yaml
+    dependencies:
+      - charm-build
     # queue: functional-test
     vars:
       tox_envlist: func-target
