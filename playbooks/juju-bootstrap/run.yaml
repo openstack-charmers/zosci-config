@@ -17,5 +17,6 @@
     - name: 'Bootstrap Controller'
       command: /snap/bin/juju bootstrap {{ serverstack_cloud.region_name }}/{{ serverstack_cloud.region_name }}
     - name: hack around juju's reluctance to deploy misnamed directories
-      command: >
-        "cp -r {{ zuul.executor.work_root }}/{{ zuul.project.src_dir }} {{ zuul.executor.work_root }}/{{ zuul.project.src_dir | replace('charm-', '') }}"
+      copy:
+        src: "{{ zuul.executor.work_root }}/{{ zuul.project.src_dir }}"
+        dest: "{{ zuul.executor.work_root }}/{{ zuul.project.src_dir | replace('charm-', '') }}"
