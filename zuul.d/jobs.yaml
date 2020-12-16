@@ -38,7 +38,7 @@
     description: Run a functional test
     parent: juju-bootstrap
     requires: deployable-charm
-    queue: functional-test
+    # queue: functional-test
     vars:
       tox_envlist: func-target
 
