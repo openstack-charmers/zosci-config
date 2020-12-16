@@ -2,7 +2,7 @@
   tasks:
     - name: hack around juju's reluctance to deploy misnamed directories
       copy:
-        src: "/home/ubuntu/{{ zuul.project.src_dir }}"
+        src: "/home/ubuntu/{{ zuul.project.src_dir }}/"
         dest: "/home/ubuntu/{{ zuul.project.src_dir | replace('charm-', '') }}"
         remote_src: yes
     - name: Log what the charm's parent directory looks like
