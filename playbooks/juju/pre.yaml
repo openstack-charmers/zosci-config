@@ -1,7 +1,6 @@
 - hosts: all
   tasks:
     - name: hack around juju's reluctance to deploy misnamed directories
-      become: true
       copy:
         src: "/home/ubuntu/{{ zuul.project.src_dir }}"
         dest: "/home/ubuntu/{{ zuul.project.src_dir | replace('charm-', '') }}"
