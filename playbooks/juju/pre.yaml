@@ -2,8 +2,9 @@
   tasks:
     - name: hack around juju's reluctance to deploy misnamed directories
       copy:
-        remote_src: "/home/ubuntu/{{ zuul.project.src_dir }}"
+        src: "/home/ubuntu/{{ zuul.project.src_dir }}"
         dest: "/home/ubuntu/{{ zuul.project.src_dir | replace('charm-', '') }}"
+        remote_src: yes
     - name: Log what the charm's parent directory looks like
       command: >
         ls -al /home/ubuntu/src/10.245.164.94/openstack
