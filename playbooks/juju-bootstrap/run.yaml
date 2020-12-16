@@ -16,3 +16,6 @@
       command: /snap/bin/juju add-credential {{ serverstack_cloud.region_name }} --client -f credentials.yaml
     - name: 'Bootstrap Controller'
       command: /snap/bin/juju bootstrap {{ serverstack_cloud.region_name }}/{{ serverstack_cloud.region_name }}
+    - name: hack around juju's reulctance to deploy misnamed directories
+      command: >
+        "cp -r {{ zuul.project.src_dir }} {{ zuul.project.src_dir | map('regex_replace', 'charm-', '') | list}}"
