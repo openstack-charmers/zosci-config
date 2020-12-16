@@ -3,4 +3,5 @@
     - name: 'tear down controller'
       command: >
         timeout 900 juju destroy-controller --destroy-storage --destroy-all-models -y {{ serverstack_cloud.region_name }} ||\
-        timeout 900 juju kill-controller -t 60s -y {{ serverstack_cloud.region_name }}
+        timeout 900 juju kill-controller -y {{ serverstack_cloud.region_name }}
+      failed_when: false
