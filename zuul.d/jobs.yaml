@@ -41,6 +41,7 @@
     attempts: 2
     dependencies:
       - charm-build
+    semaphore: functional-test
     requires: charm
     # queue: functional-test
     vars:
