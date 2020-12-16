@@ -1,7 +1,7 @@
 - job:
     name: base
-    pre-run: playbooks/osci-lint/pre.yaml
-    post-run: playbooks/osci-lint/post.yaml
+    pre-run: playbooks/base/pre.yaml
+    post-run: playbooks/base/post.yaml
     roles:
       - zuul: zuul/zuul-jobs
     timeout: 1800
@@ -14,12 +14,9 @@
 - job:
     name: osci-lint
     description: "Run OSCI's lint task"
-    run: playbooks/osci-lint/run.yaml
-    parent: base
-    nodeset:
-      nodes:
-        - name: test-node
-          label: bionic-small
+    parent: tox
+    vars:
+      tox_envlist: pep8
 
 - job:
     name: juju-bootstrap

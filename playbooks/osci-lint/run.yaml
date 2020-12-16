@@ -1,4 +1,0 @@
-- hosts: all
-  tasks:
-  - name: Run tox
-    command: "tox -e pep8"
