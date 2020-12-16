@@ -38,6 +38,7 @@
     name: func-target
     description: Run a functional test
     parent: configure-juju
+    timeout: 7200
     attempts: 1 # this should be updated to two once the jobs are stable
     # dependencies:
     #   - charm-build
