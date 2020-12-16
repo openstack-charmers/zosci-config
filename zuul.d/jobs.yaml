@@ -28,7 +28,7 @@
 - job:
     name: func-target
     description: Run a functional test
-    parent: juju-bootstrap
+    parent: tox
     attempts: 2
     pre-run: playbooks/juju-bootstrap/run.yaml
     post-run: playbooks/juju-bootstrap/post.yaml
