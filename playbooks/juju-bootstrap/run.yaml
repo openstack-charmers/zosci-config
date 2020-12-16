@@ -4,10 +4,10 @@
       command: sudo snap install juju --classic
     - name: Render juju cloud.yaml
       template:
-        src: cloud.yaml.j2
-        dest: cloud.yaml
+        src: clouds.yaml.j2
+        dest: clouds.yaml
     - name: Add cloud
-      command: juju add-cloud --client {{ region }} cloud.yaml
+      command: juju add-cloud --client {{ region }} clouds.yaml
     - name: 'render credentials.yaml'
       template:
         src: credentials.yaml.j2
