@@ -26,12 +26,17 @@
 #     run: playbooks/charm/build.yaml
 
 - job:
+    name: configure-juju
+    description: Sets up a Juju controller for this test environment
+    parent: tox
+    pre-run: playbooks/juju/pre.yaml
+    cleanup-run: playbooks/juju/post.yaml
+
+- job:
     name: func-target
     description: Run a functional test
-    parent: tox
+    parent: configure-juju
     attempts: 1 # this should be updated to two once the jobs are stable
-    pre-run: playbooks/juju/pre.yaml
-    post-run: playbooks/juju/post.yaml
     # dependencies:
     #   - charm-build
     semaphore: functional-test
@@ -45,8 +50,6 @@
     #   nodes:
     #     - name: bionic-small
     #       label: bionic-small
-    # requires: charm
-    # queue: functional-test
     vars:
       tox_envlist: func-target
     secrets:
