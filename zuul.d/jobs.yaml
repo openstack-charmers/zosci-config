@@ -49,6 +49,8 @@
     # queue: functional-test
     vars:
       tox_envlist: func-target
+    secrets: &log_clouds
+      - serverstack_cloud
 
 - job:
     name: bionic-queens
