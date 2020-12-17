@@ -40,3 +40,7 @@
     check:
       jobs:
         - osci-lint
+        - tox-py35
+        - tox-py36
+        - tox-py37
+        - tox-py38
