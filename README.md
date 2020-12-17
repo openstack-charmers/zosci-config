@@ -161,3 +161,13 @@ The above results were posted after a partially successful run of a subset
 of the Ceph example above:
 
 ![zuul-ceph-mon](images/zuul-ceph-mon.png)
+
+## Potential improvements
+
+### Per test OpenStack tenant
+
+There are some possible improvements over the current example presented here,
+including potentially creating a new OpenStack tenant for each functional test.
+Because we control the test environment via ansible, it would be possible to
+create a tenant in the setup steges of a functional test, and remove that
+tenant's resources and the tenant itself in a cleanup stage.
