@@ -1,7 +1,7 @@
 - hosts: all
   tasks:
     - name: "apt-get update"
-    become: yes
+      become: yes
       apt:
         update_cache: yes
   roles:
