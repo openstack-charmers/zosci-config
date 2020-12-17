@@ -15,11 +15,15 @@ as operator); however, we can generally summarize them the same:
 
 The last line above deserves special attention. With OSCI, the last step is
 performed with the `func-smoke` or `func` `tox` targets, asking Zaza to run
-the whole test quite in series, for example: 
+the whole test suite in series, for example: 
 
 ```
 bionic-stein -> bionic-rocky -> bionic-queens
 ```
+
+In addition to the test lifecycle above, OSCI Jenkins also performs release
+related tasks such as publishing artifacts to the charmstore and scheduled
+versions of the above as well.
 
 With Zuul, we can configure the functional testing to be performed in a more
 parallel fashion, with steps optionally depending on a step before them. For
@@ -27,6 +31,13 @@ example, it's possible for us to have jobs defined such that a `charm-build`
 job is performed before a `func-test` job. In addition, jobs would be defined
 in a more centralized fashion, by default, without restricting our ability to
 define jobs in a specific repo.
+
+Zuul can run scheduled tasks as well, so we should be able to replicate our
+regularly scheduled test runs as desired.
+
+It is possible for us to define pipelines for different parts of the change
+lifecycle, so that we could add a job to Zuul to publish resources after the
+change has landed upstream but that hasn't been encoded in this evaluation.
 
 To further explore what this looks like, the following sections will describe
 common tasks that must be performed and what they look like for both Jenkins
