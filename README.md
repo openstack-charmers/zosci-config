@@ -58,7 +58,7 @@ as easy as adding the new item to the default jobs that we run for every charm.
 
 When a developer wants to test their changes in OSCI, the current setup
 defaults to just running a smoke test. One downside of this is that all
-supported release combinations aren't tested for evety change; however, it
+supported release combinations aren't tested for every change; however, it
 does allow us to get test results on a change reasonably quickly (around an
 hour, generally).
 
@@ -180,5 +180,5 @@ of the Ceph example above:
 There are some possible improvements over the current example presented here,
 including potentially creating a new OpenStack tenant for each functional test.
 Because we control the test environment via ansible, it would be possible to
-create a tenant in the setup steges of a functional test, and remove that
+create a tenant in the setup stages of a functional test, and remove that
 tenant's resources and the tenant itself in a cleanup stage.
