@@ -1,6 +1,7 @@
 - hosts: all
   tasks:
     - name: 'install crashdump'
+      become: true
       snap:
         name: juju-crashdump
         classic: yes
