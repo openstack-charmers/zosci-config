@@ -1,4 +1,8 @@
 - hosts: all
+  tasks:
+    - name: "apt-get update"
+      apt:
+        update_cache: yes
   roles:
     - add-build-sshkey
     - prepare-workspace
@@ -13,9 +17,3 @@
     - log-inventory
     - ensure-python
     - ensure-tox
-  tasks:
-    - name: "apt-get update && apt-get upgrade"
-      apt:
-        name: "*"
-        state: latest
-        update_cache: yes
