@@ -10,3 +10,33 @@
     name: openstack-cover-jobs
     description: |
       placeholder
+- project-template:
+    name: charm-functional-jobs
+    description: |
+      The default set of functional test jobs for the OpenStack Charms
+    check:
+      jobs:
+        - bionic-queens
+        - bionic-rocky
+        - groovy-victoria
+        - focal-victoria
+        - focal-ussuri-ec
+        - focal-ussuri
+        - bionic-ussuri
+        - bionic-train
+        - bionic-train-with-fsid
+        - bionic-stein
+        - bionic-rocky
+        - bionic-queens
+        - xenial-queens
+        - xenial-pike
+        - xenial-ocata
+        - xenial-mitaka
+        - trusty-mitaka
+- project-template:
+    name: charm-unit-jobs
+    description: |
+      The default set of unit tests and lint checks for the OpenStack Charms
+    check:
+      jobs:
+        - osci-lint
