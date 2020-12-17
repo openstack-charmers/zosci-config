@@ -47,6 +47,7 @@
     description: Sets up a Juju controller for this test environment
     parent: tox
     pre-run: playbooks/juju/pre.yaml
+    post-run: playbooks/juju/post.yaml
     cleanup-run: playbooks/juju/cleanup.yaml
     secrets:
       - serverstack_cloud

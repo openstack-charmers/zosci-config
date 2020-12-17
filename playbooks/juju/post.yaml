@@ -1,0 +1,8 @@
+- hosts: all
+  tasks:
+    - name: 'install crashdump'
+      snap:
+        name: juju-crashdump
+        classic: yes
+    - name: 'crashdump'
+      command: juju-crashdump -o "{{ zuul.executor.log_root }}"
