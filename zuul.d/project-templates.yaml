@@ -40,7 +40,8 @@
     check:
       jobs:
         - osci-lint
-        - tox-py35
+        - tox-py35:
+            nodeset: ubuntu-xenial
         - tox-py36
         - tox-py37
         - tox-py38
