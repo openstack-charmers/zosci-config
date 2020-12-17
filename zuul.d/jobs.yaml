@@ -18,6 +18,22 @@
     vars:
       tox_envlist: pep8
 
+- job:
+    name: tox-py35
+    parent: tox
+    description: |
+      Run unit tests for a Python project under cPython version 3.5.
+
+      Uses tox with the ``py35`` environment.
+
+    nodeset:
+      nodes:
+        - name: xenial-medium
+          label: xenial-medium
+    vars:
+      tox_envlist: py35
+      python_version: 3.5
+
 # - job:
 #     name: charm-build
 #     description: Build a source charm into a deployable charm
