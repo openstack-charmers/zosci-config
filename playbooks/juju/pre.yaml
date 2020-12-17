@@ -8,8 +8,17 @@
     - name: Log what the charm's parent directory looks like
       command: >
         ls -al /home/ubuntu/src/10.245.164.94/openstack
-    - name: 'Install Juju'
-      command: sudo snap install juju --classic
+
+    - name: 'install crashdump'
+      become: true
+      snap:
+        name: juju-crashdump
+        classic: yes
+    - name: 'install juju'
+      become: true
+      snap:
+        name: juju
+        classic: yes
     - name: Render juju clouds.yaml
       template:
         src: clouds.yaml.j2
