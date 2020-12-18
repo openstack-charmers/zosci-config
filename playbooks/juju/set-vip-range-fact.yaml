@@ -12,3 +12,7 @@
     - name: set CIDR ext
       set_fact:
         cidr_ext: "{{ network }}.0/24"
+    - debug:
+        val: network
+    - debug:
+        val: cidr_ext
