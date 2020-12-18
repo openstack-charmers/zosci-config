@@ -1,5 +1,7 @@
 - hosts: all
   tasks:
+    - debug:
+        var: network
     # setup networking
     - name: get ip
       shell: ip a | grep 10.5 | awk '{print $2}' | awk -F '/' '{print $1}'
