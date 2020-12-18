@@ -1,7 +1,5 @@
 - hosts: all
   tasks:
-    - debug:
-        var: network
     # setup networking
     - name: get ip
       shell: ip a | grep 10.5 | awk '{print $2}' | awk -F '/' '{print $1}'
@@ -12,3 +10,5 @@
       set_fact:
         cidr_ext: 172.16.{{ ip_out.stdout.split('.')[-1]}}.0/24
         network: 172.16.{{ ip_out.stdout.split('.')[-1]}}
+    - debug:
+        var: network
