@@ -72,7 +72,7 @@
     #   nodes:
     #     - name: bionic-medium
     #       label: bionic-medium
-    pre-run: playbooks/juju/set-vip-range-fact.yaml
+    run: playbooks/juju/run.yaml
     vars:
       tox_environment:
         TEST_CIDR_EXT: "{{ cidr_ext }}"
