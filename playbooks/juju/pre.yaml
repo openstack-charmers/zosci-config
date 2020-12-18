@@ -5,10 +5,12 @@
         src: "/home/ubuntu/{{ zuul.project.src_dir }}/"
         dest: "/home/ubuntu/{{ zuul.project.src_dir | replace('charm-', '') }}"
         remote_src: yes
-    # setup networking
-    - name: Add route to zuul-tests network
+    - name: 'install crashdump'
       become: true
-      command: 'ip route add 172.16.0.0/16 via 10.245.164.141'
+      snap:
+        name: juju-crashdump
+        classic: yes
+    # setup networking
     - name: get ip
       shell: ip a | grep 10.5 | awk '{print $2}' | awk -F '/' '{print $1}'
       args:
@@ -52,11 +54,6 @@
           TEST_VIP={{ network }}.230
           TEST_VIP_RANGE="{{ network }}.230:{{ network }}.250"
     # Setup Juju
-    - name: 'install crashdump'
-      become: true
-      snap:
-        name: juju-crashdump
-        classic: yes
     - name: 'install juju'
       become: true
       snap:
