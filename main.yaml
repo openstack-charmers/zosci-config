@@ -16,3 +16,7 @@
               extra-config-paths:
                 - osci.yaml
                 - osci.d/
+          - openstack/charm-keystone:
+              extra-config-paths:
+                - osci.yaml
+                - osci.d/
