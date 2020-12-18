@@ -5,34 +5,7 @@
         src: "/home/ubuntu/{{ zuul.project.src_dir }}/"
         dest: "/home/ubuntu/{{ zuul.project.src_dir | replace('charm-', '') }}"
         remote_src: yes
-    - name: Log what the charm's parent directory looks like
-      command: >
-        ls -al /home/ubuntu/src/10.245.164.94/openstack
-
-    - name: 'install crashdump'
-      become: true
-      snap:
-        name: juju-crashdump
-        classic: yes
-    - name: 'install juju'
-      become: true
-      snap:
-        name: juju
-        classic: yes
-    - name: Render juju clouds.yaml
-      template:
-        src: clouds.yaml.j2
-        dest: clouds.yaml
-    - name: Add cloud
-      command: /snap/bin/juju add-cloud --client {{ serverstack_cloud.region_name }} clouds.yaml
-    - name: 'render credentials.yaml'
-      template:
-        src: credentials.yaml.j2
-        dest: credentials.yaml
-    - name: Add credential
-      command: /snap/bin/juju add-credential {{ serverstack_cloud.region_name }} --client -f credentials.yaml
-    - name: 'Bootstrap Controller'
-      command: /snap/bin/juju bootstrap {{ serverstack_cloud.region_name }}/{{ serverstack_cloud.region_name }}
+    # setup networking
     - name: Add route to zuul-tests network
       command: 'ip route add 172.16.0.0/16 via 10.245.164.141'
     - name: get ip
@@ -77,3 +50,28 @@
           TEST_VIP20={{ network }}.250
           TEST_VIP={{ network }}.230
           TEST_VIP_RANGE="{{ network }}.230:{{ network }}.250"
+    # Setup Juju
+    - name: 'install crashdump'
+      become: true
+      snap:
+        name: juju-crashdump
+        classic: yes
+    - name: 'install juju'
+      become: true
+      snap:
+        name: juju
+        classic: yes
+    - name: Render juju clouds.yaml
+      template:
+        src: clouds.yaml.j2
+        dest: clouds.yaml
+    - name: Add cloud
+      command: /snap/bin/juju add-cloud --client {{ serverstack_cloud.region_name }} clouds.yaml
+    - name: 'render credentials.yaml'
+      template:
+        src: credentials.yaml.j2
+        dest: credentials.yaml
+    - name: Add credential
+      command: /snap/bin/juju add-credential {{ serverstack_cloud.region_name }} --client -f credentials.yaml
+    - name: 'Bootstrap Controller'
+      command: /snap/bin/juju bootstrap {{ serverstack_cloud.region_name }}/{{ serverstack_cloud.region_name }}
