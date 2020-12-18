@@ -18,8 +18,8 @@
       register: ip_out
     - name: set test VIP CIDR
       set_fact:
-        cidr_ext=172.16.{{ ip_out.stdout.split('.')[-1]}}.0/24
-        network=172.16.{{ ip_out.stdout.split('.')[-1]}}.
+        cidr_ext: 172.16.{{ ip_out.stdout.split('.')[-1]}}.0/24
+        network: 172.16.{{ ip_out.stdout.split('.')[-1]}}.
     # Setup Juju
     - name: 'install juju'
       become: true
