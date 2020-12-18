@@ -13,6 +13,6 @@
       set_fact:
         cidr_ext: "{{ network }}.0/24"
     - debug:
-        val: network
+        var: network
     - debug:
-        val: cidr_ext
+        var: cidr_ext
