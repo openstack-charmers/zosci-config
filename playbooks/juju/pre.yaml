@@ -7,6 +7,7 @@
         remote_src: yes
     # setup networking
     - name: Add route to zuul-tests network
+      become: true
       command: 'ip route add 172.16.0.0/16 via 10.245.164.141'
     - name: get ip
       shell: ip a | grep 10.5 | awk '{print $2}' | awk -F '/' '{print $1}'
