@@ -73,8 +73,6 @@
     #       label: bionic-medium
     pre-run: playbooks/juju/set-vip-range-fact.yaml
     vars:
-      - cidr_ext
-      - network
       tox_environment:
         TEST_CIDR_EXT: "{{ cidr_ext }}"
         TEST_CIDR_END: "{{ network }}.254"
