@@ -72,6 +72,7 @@
     #     - name: bionic-medium
     #       label: bionic-medium
     vars:
+      tox_environment: tox_environment_fact
       tox_envlist: func-target
 
 - job:

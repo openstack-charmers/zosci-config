@@ -22,7 +22,7 @@
         network=172.16.{{ ip_out.stdout.split('.')[-1]}}.
     - name: 'Set test environment variables'
       set_fact:
-        tox_environment:
+        tox_environment_fact:
           TEST_CIDR_EXT: "{{ cidr_ext }}"
           TEST_CIDR_END: "{{ network }}.254"
           TEST_GATEWAY: 172.16.0.1
