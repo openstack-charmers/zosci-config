@@ -1,0 +1,12 @@
+- hosts: all
+  tasks:
+    # setup networking
+    - name: get ip
+      shell: ip a | grep 10.5 | awk '{print $2}' | awk -F '/' '{print $1}'
+      args:
+        executable: /bin/bash
+      register: ip_out
+    - name: set test VIP CIDR
+      set_fact:
+        cidr_ext: 172.16.{{ ip_out.stdout.split('.')[-1]}}.0/24
+        network: 172.16.{{ ip_out.stdout.split('.')[-1]}}
