@@ -33,3 +33,5 @@
       command: /snap/bin/juju add-credential {{ serverstack_cloud.region_name }} --client -f credentials.yaml
     - name: 'Bootstrap Controller'
       command: /snap/bin/juju bootstrap {{ serverstack_cloud.region_name }}/{{ serverstack_cloud.region_name }}
+    - name: Add route to zuul-tests network
+      command: 'ip route add 172.16.0.0/16 via 10.245.164.141'
