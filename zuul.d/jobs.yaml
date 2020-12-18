@@ -11,8 +11,8 @@
         - name: bionic-medium
           label: bionic-medium
     secrets: &log_clouds
-      - serverstack_cloud
-      # - artifact_cloud
+      # - serverstack_cloud
+      - artifact_cloud
 - job:
     name: osci-lint
     description: "Run OSCI's lint task"
