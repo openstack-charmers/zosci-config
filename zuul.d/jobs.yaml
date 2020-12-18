@@ -8,8 +8,8 @@
     attempts: 2
     nodeset:
       nodes:
-        - name: bionic-small
-          label: bionic-small
+        - name: bionic-medium
+          label: bionic-medium
     secrets: &log_clouds
       - serverstack_cloud
 - job:
@@ -69,8 +69,8 @@
     #
     # nodeset:
     #   nodes:
-    #     - name: bionic-small
-    #       label: bionic-small
+    #     - name: bionic-medium
+    #       label: bionic-medium
     vars:
       tox_envlist: func-target
 
