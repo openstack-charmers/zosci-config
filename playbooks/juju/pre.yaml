@@ -15,7 +15,7 @@
       set_fact:
         network: 172.16.{{ ip_out.stdout.split('.')[-1] }}
     - name: set CIDR ext
-      set_facts:
+      set_fact:
         cidr_ext: "{{ network }}.0/24"
     - name: Render environment
       become: true
