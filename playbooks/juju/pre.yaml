@@ -35,3 +35,14 @@
       command: /snap/bin/juju bootstrap {{ serverstack_cloud.region_name }}/{{ serverstack_cloud.region_name }}
     - name: Add route to zuul-tests network
       command: 'ip route add 172.16.0.0/16 via 10.245.164.141'
+    - name: get ip
+      shell: ip a | grep 10.5 | awk '{print $2}' | awk -F '/' '{print $1}'
+      args:
+        executable: /bin/bash
+      register: ip_out
+    - name: set test VIP CIDR
+      set_fact:
+        cidr_ext=172.16.{{ ip_out.stdout.split('.')[-1]}}.0/24
+    # - name: 'Set test environment variables'
+    #   set_fact:
+    #     tox_environment:
