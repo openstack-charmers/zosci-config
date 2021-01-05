@@ -32,7 +32,7 @@
     # _github_api_pr_url="https://api.github.com/repos/$_pr_repo/pulls/$_pr_num"
 
     - name: func-test pr label
-      when: func_pr_repo.rc == 0 && func_pr_num.rc == 0
+      when: func_pr_repo.rc == 0
       shell: >
         curl https://api.github.com/repos/{{ func_pr_repo.stdout }}/pulls/{{ func_pr_num.stdout }} | \
         awk '/"head":/ {getline; gsub(/"|,/, ""); print $2}'
