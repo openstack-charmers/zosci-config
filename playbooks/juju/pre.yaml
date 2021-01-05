@@ -23,11 +23,11 @@
         echo {{ func_pr_repo.stdout }} | cut -f1 -d/
       register: github_pr_org
 
-    # - name: func-test PR number
-    #   when: func_test_pr.rc == 0
-    #   shell: >
-    #     echo {{ func_test_pr.stdout }} | cut -f3 -d/
-    #   register: func_pr_num
+    - name: func-test PR number
+      when: func_test_pr.rc == 0
+      shell: >
+        echo {{ func_test_pr.stdout }} | cut -f3 -d/
+      register: func_pr_num
 
     # _github_api_pr_url="https://api.github.com/repos/$_pr_repo/pulls/$_pr_num"
 
