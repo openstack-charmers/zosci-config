@@ -1,5 +1,65 @@
 - hosts: all
   tasks:
+    - name: has func-test-pr
+      shell: >
+        echo -n {{ zuul.message }} | base64 -d | \
+          awk 'tolower($0) ~ /func-test-pr: .*github.*zaza.*pull/ {print $2; exit;}' | \
+          rev | cut -sf1,3,4 -d/ | rev
+      register: func_test_pr
+    - name: func-test repo
+      when: func_test_pr.rc == 0
+      shell: >
+        echo {{ func_test_pr.stdout }} | cut -f1-2 -d/
+      register: func_pr_repo
+
+    - name: Github PR repo
+      when: func_pr_repo.rc == 0
+      shell: >
+        echo {{ func_pr_repo.stdout }} | cut -f2 -d/
+      register: github_pr_repo
+    - name: Github PR org
+      when: func_pr_repo.rc == 0
+      shell: >
+        echo {{ func_pr_repo.stdout }} | cut -f1 -d/
+      register: github_pr_org
+
+    # - name: func-test PR number
+    #   when: func_test_pr.rc == 0
+    #   shell: >
+    #     echo {{ func_test_pr.stdout }} | cut -f3 -d/
+    #   register: func_pr_num
+
+    # _github_api_pr_url="https://api.github.com/repos/$_pr_repo/pulls/$_pr_num"
+
+    - name: func-test pr label
+      when: func_pr_repo.rc == 0 && func_pr_num.rc == 0
+      shell: >
+        curl https://api.github.com/repos/{{ func_pr_repo.stdout }}/pulls/{{ func_pr_num.stdout }} | \
+        awk '/"head":/ {getline; gsub(/"|,/, ""); print $2}'
+      register: func_pr_label
+
+    - name: Github PR login
+      when: func_pr_label.rc == 0
+      shell: >
+        echo {{ func_pr_label.stdout }} | cut -f1 -d:
+      register: github_pr_login
+    - name: Github PR branch
+      when: func_pr_label.rc == 0
+      shell: >
+        echo {{ func_pr_label.stdout }} | cut -f2 -d: | sed -e 's/\//\\\//g'
+      register: github_pr_branch
+
+    - name: 'handle func-test-pr'
+      when: github_pr_login.rc
+      shell: >
+        GITHUB_PR_REPO="{{ github_pr_repo.stdout }}"
+        GITHUB_PR_ORG="{{ github_pr_org.stdout }}"
+        GITHUB_PR_LOGIN="{{ github_pr_login.stdout }}"
+        GITHUB_PR_BRANCH="{{ github_pr_branch.stdout }}"
+        if [ -n "$GITHUB_PR_LOGIN" -a -n "$GITHUB_PR_BRANCH" ]; then
+          sed -i s/${GITHUB_PR_ORG}\\/${GITHUB_PR_REPO}.git/${GITHUB_PR_LOGIN}\\/${GITHUB_PR_REPO}.git@${GITHUB_PR_BRANCH}/ /home/ubuntu/{{ zuul.project.src_dir }}/test-requirements.txt || true
+          sed -i s/${GITHUB_PR_ORG}\\/${GITHUB_PR_REPO}.git/${GITHUB_PR_LOGIN}\\/${GITHUB_PR_REPO}.git@${GITHUB_PR_BRANCH}/ /home/ubuntu/{{ zuul.project.src_dir }}/src/test-requirements.txt || true
+        fi
     - name: hack around juju's reluctance to deploy misnamed directories
       copy:
         src: "/home/ubuntu/{{ zuul.project.src_dir }}/"
