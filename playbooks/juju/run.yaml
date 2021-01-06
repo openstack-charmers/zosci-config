@@ -2,4 +2,5 @@
   roles:
     - revoke-sudo
     - setup-networking-env
+    - charm-build
     - tox
