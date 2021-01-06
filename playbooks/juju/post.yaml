@@ -1,6 +1,6 @@
 - hosts: all
   tasks:
     - name: 'crashdump'
-      shell: juju-crashdump -o "{{ ansible_user_dir }}/zuul-output -m {{ item }}"
+      shell: juju-crashdump -o "{{ zuul.executor.log_root }} -m {{ item }}"
       with_lines:
         - juju models | grep zaza-| awk '{gsub(/\*?/,""); print $1}'
