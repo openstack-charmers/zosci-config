@@ -27,5 +27,5 @@
 
 - name: set built charm path
   when: charm_build_output.rc == 0
-  set-fact:
+  set_fact:
     zuul_work_dir: "{{ zuul.project.src_dir }}/build/builds/{{ charm_build_name }}"
