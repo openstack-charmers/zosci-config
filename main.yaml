@@ -12,6 +12,10 @@
               shadow: openstack-charmers/zosci-config
       gerrit:
         untrusted-projects:
+          - openstack/charm-ceph-fs:
+              extra-config-paths:
+                - osci.yaml
+                - osci.d/
           - openstack/charm-ceph-mon:
               extra-config-paths:
                 - osci.yaml
