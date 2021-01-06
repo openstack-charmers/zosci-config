@@ -1,22 +1,27 @@
 - hosts: all
   tasks:
+    - name: Create destination for logs
+      file:
+        path: "{{ zuul.project.src_dir }}/log"
+        state: directory
+        mode: 0755
     - name: 'crashdump'
       shell: >
         for model in $(juju models | grep zaza- | awk '{gsub(/\*?/,""); print $1}'); do
-          juju-crashdump -o "{{ zuul.project.src_dir }}/../log" -m $model
+          juju-crashdump -o "{{ zuul.project.src_dir }}/log" -m $model
         done
       when: not zuul_success | bool
     - name: juju status
       shell: >
         for model in $(juju models | grep zaza- | awk '{gsub(/\*?/,""); print $1}'); do
-          juju status -m $model > {{ zuul.project.src_dir }}/../log/juju-status.$model.txt
-          juju status -m $model --format=yaml > {{ zuul.project.src_dir }}/../log/juju-status.$model.yaml
+          juju status -m $model > {{ zuul.project.src_dir }}/log/juju-status.$model.txt
+          juju status -m $model --format=yaml > {{ zuul.project.src_dir }}/log/juju-status.$model.yaml
         done
     - name: fetch juju logs
       synchronize:
         dest: "{{ zuul_executor_dest }}"
         mode: pull
-        src: "{{ zuul.executor.log_root }}/../log"
+        src: "{{ zuul.executor.log_root }}/log"
         verify_host: true
         owner: no
         group: no
