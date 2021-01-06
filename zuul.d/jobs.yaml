@@ -135,7 +135,18 @@
         OS_VIP19: "{{ network }}.249"
         OS_VIP20: "{{ network }}.250"
         VIP_RANGE: "{{ network }}.230:{{ network }}.250"
+        OS_AUTH_URL: "{{ serverstack_cloud.auth.auth_url }}"
+        OS_USERNAME: "{{ serverstack_cloud.auth.username }}"
+        OS_PASSWORD: "{{ serverstack_cloud.auth.password }}"
+        OS_USER_DOMAIN_NAME: "{{ serverstack_cloud.auth.user_domain_name }}"
+        OS_PROJECT_NAME: "{{ serverstack_cloud.auth.project_name }}"
+        OS_PROJECT_DOMAIN_NAME: user
+        OS_AUTH_VERSION: 3
+        OS_IDENTITY_API_VERSION: 3
+        OS_REGION_NAME: serverstack
       tox_envlist: func-target
+    secrets:
+      - serverstack_cloud
 
 - job:
     name: bionic-queens
