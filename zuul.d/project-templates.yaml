@@ -11,6 +11,14 @@
     description: |
       placeholder
 - project-template:
+    name: openstack-python35-jobs-nonvoting
+    description: |
+      placeholder
+- project-template:
+    name: openstack-python36-jobs
+    description: |
+      placeholder
+- project-template:
     name: openstack-python3-ussuri-jobs
     description: |
       placeholder
