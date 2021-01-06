@@ -152,6 +152,12 @@
     name: bionic-queens
     description: Run a functional test against bionic-queens
     parent: func-target
+    dependencies:
+        - osci-lint
+        - tox-py35
+        - tox-py36
+        - tox-py37
+        - tox-py38
     vars:
       tox_extra_args: bionic-queens
 - job:
