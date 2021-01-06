@@ -1,2 +1,2 @@
 needs_charm_build: false
-charm-build-name: null
+charm_build_name: null
