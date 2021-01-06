@@ -5,11 +5,11 @@
     source:
       github-git:
         config-projects:
-          - chrismacnaughton/zosci-config
+          - openstack-charmers/zosci-config
       opendev:
         untrusted-projects:
           - zuul/zuul-jobs:
-              shadow: chrismacnaughton/zosci-config
+              shadow: openstack-charmers/zosci-config
       gerrit:
         untrusted-projects:
           - openstack/charm-ceph-mon:
