@@ -26,6 +26,6 @@
   register: charm_build_output
 
 - name: set built charm path
-  when: charm_build_output
+  when: charm_build_output is defined
   set_fact:
     zuul_work_dir: "{{ zuul.project.src_dir }}/build/builds/{{ charm_build_name }}"
