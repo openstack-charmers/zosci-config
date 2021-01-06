@@ -3,5 +3,5 @@
     - name: 'crashdump'
       shell: >
         for model in $(juju models | grep zaza- | awk '{gsub(/\*?/,""); print $1}'); do
-          juju-crashdump -o "{{ zuul.executor.log_root }} -m $model"
+          juju-crashdump -o "{{ zuul.executor.log_root }}" -m $model"
         done
