@@ -6,3 +6,9 @@
           juju-crashdump -o "{{ zuul.executor.log_root }}" -m $model
         done
       when: tox_output.rc != 0
+    - name: juju status
+      shell: >
+        for model in $(juju models | grep zaza- | awk '{gsub(/\*?/,""); print $1}'); do
+          juju status -m $model > {{ zuul.executor.log_root }}/juju-status.$model.txt
+          juju status -m $model --format=yaml > {{ zuul.executor.log_root }}/juju-status.$model.yaml
+        done
