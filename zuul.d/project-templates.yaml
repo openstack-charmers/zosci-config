@@ -3,11 +3,19 @@
     description: |
       placeholder
 - project-template:
+    name: python-charm-jobs
+    description: |
+      placeholder
+- project-template:
     name: openstack-python35-jobs
     description: |
       placeholder
 - project-template:
     name: openstack-python3-ussuri-jobs
+    description: |
+      placeholder
+- project-template:
+    name: openstack-python3-train-jobs
     description: |
       placeholder
 - project-template:
