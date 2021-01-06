@@ -19,9 +19,9 @@
         done
     - name: fetch juju logs
       synchronize:
-        dest: "{{ zuul_executor_dest }}"
+        dest: "{{ zuul.executor.log_root }}"
         mode: pull
-        src: "{{ zuul.executor.log_root }}/log"
+        src: "{{ zuul.project.src_dir }}/log"
         verify_host: true
         owner: no
         group: no
