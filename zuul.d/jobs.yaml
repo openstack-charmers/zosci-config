@@ -144,6 +144,11 @@
         OS_AUTH_VERSION: 3
         OS_IDENTITY_API_VERSION: 3
         OS_REGION_NAME: serverstack
+        AMULET_HTTP_PROXY: "http://squid.internal:3128/"
+        OS_TEST_HTTP_PROXY: "http://squid.internal:3128/"
+        TEST_HTTP_PROXY: "http://squid.internal:3128/"
+        BAK_REMOTE_BASE_DIR: "/home/ubuntu/osci/bak-osci-master"
+        BAK_USER_HOST: "ubuntu@10.245.168.2"
       tox_envlist: func-target
     secrets:
       - serverstack_cloud
