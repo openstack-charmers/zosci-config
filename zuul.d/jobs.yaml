@@ -22,7 +22,7 @@
 
 - job:
     name: openstack-tox-with-sudo
-    parent: openstack-tox
+    parent: tox
     description: |
       Job to run tox for tests with OpenStack project specific
       settings such as constraints but without sudo access being revoked.
