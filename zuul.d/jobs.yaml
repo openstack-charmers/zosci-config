@@ -29,6 +29,23 @@
     run: playbooks/tox-with-sudo/run.yaml
 
 - job:
+    name: openstack-tox-snap-with-sudo
+    parent: openstack-tox-with-sudo
+    description: |
+      Run tox-based functional tests for an OpenStack Python project.
+
+      Uses tox with the ``snap`` environment.
+      Sudo access is not revoked.
+    irrelevant-files:
+      - ^.*\.rst$
+      - ^api-ref/.*$
+      - ^doc/.*$
+      - ^releasenotes/.*$
+      - ^deliverables/.*$
+    vars:
+      tox_envlist: snap
+
+- job:
     name: tox-py35
     parent: tox
     description: |
