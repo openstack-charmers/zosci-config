@@ -21,6 +21,14 @@
       tox_envlist: pep8
 
 - job:
+    name: openstack-tox-with-sudo
+    parent: openstack-tox
+    description: |
+      Job to run tox for tests with OpenStack project specific
+      settings such as constraints but without sudo access being revoked.
+    run: playbooks/tox-with-sudo/run.yaml
+
+- job:
     name: tox-py35
     parent: tox
     description: |

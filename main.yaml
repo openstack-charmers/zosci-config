@@ -19,3 +19,4 @@
           - openstack/charm-ceph-mon: *default-project
           - openstack/charm-keystone: *default-project
           - openstack/charm-neutron-api: *default-project
+          - x/microstack: *default-project
