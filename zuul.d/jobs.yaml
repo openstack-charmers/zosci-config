@@ -19,7 +19,16 @@
     parent: tox
     vars:
       tox_envlist: pep8
+- job:
+    name: openstack-tox-linters
+    parent: tox
+    description: |
+      Runs code linting tests.
 
+      Uses tox with the ``linters`` environment.
+    vars:
+      tox_envlist: linters
+      bindep_profile: test linters
 - job:
     name: openstack-tox-with-sudo
     parent: tox
