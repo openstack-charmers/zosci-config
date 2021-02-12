@@ -10,9 +10,6 @@
     - name: 'source charm'
       when: charm_buildable.rc == 0
       command: "{{ tox_executable }} -e build"
-    - name: 'source charm fact'
-      when: charm_buildable.rc == 0
-      command: echo "Source charms aren't currencly supported" && /bin/false
       # set_fact:
       #   charm_path: "{{ zuul.project.src_dir }}/builds/build/{{ zuul.project.short_name }}"
     # TODO evaluate saving the built charm as an artifact:
