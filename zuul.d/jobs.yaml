@@ -266,7 +266,12 @@
     name: bionic-ussuri
     description: Run a functional test against bionic-ussuri
     parent: func-target
-    dependencies: *smoke-jobs
+    dependencies:
+        - osci-lint
+        - tox-py35
+        - tox-py36
+        - tox-py37
+        - tox-py38
     vars:
       tox_extra_args: bionic-ussuri
 - job:
