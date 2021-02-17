@@ -65,7 +65,7 @@
           - openstack/charm-octavia: *default-project
           - openstack/charm-octavia-dashboard: *default-project
           - openstack/charm-octavia-diskimage-retrofit: *default-project
-          - openstack/charm-openstack-dashboard: *default-projectct
+          - openstack/charm-openstack-dashboard: *default-project
           - openstack/charm-pacemaker-remote: *default-project
           - openstack/charm-percona-cluster: *default-project
           - openstack/charm-placement: *default-project
@@ -79,5 +79,5 @@
           - openstack/charm-vault: *default-project
           - x/charm-ovn-central: *default-project
           - x/charm-ovn-chassis: *default-project
-          - x/charm-ovn-dedicated-chassis: *default-proje
+          - x/charm-ovn-dedicated-chassis: *default-project
           - x/microstack: *default-project
