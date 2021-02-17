@@ -36,8 +36,6 @@
       The default set of functional test jobs for the OpenStack Charms
     check:
       jobs:
-        - bionic-queens
-        - bionic-rocky
         - groovy-victoria
         - focal-victoria
         - focal-ussuri

@@ -192,9 +192,8 @@
       tox_envlist: func-target
     secrets:
       - serverstack_cloud
-
 - job:
-    name: bionic-queens
+    name: bionic
     description: Run a functional test against bionic-queens
     parent: func-target
     dependencies:
@@ -204,13 +203,44 @@
         - tox-py37
         - tox-py38
     vars:
+      tox_extra_args: bionic
+- job:
+    name: focal
+    description: Run a functional test against bionic-queens
+    parent: func-target
+    dependencies:
+        - osci-lint
+        - tox-py35
+        - tox-py36
+        - tox-py37
+        - tox-py38
+    vars:
+      tox_extra_args: focal
+- job:
+    name: groovy
+    description: Run a functional test against bionic-queens
+    parent: func-target
+    dependencies:
+        - osci-lint
+        - tox-py35
+        - tox-py36
+        - tox-py37
+        - tox-py38
+    vars:
+      tox_extra_args: groovy
+- job:
+    name: bionic-queens
+    description: Run a functional test against bionic-queens
+    parent: func-target
+    dependencies: &smoke-jobs
+      - focal-ussuri
+    vars:
       tox_extra_args: bionic-queens
 - job:
     name: groovy-victoria
     description: Run a functional test against groovy-victoria
     parent: func-target
-    dependencies: &smoke-jobs
-      - bionic-queens
+    dependencies: *smoke-jobs
     vars:
       tox_extra_args: groovy-victoria
 - job:
@@ -224,7 +254,12 @@
     name: focal-ussuri
     description: Run a functional test against focal-ussuri
     parent: func-target
-    dependencies: *smoke-jobs
+    dependencies:
+        - osci-lint
+        - tox-py35
+        - tox-py36
+        - tox-py37
+        - tox-py38
     vars:
       tox_extra_args: focal-ussuri
 - job:
