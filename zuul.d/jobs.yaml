@@ -233,7 +233,7 @@
     description: Run a functional test against bionic-queens
     parent: func-target
     dependencies: &smoke-jobs
-      - focal-ussuri
+      - bionic-ussuri
     vars:
       tox_extra_args: bionic-queens
 - job:
