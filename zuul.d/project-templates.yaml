@@ -23,8 +23,7 @@
     description: |
       placeholder
 - project-template:
-    name: 
-      python36-charm-jobs
+    name: python36-charm-jobs
     description: |
       placeholder
 - project-template:
