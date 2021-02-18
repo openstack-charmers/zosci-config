@@ -1,6 +1,5 @@
 - pipeline:
     name: check
-    debug: true
     description: |
       Newly uploaded patchsets enter this pipeline to receive an
       initial +/-1 Verified vote.
