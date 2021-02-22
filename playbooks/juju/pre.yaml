@@ -93,7 +93,7 @@
     - name: 'Bootstrap Controller'
       command: |
         /snap/bin/juju bootstrap \
-          --bootstrap-constraints=virt-type=kvm cores=4 mem=8G \
+          --bootstrap-constraints="virt-type=kvm cores=4 mem=8G" \
           --constraints=virt-type=kvm \
           --auto-upgrade=false
           --model-default=/tmp/charm-test-infra/juju-configs/model-default-serverstack.yaml \
