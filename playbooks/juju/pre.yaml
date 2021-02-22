@@ -76,6 +76,10 @@
       snap:
         name: juju
         classic: yes
+    - name: Install libpq-dev
+      become: true
+      apt:
+         name: libpq-dev
     - name: Render juju clouds.yaml
       template:
         src: clouds.yaml.j2

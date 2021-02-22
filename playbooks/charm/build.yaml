@@ -7,10 +7,6 @@
         executable: /bin/bash
       register: charm_buildable
       failed_when: false
-    - name: Install libpq-dev
-      become: true
-      apt:
-         name: libpq-dev
     - name: 'source charm'
       when: charm_buildable.rc == 0
       command: "{{ tox_executable }} -e build"
