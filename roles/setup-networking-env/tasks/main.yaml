@@ -13,3 +13,7 @@
     var: network
 - debug:
     var: cidr_ext
+- name: echo environment
+  shell: env | grep -v OS_
+  args:
+    executable: /bin/bash
