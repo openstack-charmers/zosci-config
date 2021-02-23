@@ -50,13 +50,8 @@
         - bionic-ussuri
         - bionic-train
         - bionic-stein
-        - bionic-rocky
         - bionic-queens
-        - xenial-queens
-        - xenial-pike
-        - xenial-ocata
         - xenial-mitaka
-        - trusty-mitaka
 - project-template:
     name: charm-unit-jobs
     description: |
