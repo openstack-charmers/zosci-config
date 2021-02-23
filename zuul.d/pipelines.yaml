@@ -32,13 +32,13 @@
     trigger:
       gerrit:
         - event: patchset-created
-        - event: comment-added
-          comment: zosci-recheck
         - event: change-restored
         - event: comment-added
-          comment: recheck
+          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*recheck
         - event: comment-added
-          comment: charm-recheck
+          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*charm-recheck
+        - event: comment-added
+          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*zosci-recheck
         - event: comment-added
           require-approval:
             - Verified: [-1, -2]
