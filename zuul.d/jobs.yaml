@@ -190,9 +190,11 @@
         BAK_REMOTE_BASE_DIR: "/home/ubuntu/osci/bak-osci-master"
         BAK_USER_HOST: "ubuntu@10.245.168.2"
         OS_PURESTORAGE_SAN_IP: 10.246.112.11
+        OS_PURESTORAGE_API_TOKEN: "{{ purestorage_api_token.value }}"
       tox_envlist: func-target
     secrets:
       - serverstack_cloud
+      - purestorage_api_token
 - job:
     name: bionic
     description: Run a functional test against bionic
