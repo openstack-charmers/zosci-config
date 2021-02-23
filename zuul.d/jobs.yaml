@@ -189,6 +189,7 @@
         TEST_HTTP_PROXY: "http://squid.internal:3128/"
         BAK_REMOTE_BASE_DIR: "/home/ubuntu/osci/bak-osci-master"
         BAK_USER_HOST: "ubuntu@10.245.168.2"
+        OS_PURESTORAGE_SAN_IP: 10.246.112.11
       tox_envlist: func-target
     secrets:
       - serverstack_cloud
