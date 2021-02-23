@@ -3,10 +3,26 @@
     description: |
       Newly uploaded patchsets enter this pipeline to receive an
       initial +/-1 Verified vote.
-    success-message: Build succeeded (check pipeline).
+    success-message: |
+      Build SUCCESS by Canonical OpenStack Charm CI.
+
+      Re-test comment options:
+
+      - 'recheck' (run/re-run the default upstream and charm test sets)
+      - 'charm-recheck' (run/re-run the default charm verify test set) with Jenkins and Zuul
+      - 'zosci-recheck' (run/re-run the default charm verify test set) with only Zuul
+
+      For more info, see http://docs.openstack.org/developer/charm-guide/ and https://wiki.openstack.org/wiki/ThirdPartySystems/Canonical_Charm_CI.
     failure-message: |
-      Build failed (check pipeline).  For information on how to proceed, see
-      https://docs.opendev.org/opendev/infra-manual/latest/developers.html#automated-testing
+      Build FAILURE by Canonical OpenStack Charm CI.
+
+      Re-test comment options:
+
+      - 'recheck' (run/re-run the default upstream and charm test sets)
+      - 'charm-recheck' (run/re-run the default charm verify test set) with Jenkins and Zuul
+      - 'zosci-recheck' (run/re-run the default charm verify test set) with only Zuul
+
+      For more info, see http://docs.openstack.org/developer/charm-guide/ and https://wiki.openstack.org/wiki/ThirdPartySystems/Canonical_Charm_CI.
     manager: independent
     precedence: low
     require:
