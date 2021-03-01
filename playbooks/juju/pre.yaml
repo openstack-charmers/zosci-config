@@ -63,7 +63,7 @@
       when: github_pr_login.rc == 0
       args:
         executable: /bin/bash
-      shell: >
+      shell: |
         GITHUB_PR_REPO="{{ github_pr_repo.stdout }}"
         GITHUB_PR_ORG="{{ github_pr_org.stdout }}"
         GITHUB_PR_LOGIN="{{ github_pr_login.stdout }}"
