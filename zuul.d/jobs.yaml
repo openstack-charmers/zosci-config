@@ -46,8 +46,6 @@
       tox_environment:
         HTTP_PROXY: "http://squid.internal:3128"
         HTTPS_PROXY: "http://squid.internal:3128"
-        http_proxy: "http://squid.internal:3128"
-        https_proxy: "http://squid.internal:3128"
 - job:
     name: openstack-tox-snap-with-sudo
     parent: openstack-tox-with-sudo
