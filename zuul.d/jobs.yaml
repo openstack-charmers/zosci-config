@@ -81,12 +81,14 @@
       tox_envlist: py35
       python_version: 3.5
 
-# - job:
-#     name: charm-build
-#     description: Build a source charm into a deployable charm
-#     parent: tox
-#     provides: charm
-#     run: playbooks/charm/build.yaml
+- job:
+    name: charm-build
+    description: Build a source charm into a deployable charm
+    parent: tox
+    provides: charm
+    run: playbooks/charm/build.yaml
+    secrets:
+      - serverstack_cloud
 
 - job:
     name: configure-juju
