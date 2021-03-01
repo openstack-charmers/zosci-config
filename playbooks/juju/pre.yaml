@@ -36,7 +36,7 @@
       args:
         executable: /bin/bash
       shell: >
-        curl https://api.github.com/repos/{{ func_pr_repo.stdout }}/pulls/{{ func_pr_num.stdout }} | \
+        curl -s https://api.github.com/repos/{{ func_pr_repo.stdout }}/pulls/{{ func_pr_num.stdout }} |
         awk '/"head":/ {getline; gsub(/"|,/, ""); print $2}'
       register: func_pr_label_cmd
     - name: func-test pr
