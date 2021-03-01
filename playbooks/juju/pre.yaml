@@ -36,21 +36,25 @@
       shell: >
         curl https://api.github.com/repos/{{ func_pr_repo.stdout }}/pulls/{{ func_pr_num.stdout }} | \
         awk '/"head":/ {getline; gsub(/"|,/, ""); print $2}'
-      register: func_pr_label
+      register: func_pr_label_cmd
+    - name: func-test pr
+      when: func_pr_label_cmd.rc == 0
+      set_fact:
+        func_pr_label: "{{ func_pr_label_cmd.stdout }}"
 
     - name: Github PR login
-      when: func_pr_label.rc == 0
+      when: func_pr_label is defined
       shell: >
-        echo {{ func_pr_label.stdout }} | cut -f1 -d:
+        echo {{ func_pr_label }} | cut -f1 -d:
       register: github_pr_login
     - name: Github PR branch
-      when: func_pr_label.rc == 0
+      when: func_pr_label is defined
       shell: >
-        echo {{ func_pr_label.stdout }} | cut -f2 -d: | sed -e 's/\//\\\//g'
+        echo {{ func_pr_label }} | cut -f2 -d: | sed -e 's/\//\\\//g'
       register: github_pr_branch
 
     - name: 'handle func-test-pr'
-      when: github_pr_login.rc
+      when: github_pr_login.rc == 0
       shell: >
         GITHUB_PR_REPO="{{ github_pr_repo.stdout }}"
         GITHUB_PR_ORG="{{ github_pr_org.stdout }}"
