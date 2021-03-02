@@ -4,7 +4,7 @@
   when: needs_charm_build
   args:
     executable: /bin/bash
-  command: |
+  shell: |
     wget http://10.245.161.162:80/swift/v1/zuul/artifacts/built_charms/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 || true
     mkdir {{ zuul.project.src_dir }}/build/builds/{{ charm_build_name }}
     cd {{ zuul.project.src_dir }}/build/builds/{{ charm_build_name }}
