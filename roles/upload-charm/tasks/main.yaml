@@ -6,7 +6,7 @@
     executable: /bin/bash
   shell: |
     tar -cjf {{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 -C build/builds/{{ charm_build_name }} . \ &&
-      mv {{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 {{ zuul.project.src_dir }}
+      mv {{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 $HOME/{{ zuul.project.src_dir }}
 
 - name: Upload built charm to swift
   delegate_to: localhost
