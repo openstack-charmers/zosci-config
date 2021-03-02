@@ -3,20 +3,22 @@
   register: charm_archived
   args:
     chdir: "{{ zuul.project.src_dir }}"
-  command: tar -cjf {{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 -C build/builds/{{ charm_build_name }} .
+  command: |
+    tar -cjf {{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 -C build/builds/{{ charm_build_name }} . \
+      && mv {{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 {{ zuul.project.src_dir }}
 
 - name: Upload built charm to swift
   delegate_to: localhost
   when: charm_archived.rc == 0
   zuul_swift_upload:
     cloud: "{{ serverstack_cloud }}"
-    partition: "true"
-    container: "zuul"
+    partition: "false"
+    container: "zuul-built-charms"
     public: "yes"
-    prefix: "built_charms"
+    prefix: ""
     indexes: "false"
     files:
-      - "{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2"
+      - "{{ zuul.project.src_dir }}/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2"
     delete_after: "14"
   register: upload_results
 
