@@ -87,6 +87,10 @@
     run: playbooks/charm/build.yaml
     secrets:
       - serverstack_cloud
+    nodeset:
+      nodes:
+        - name: xenial-medium
+          label: xenial-medium
 
 - job:
     name: configure-juju
