@@ -28,7 +28,6 @@
         files:
           - "{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2"
         delete_after: "14"
-      set_fact: charm_uploaded
       tasks:
         - zuul_return:
           data:
