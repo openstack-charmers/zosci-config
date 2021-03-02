@@ -1,23 +1,25 @@
-# - name: get ip
-#   shell: ip a | grep 10.5 | awk '{print $2}' | awk -F '/' '{print $1}'
-#   args:
-#     executable: /bin/bash
-#   register: ip_out
-# - name: set test VIP CIDR
-#   set_fact:
-#     network: 172.16.{{ ip_out.stdout.split('.')[-1] }}
-# - name: set CIDR ext
-#   set_fact:
-#     cidr_ext: "{{ network }}.0/24"
-# - debug:
-#     var: network
-# - debug:
-#     var: cidr_ext
-
-
-
-- name: build charm
+# Improvements: use the built charm tarball artifact that's sent to Zuul for
+# downloading rather than just knowing the path and using that.
+- name: fetch charm
   when: needs_charm_build
+  command: |
+    wget http://10.245.161.162:80/swift/v1/zuul/artifacts/built_charms/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 || true
+    mkdir {{ zuul.project.src_dir }}/build/builds/{{ charm_build_name }}
+    cd {{ zuul.project.src_dir }}/build/builds/{{ charm_build_name }}
+    # try to untar the downloaded file and echo our "success" message, but pass on failure
+    tar xjf ../{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 && \
+      echo "successfully fetched built {{ charm_build_name }}" || \
+      true
+  register: fetch_charm
+
+# In the below conditional, we're asking to build the charm with two conditions:
+# 1. The charm is a reactive charm that's been configured to build (needs_charm_build)
+# 2. We did not successfully fetch a built charm in the step above.
+#      The way we're checking if we fetched successfully is to look through the output of
+#      the previous command for the string "successfully fetched built" and checking the
+#      position of that, as -1 is the value for a not-found in this case.
+- name: build charm
+  when: needs_charm_build and fetch_charm.stdout.find("successfully fetched built") == -1
   args:
     chdir: "{{ zuul.project.src_dir }}"
   environment: "{{ tox_environment|combine(tox_constraints_env|default({})) }}"
