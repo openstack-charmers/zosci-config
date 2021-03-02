@@ -28,11 +28,20 @@
         files:
           - "{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2"
         delete_after: "14"
-      tasks:
-        - zuul_return:
-          data:
-            zuul:
-              artifacts:
+      register: upload_results
+
+    - block:
+        - name: Return charm to Zuul
+          delegate_to: localhost
+          zuul_return:
+            data:
+              zuul:
+                artifacts:
                 - name: built charm tarball
                   type: charm
                   url: http://10.245.161.162:80/swift/v1/zuul/artifacts/built_charms/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2
+        - name: Print upload failures
+          debug:
+            var: upload_results.upload_failures
+
+      when: upload_results is defined
