@@ -5,11 +5,11 @@
   args:
     executable: /bin/bash
   shell: |
-    wget http://10.245.161.162:80/swift/v1/zuul-built-charms/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 || true
+    curl -o {{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 http://10.245.161.162:80/swift/v1/zuul-built-charms/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 || true
     mkdir -p {{ zuul.project.src_dir }}/build/builds/{{ charm_build_name }}
     cd {{ zuul.project.src_dir }}/build/builds/{{ charm_build_name }}
     # try to untar the downloaded file and echo our "success" message, but pass on failure
-    tar xjf ../{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 && \
+    tar xjf $HOME/{{ zuul.project.src_dir }}/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 && \
       echo "successfully fetched built {{ charm_build_name }}" || \
       true
   register: fetch_charm
