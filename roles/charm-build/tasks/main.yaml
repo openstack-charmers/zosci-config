@@ -5,7 +5,7 @@
   args:
     executable: /bin/bash
   shell: |
-    wget http://10.245.161.162:80/swift/v1/zuul/artifacts/built_charms/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 || true
+    wget http://10.245.161.162:80/swift/v1/zuul-built-charms/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 || true
     mkdir -p {{ zuul.project.src_dir }}/build/builds/{{ charm_build_name }}
     cd {{ zuul.project.src_dir }}/build/builds/{{ charm_build_name }}
     # try to untar the downloaded file and echo our "success" message, but pass on failure
