@@ -26,7 +26,7 @@
     indexes: "false"
     files:
       - "{{ zuul.executor.log_root }}/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2"
-    delete_after: "14"
+    delete_after: "2592000"
   register: upload_results
 
 - block:
