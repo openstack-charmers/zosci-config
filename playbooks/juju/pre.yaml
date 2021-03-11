@@ -96,6 +96,10 @@
       become: true
       apt:
          name: libpq-dev
+    - name: Install libmysqlclient-dev
+      become: true
+      apt:
+        name: libmysqlclient-dev
     - name: Render juju clouds.yaml
       template:
         src: clouds.yaml.j2
