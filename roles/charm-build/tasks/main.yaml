@@ -1,3 +1,12 @@
+# Install build dependencies for charm builds
+- name: Install libpq-dev
+  become: true
+  apt:
+     name: libpq-dev
+- name: Install libmysqlclient-dev
+  become: true
+  apt:
+    name: libmysqlclient-dev
 # Improvements: use the built charm tarball artifact that's sent to Zuul for
 # downloading rather than just knowing the path and using that.
 - name: fetch charm
