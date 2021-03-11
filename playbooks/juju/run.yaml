@@ -1,7 +1,7 @@
 - hosts: all
   roles:
+    - setup-networking-env
     - charm-build
     - revoke-sudo
-    - setup-networking-env
     - setup-test-fixtures
     - tox
