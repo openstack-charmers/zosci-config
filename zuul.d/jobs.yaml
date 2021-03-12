@@ -213,6 +213,14 @@
     name: bionic
     description: Run a functional test against bionic
     parent: func-target
+    dependencies:
+      - focal
+    vars:
+      tox_extra_args: bionic
+- job:
+    name: focal
+    description: Run a functional test against focal
+    parent: func-target
     dependencies: &lint_and_unit
         - osci-lint
         - tox-py35
@@ -220,19 +228,13 @@
         - tox-py37
         - tox-py38
     vars:
-      tox_extra_args: bionic
-- job:
-    name: focal
-    description: Run a functional test against focal
-    parent: func-target
-    dependencies: *lint_and_unit
-    vars:
       tox_extra_args: focal
 - job:
     name: groovy
     description: Run a functional test against groovy
     parent: func-target
-    dependencies: *lint_and_unit
+    dependencies:
+      - focal
     vars:
       tox_extra_args: groovy
 - job:
