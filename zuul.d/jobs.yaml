@@ -124,6 +124,7 @@
     run: playbooks/juju/run.yaml
     vars:
       tox_environment:
+        TEST_NET_ID: "94a87d6a-6d82-4931-878d-aedcf0e62962"
         TEST_CIDR_EXT: "{{ cidr_ext }}"
         TEST_CIDR_END: "{{ network }}.254"
         TEST_GATEWAY: 172.16.0.1
