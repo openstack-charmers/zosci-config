@@ -119,7 +119,7 @@
         /snap/bin/juju bootstrap \
           --bootstrap-constraints="virt-type=kvm cores=4 mem=8G" \
           --constraints=virt-type=kvm \
-          --auto-upgrade=false
+          --auto-upgrade=false \
           --model-default=/tmp/charm-test-infra/juju-configs/model-default-serverstack.yaml \
           --config=/tmp/charm-test-infra/juju-configs/controller-default.yaml \
           {{ serverstack_cloud.region_name }}/{{ serverstack_cloud.region_name }}
