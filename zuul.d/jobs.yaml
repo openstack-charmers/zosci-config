@@ -258,8 +258,7 @@
     name: hirsute-wallaby
     description: Run a functional test against hirsute-wallaby
     parent: func-target
-    dependencies:
-      - focal
+    dependencies: *smoke-jobs
     vars:
       tox_extra_args: hirsute-wallaby
 - job:
