@@ -8,7 +8,7 @@
     network: 172.16.{{ ip_out.stdout.split('.')[-1] }}
 - name: set CIDR ext
   set_fact:
-    cidr_ext: "{{ network }}.0/24"
+    cidr_ext: "172.16.0.0/16"
 - debug:
     var: network
 - debug:
