@@ -108,8 +108,6 @@
     parent: configure-juju
     timeout: 7200
     attempts: 2
-    # dependencies:
-    #   - charm-build
     semaphore: functional-test
     # as an alternate to semaphores, or along side them, we could define
     # a custom node label to use for the func jobs. This would have a potential
@@ -122,6 +120,16 @@
     #     - name: bionic-medium
     #       label: bionic-medium
     run: playbooks/juju/run.yaml
+    dependencies:
+      # The charm-build job being a soft dependency means that, if the charm-build
+      # job is configured to run, it will be run, and expected to pass, before
+      # starting a func-target job. If, however, the charm-build job is not
+      # configured, it will be ignored here and the func-target will continue
+      # as normal.
+      #
+      # ref: https://zuul-ci.org/docs/zuul/reference/job_def.html#attr-job.dependencies
+      - name: 'charm-build'
+        soft: true
     vars:
       tox_environment:
         TEST_NET_ID: "94a87d6a-6d82-4931-878d-aedcf0e62962"
