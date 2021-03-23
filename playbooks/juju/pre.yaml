@@ -100,6 +100,14 @@
       become: true
       apt:
         name: libmysqlclient-dev
+    - name: Install libxml2-dev
+      become: true
+      apt:
+        name: libxml2-dev
+    - name: Install libxslt1-dev
+      become: true
+      apt:
+        name: libxslt1-dev
     - name: Render juju clouds.yaml
       template:
         src: clouds.yaml.j2
