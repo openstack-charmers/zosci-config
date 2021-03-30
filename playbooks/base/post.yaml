@@ -12,7 +12,8 @@
       # zuul_log_cloud_config: '{{ serverstack_cloud }}'
       zuul_log_cloud_config: '{{ artifact_cloud }}'
       # zuul_log_partition: true
-      zuul_log_delete_after: 2592000
+      # 15552000 is 30 days * 6, or ~ 6 months
+      zuul_log_delete_after: 15552000
       # Unique log prefix to avoid container name collisions when ceph is
       # used.
       # zuul_log_container: zuul_logs
