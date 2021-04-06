@@ -16,6 +16,7 @@
               extra-config-paths:
                 - osci.yaml
                 - osci.d/
+          - openstack/charm-ceph-iscsi: *default-project
           - openstack/charm-ceph-mon: *default-project
           - openstack/charm-keystone: *default-project
           - openstack/charm-neutron-api: *default-project
@@ -45,10 +46,14 @@
           - openstack/charm-keystone-kerberos: *default-project
           - openstack/charm-keystone-ldap: *default-project
           - openstack/charm-keystone-saml-mellon: *default-project
+          - openstack/charm-magnum: *default-project
+          - openstack/charm-magnum-dashboard: *default-project
           - openstack/charm-magpie: *default-project
           - openstack/charm-manila: *default-project
+          - openstack/charm-manila-dashboard: *default-project
           - openstack/charm-manila-ganesha: *default-project
           - openstack/charm-manila-generic: *default-project
+          - openstack/charm-manila-netapp: *default-project
           - openstack/charm-masakari: *default-project
           - openstack/charm-masakari-monitors: *default-project
           - openstack/charm-mysql-innodb-cluster: *default-project
