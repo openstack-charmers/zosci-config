@@ -65,6 +65,9 @@
     precedence: low
     trigger:
       gerrit:
+        # We do want to run this pipeline always, but it should also always be non-voting
+        - event: patchset-created
+        - event: change-restored
         - event: comment-added
           comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*check experimental\s*$
     success:
