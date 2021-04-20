@@ -132,9 +132,9 @@ run the following unit test type jobs:
 and these functional jobs:
 
 ```
-- bionic-queens
-- bionic-rocky
+- hirsute-wallaby
 - groovy-victoria
+- focal-wallaby
 - focal-victoria
 - focal-ussuri-ec
 - focal-ussuri
