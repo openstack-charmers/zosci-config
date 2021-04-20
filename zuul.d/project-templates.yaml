@@ -44,7 +44,9 @@
       The default set of functional test jobs for the OpenStack Charms
     check:
       jobs:
+        - hirsute-wallaby
         - groovy-victoria
+        - focal-wallaby
         - focal-victoria
         - focal-ussuri
         - bionic-ussuri
