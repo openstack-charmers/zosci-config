@@ -47,11 +47,11 @@
             - Workflow: 1
     # TODO: Re-enable voting when we're confident
     success:
-      gerrit: {}
+      gerrit:
         # Note that gerrit keywords are case-sensitive.
         Verified: 1
     failure:
-      gerrit: {}
+      gerrit:
         Verified: -1
 
 - pipeline:
