@@ -2,6 +2,7 @@
   tasks:
     - name: has func-test-pr
       shell: >
+        set -o pipefail
         echo -n {{ zuul.message }} | base64 -d | \
           awk 'tolower($0) ~ /func-test-pr: .*github.*zaza.*pull/ {print $2; exit;}' | \
           rev | cut -sf1,3,4 -d/ | rev
@@ -9,23 +10,27 @@
     - name: func-test repo
       when: func_test_pr.rc == 0
       shell: >
+        set -o pipefail
         echo {{ func_test_pr.stdout }} | cut -f1-2 -d/
       register: func_pr_repo
 
     - name: Github PR repo
       when: func_pr_repo.rc == 0
       shell: >
+        set -o pipefail
         echo {{ func_pr_repo.stdout }} | cut -f2 -d/
       register: github_pr_repo
     - name: Github PR org
       when: func_pr_repo.rc == 0
       shell: >
+        set -o pipefail
         echo {{ func_pr_repo.stdout }} | cut -f1 -d/
       register: github_pr_org
 
     - name: func-test PR number
       when: func_test_pr.rc == 0
       shell: >
+        set -o pipefail
         echo {{ func_test_pr.stdout }} | cut -f3 -d/
       register: func_pr_num
 
@@ -36,6 +41,7 @@
       args:
         executable: /bin/bash
       shell: >
+        set -o pipefail
         curl -s https://api.github.com/repos/{{ func_pr_repo.stdout }}/pulls/{{ func_pr_num.stdout }} |
         awk '/"head":/ {getline; gsub(/"|,/, ""); print $2}'
       register: func_pr_label_cmd
@@ -49,6 +55,7 @@
       args:
         executable: /bin/bash
       shell: >
+        set -o pipefail
         echo {{ func_pr_label }} | cut -f1 -d:
       register: github_pr_login
     - name: Github PR branch
@@ -56,6 +63,7 @@
       args:
         executable: /bin/bash
       shell: >
+        set -o pipefail
         echo {{ func_pr_label }} | cut -f2 -d: | sed -e 's/\//\\\//g'
       register: github_pr_branch
 
@@ -64,6 +72,7 @@
       args:
         executable: /bin/bash
       shell: |
+        set -o pipefail
         GITHUB_PR_REPO="{{ github_pr_repo.stdout }}"
         GITHUB_PR_ORG="{{ github_pr_org.stdout }}"
         GITHUB_PR_LOGIN="{{ github_pr_login.stdout }}"

@@ -9,7 +9,6 @@ skip_list:
     - '303'  # Using command rather than module
              # TODO (icey): Remove use of curl / tar in charm-build and
              # upload-charm roles. They should use `get_url` and `unarchive`
-    - '306'  # Shells that use pipes should set the pipefail option
     - '701'  # meta/main.yml should contain relevant info
              # We aren't using ansible-galaxy so this is not helpful
 verbosity: 1

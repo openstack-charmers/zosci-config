@@ -1,5 +1,5 @@
 - name: get ip
-  shell: ip a | grep 10.5 | awk '{print $2}' | awk -F '/' '{print $1}'
+  shell: set -o pipefail && ip a | grep 10.5 | awk '{print $2}' | awk -F '/' '{print $1}'
   args:
     executable: /bin/bash
   register: ip_out
@@ -14,6 +14,6 @@
 - debug:
     var: cidr_ext
 - name: echo environment
-  shell: env | grep -v OS_
+  shell: set -o pipefail && env | grep -v OS_
   args:
     executable: /bin/bash
