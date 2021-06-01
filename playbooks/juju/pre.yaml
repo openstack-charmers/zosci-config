@@ -7,33 +7,40 @@
           awk 'tolower($0) ~ /func-test-pr: .*github.*zaza.*pull/ {print $2; exit;}' | \
           rev | cut -sf1,3,4 -d/ | rev
       register: func_test_pr
+      args:
+        executable: /bin/bash
     - name: func-test repo
       when: func_test_pr.rc == 0
       shell: >
         set -o pipefail
         echo {{ func_test_pr.stdout }} | cut -f1-2 -d/
       register: func_pr_repo
-
+      args:
+        executable: /bin/bash
     - name: Github PR repo
       when: func_pr_repo.rc == 0
       shell: >
         set -o pipefail
         echo {{ func_pr_repo.stdout }} | cut -f2 -d/
       register: github_pr_repo
+      args:
+        executable: /bin/bash
     - name: Github PR org
       when: func_pr_repo.rc == 0
       shell: >
         set -o pipefail
         echo {{ func_pr_repo.stdout }} | cut -f1 -d/
       register: github_pr_org
-
+      args:
+        executable: /bin/bash
     - name: func-test PR number
       when: func_test_pr.rc == 0
       shell: >
         set -o pipefail
         echo {{ func_test_pr.stdout }} | cut -f3 -d/
       register: func_pr_num
-
+      args:
+        executable: /bin/bash
     # _github_api_pr_url="https://api.github.com/repos/$_pr_repo/pulls/$_pr_num"
 
     - name: func-test pr label
