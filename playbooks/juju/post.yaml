@@ -8,7 +8,7 @@
     - name: 'crashdump'
       args:
         executable: /bin/bash
-      shell:|
+      shell: |
         set -o pipefail
         for model in $(juju models | grep zaza- | awk '{gsub(/\*?/,""); print $1}'); do
           juju-crashdump -o "{{ zuul.project.src_dir }}/log" -m $model
