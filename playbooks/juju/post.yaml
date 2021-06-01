@@ -6,6 +6,8 @@
         state: directory
         mode: 0755
     - name: 'crashdump'
+      args:
+        executable: /bin/bash
       shell: >
         set -o pipefail
         for model in $(juju models | grep zaza- | awk '{gsub(/\*?/,""); print $1}'); do
@@ -13,6 +15,8 @@
         done
       when: not zuul_success | bool
     - name: juju status
+      args:
+        executable: /bin/bash
       shell: >
         set -o pipefail
         for model in $(juju models | grep zaza- | awk '{gsub(/\*?/,""); print $1}'); do
