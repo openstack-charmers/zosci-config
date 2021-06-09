@@ -54,6 +54,24 @@ easily have a [centralized location](./zuul.d/project-templates.yaml) where we
 can define common jobs. Adding a new release combination to our Zuul tests is
 as easy as adding the new item to the default jobs that we run for every charm.
 
+### Adding a secret
+
+Place the secret in a file and use zuul-client to generate the configuration
+snippet for you:
+
+```
+    ZUUL_API_EP=X.X.X.X
+    echo "My secret" > /tmp/secret
+    zuul-client --zuul-url http://${ZUUL_API_EP} encrypt \
+        --project 'github.com/openstack-charmers/zosci-config' \
+        --tenant openstack --infile /tmp/secret  \
+        --secret-name netapp_vsadmin_password --field-nam evalue
+```
+
+The snippet can then be added [secrets config](.zuul.d/secrets.yaml). For more
+information see
+[zuul encryption](https://zuul-ci.org/docs/zuul/discussion/encryption.html)
+
 ### Run a functional test
 
 When a developer wants to test their changes in OSCI, the current setup
