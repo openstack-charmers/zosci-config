@@ -61,11 +61,12 @@ snippet for you:
 
 ```
     ZUUL_API_EP=X.X.X.X
+    NAME_OF_KEY="ldap_secret"
     echo "My secret" > /tmp/secret
     zuul-client --zuul-url http://${ZUUL_API_EP} encrypt \
         --project 'github.com/openstack-charmers/zosci-config' \
         --tenant openstack --infile /tmp/secret  \
-        --secret-name netapp_vsadmin_password --field-nam evalue
+        --secret-name ${NAME_OF_KEY} --field-name value
 ```
 
 The snippet can then be added [secrets config](.zuul.d/secrets.yaml). For more
