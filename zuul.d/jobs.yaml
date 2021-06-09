@@ -209,6 +209,12 @@
         BAK_USER_HOST: "ubuntu@10.245.168.2"
         OS_PURESTORAGE_SAN_IP: 10.246.112.11
         OS_PURESTORAGE_API_TOKEN: "{{ purestorage_api_token.value }}"
+        TEST_NETAPP_SAN_IP: 10.245.168.123
+        TEST_NETAPP_SAN_PORT: 80
+        TEST_NETAPP_SAN_VSERVER: svm01
+        TEST_NETAPP_STORAGE_TYPE: ontap_cluster
+        TEST_NETAPP_SAN_USERNAME: vsadmin
+        TEST_NETAPP_SAN_PASSWORD: "{{ netapp_vsadmin_password.value }}"
         TEST_ARISTA_IMAGE_REMOTE: 'http://10.245.161.162/swift/v1/images/arista-cvx-virt-test.qcow2'
         TEST_IRONIC_DEPLOY_INITRD: 'http://10.245.161.162/swift/v1/images/ironic-python-agent.initramfs'
         TEST_IRONIC_DEPLOY_VMLINUZ: 'http://10.245.161.162/swift/v1/images/ironic-python-agent.kernel'
