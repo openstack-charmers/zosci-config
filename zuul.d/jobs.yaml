@@ -224,6 +224,7 @@
     secrets:
       - serverstack_cloud
       - purestorage_api_token
+      - netapp_vsadmin_password
 - job:
     name: bionic
     description: Run a functional test against bionic
