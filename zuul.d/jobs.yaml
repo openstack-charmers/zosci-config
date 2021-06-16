@@ -106,7 +106,7 @@
     name: func-target
     description: Run a functional test
     parent: configure-juju
-    timeout: 7200
+    timeout: 10800
     attempts: 2
     semaphore: functional-test
     # as an alternate to semaphores, or along side them, we could define
