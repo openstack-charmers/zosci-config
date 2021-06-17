@@ -89,7 +89,7 @@
     executable: /bin/bash
   shell: |
     set -o pipefail
-    CHARM_NAME="{{ zuul.project.src_dir | replace('charm-', '') }}"
+    CHARM_NAME="{{ zuul.project.short_name | replace('charm-', '') }}"
     GITHUB_PR_REPO="{{ github_pr_repo.stdout }}"
     GITHUB_PR_ORG="{{ github_pr_org.stdout }}"
     GITHUB_PR_LOGIN="{{ github_pr_login.stdout }}"
