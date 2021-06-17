@@ -2,6 +2,7 @@
   roles:
     - setup-networking-env
     - charm-build
+    - handle-func-test-pr
     - revoke-sudo
     - setup-test-fixtures
     - tox
