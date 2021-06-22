@@ -2,6 +2,7 @@
     name: openstack
     max-nodes-per-job: 1
     report-build-page: true
+    max-job-timeout: 28800
     source:
       github-git:
         config-projects:
