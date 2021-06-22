@@ -38,6 +38,7 @@
 - job:
     name: openstack-tox-with-sudo
     parent: tox
+    timeout: 14400
     description: |
       Job to run tox for tests with OpenStack project specific
       settings such as constraints but without sudo access being revoked.
