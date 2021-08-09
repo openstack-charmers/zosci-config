@@ -13,7 +13,11 @@
         for model in $(juju models | grep zaza- | awk '{gsub(/\*?/,""); print $1}'); do
           juju-crashdump -o "{{ zuul.project.src_dir }}/log" -m $model \
             /etc/apache2 \
-            /etc/haproxy
+            /etc/haproxy \
+            /etc/openvswitch \
+            /etc/ovn \
+            /var/lib/openvswitch \
+            /var/lib/ovn
         done
       when: not zuul_success | bool
     - name: juju status
