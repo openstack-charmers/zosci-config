@@ -17,6 +17,7 @@
               extra-config-paths:
                 - osci.yaml
                 - osci.d/
+          - openstack/charm-ceph-dashboard: *default-project
           - openstack/charm-ceph-iscsi: *default-project
           - openstack/charm-ceph-mon: *default-project
           - openstack/charm-keystone: *default-project
