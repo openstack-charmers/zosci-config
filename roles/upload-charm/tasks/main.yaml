@@ -1,11 +1,33 @@
-- name: archive built charm
+- name: Check for charmcraft file
   when: charm_build_output.rc == 0
+  stat:
+    path: "{{ zuul.project.src_dir }}/{{ charm_build_name }}.charm"
+  register: charmcraft_file
+
+- name: Check for reactive directory
+  when: charm_build_output.rc == 0
+  stat:
+    path: "{{ zuul.project.src_dir }}/build/builds/{{ charm_build_name }}"
+  register: reactive_dir
+
+- name: archive reactive built charm
+  when: charm_build_output.rc == 0 and reactive_dir.stat.exists
   register: charm_archived
   args:
     chdir: "{{ zuul.project.src_dir }}"
     executable: /bin/bash
   shell: |
     tar -cjf {{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 -C build/builds/{{ charm_build_name }} .
+
+- name: archive charmcraft built charm
+  when: charm_build_output.rc == 0 and charmcraft_file.stat.exists
+  register: charm_archived
+  args:
+    chdir: "{{ zuul.project.src_dir }}"
+    executable: /bin/bash
+  shell: |
+    tar -cjf {{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 --exclude='.tox' --exclude='.git' --exclude='build'  .
+
 - name: fetch built charm
   synchronize:
     dest: "{{ zuul.executor.log_root }}"
@@ -14,6 +36,7 @@
     verify_host: true
     owner: no
     group: no
+
 - name: Upload built charm to swift
   delegate_to: localhost
   when: charm_archived.rc == 0
