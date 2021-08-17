@@ -1,2 +1,3 @@
 needs_charm_build: false
 charm_build_name: null
+build_type: reactive
