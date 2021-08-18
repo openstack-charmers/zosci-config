@@ -38,7 +38,12 @@
     {{ tox_executable }} -e build
   register: charm_build_output
 
-- name: set built charm path
-  when: needs_charm_build
+- name: set built charm path for reactive charms
+  when: needs_charm_build and build_type == "reactive"
   set_fact:
     zuul_work_dir: "{{ zuul.project.src_dir }}/build/builds/{{ charm_build_name }}"
+
+- name: set built charm path for charmcraft charms
+  when: needs_charm_build and build_type == "charmcraft"
+  set_fact:
+    zuul_work_dir: "{{ zuul.project.src_dir }}"
