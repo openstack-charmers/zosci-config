@@ -221,6 +221,7 @@
         TEST_IRONIC_DEPLOY_VMLINUZ: 'http://10.245.161.162/swift/v1/images/ironic-python-agent.kernel'
         TEST_IRONIC_RAW_BM_IMAGE: 'http://10.245.161.162/swift/v1/images/baremetal-ubuntu-focal.img'
         TEST_TRILIO_LICENSE: /tmp/tvault-license.lic
+        MODEL_CONSTRAINTS: "cores=2"
       tox_envlist: func-target
     secrets:
       - serverstack_cloud
