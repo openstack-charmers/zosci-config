@@ -272,6 +272,13 @@
     vars:
       tox_extra_args: bionic-queens
 - job:
+    name: impish-xena
+    description: Run a functional test against impish-xena
+    parent: func-target
+    dependencies: *smoke-jobs
+    vars:
+      tox_extra_args: impish-xena
+- job:
     name: hirsute-wallaby
     description: Run a functional test against hirsute-wallaby
     parent: func-target
@@ -285,6 +292,13 @@
     dependencies: *smoke-jobs
     vars:
       tox_extra_args: groovy-victoria
+- job:
+    name: focal-xena
+    description: Run a functional test against focal-xena
+    parent: func-target
+    dependencies: *smoke-jobs
+    vars:
+      tox_extra_args: focal-xena
 - job:
     name: focal-wallaby
     description: Run a functional test against focal-wallaby
