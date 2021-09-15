@@ -35,6 +35,7 @@
           - openstack/charm-cinder-backup: *default-project
           - openstack/charm-cinder-backup-swift-proxy: *default-project
           - openstack/charm-cinder-ceph: *default-project
+          - openstack/charm-cinder-lvm: *default-project
           - openstack/charm-cinder-purestorage: *default-project
           - openstack/charm-designate: *default-project
           - openstack/charm-designate-bind: *default-project
