@@ -74,6 +74,7 @@
           - openstack/charm-octavia-dashboard: *default-project
           - openstack/charm-octavia-diskimage-retrofit: *default-project
           - openstack/charm-openstack-dashboard: *default-project
+          - openstack/charm-openstack-loadbalancer: *default-project
           - openstack/charm-pacemaker-remote: *default-project
           - openstack/charm-percona-cluster: *default-project
           - openstack/charm-placement: *default-project
