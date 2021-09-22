@@ -1,7 +1,9 @@
 - tenant:
     name: openstack
     max-nodes-per-job: 1
-    report-build-page: true
+    # report-build-page is disabled so that we don't send links
+    # to this Zuul to Gerrit when reporting job success/failure
+    report-build-page: false
     max-job-timeout: 28800
     source:
       github-git:
