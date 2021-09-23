@@ -80,7 +80,7 @@
       mysql:
 
 - pipeline:
-    name: periodidaily
+    name: periodic-daily
     post-review: true
     description: Jobs in this queue are triggered on a daily timer.
     manager: independent

@@ -9,7 +9,7 @@
       github-git:
         config-projects:
           - openstack-charmers/zosci-config
-        untrusted-prokects:
+        untrusted-projects:
           - openstack-charmers/charmed-openstack-tester
       opendev:
         untrusted-projects:
