@@ -10,7 +10,10 @@
         config-projects:
           - openstack-charmers/zosci-config
         untrusted-projects:
-          - openstack-charmers/charmed-openstack-tester
+          - openstack-charmers/charmed-openstack-tester:
+              extra-config-paths:
+                - osci.yaml
+                - osci.d/
       opendev:
         untrusted-projects:
           - zuul/zuul-jobs:
