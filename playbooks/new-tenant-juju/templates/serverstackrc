@@ -1,0 +1,10 @@
+
+export OS_AUTH_URL="{{ serverstack_admin.auth.auth_url }}"
+export OS_USERNAME="{{ tenant_project_name }}"
+export OS_PASSWORD="{{ tenant_password }}"
+export OS_USER_DOMAIN_NAME="default"
+export OS_PROJECT_NAME="{{ tenant_project_name }}"
+export OS_PROJECT_DOMAIN_NAME="default"
+export OS_AUTH_VERSION="3"
+export OS_IDENTITY_API_VERSION="3"
+export OS_REGION_NAME="{{ serverstack_admin.region_name  }}"

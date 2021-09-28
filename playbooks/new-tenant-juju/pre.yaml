@@ -1,0 +1,122 @@
+- hosts: all
+  tasks:
+    - name: hack around juju's reluctance to deploy misnamed directories
+      copy:
+        src: "/home/ubuntu/{{ zuul.project.src_dir }}/"
+        dest: "/home/ubuntu/{{ zuul.project.src_dir | replace('charm-', '') }}"
+        remote_src: yes
+    - name: 'install crashdump'
+      become: true
+      snap:
+        name: juju-crashdump
+        classic: yes
+    - name: 'install ospurge'
+      become: true
+      pip:
+        name: ospurge
+    - name: 'create tenant name'
+      set_fact:
+        tenant_project_name: "zosci-test-{{ ansible_date_time.date }}-{{ zuul.job }}-{{ zuul.project.short_name }}-{{ zuul-build }}"
+    - name: 'create tenant password'
+      set_fact:
+        tenant_password: "{{ zuul.build }}"
+    - name: 'Setup tenant'
+      args:
+        executable: /bin/bash
+      shell: |
+        set -o pipefail
+        set -ex
+        export OS_USERNAME={{ serverstack_admin.auth.username }}
+        export OS_PASSWORD={{ serverstack_admin.auth.password }}
+        export OS_TENANT_NAME={{ serverstack_admin.auth.username }}
+        export OS_REGION_NAME={{ serverstack_admin.region_name }}
+        export OS_AUTH_URL={{ serverstack_admin.auth.auth_url }}
+        function get_id() {
+          $@ | grep " id" | awk '{ print $4 }'
+        }
+        USER_DOMAIN=default
+        tenant={{ tenant_project_name }}
+        # setup project
+        project_id=$(get_id openstack project create ${tenant} --enable --domain $USER_DOMAIN)
+        password={{ tenant_password }}
+        openstack user create ${tenant} --password ${password} --project ${project_id} --domain $USER_DOMAIN
+        openstack role add --project ${tenant} --project-domain $USER_DOMAIN --user ${tenant} --user-domain $USER_DOMAIN Member || :
+        openstack quota set --instance 60 --cores 120 --secgroups 1000 \
+                            --secgroup-rules 1000 --ram 131072 \
+                            --floating-ips 50 --port 1000 ${project_id}
+        # setup networking
+        ext_net_id=$(openstack network list  | grep ext_net | awk '{ print $2 }')
+        router_id=$(get_id openstack router create --project ${project_id} ${tenant}_router)
+        openstack router set $router_id --external-gateway $ext_net_id
+        openstack network create --project ${tenant} --project-domain $USER_DOMAIN --disable-port-security ${tenant}_admin_net
+        neutron net-update --dns-domain project.serverstack. ${tenant}_admin_net
+        openstack subnet create --project ${tenant} --project-domain $USER_DOMAIN --network ${tenant}_admin_net --subnet-range 10.5.0.0/16 --dhcp --allocation-pool start=10.5.0.2,end=10.5.20.255 ${tenant}_admin_subnet
+        openstack router add subnet ${tenant}_router ${tenant}_admin_subnet
+        # setup security groups
+        tenant_openstack="openstack --os-project-name ${tenant} --os-username ${tenant} --os-password ${password} \
+                          --os-user-domain-name $USER_DOMAIN --os-project-domain-name $USER_DOMAIN"
+        tenant_neutron="neutron --os-project-name ${tenant} --os-username ${tenant} --os-password ${password} \
+                        --os-user-domain-name $USER_DOMAIN --os-project-domain-name $USER_DOMAIN"
+        $tenant_neutron security-group-rule-create --protocol tcp --port-range-min 22 \
+            --port-range-max 22 --direction ingress default || :
+        $tenant_neutron security-group-rule-create --protocol icmp --direction ingress default || :
+    - name: set test VIP CIDR
+      set_fact:
+        network: "10.5.0"
+    - name: set CIDR ext
+      set_fact:
+        cidr_ext: "10.5.0.0/16"
+    # Setup Juju
+    - name: 'install juju'
+      become: true
+      snap:
+        name: juju
+        classic: yes
+        channel: 2.8/stable
+    - name: Install libpq-dev
+      become: true
+      apt:
+         name: libpq-dev
+    - name: Install libmysqlclient-dev
+      become: true
+      apt:
+        name: libmysqlclient-dev
+    - name: Install libxml2-dev
+      become: true
+      apt:
+        name: libxml2-dev
+    - name: Install libxslt1-dev
+      become: true
+      apt:
+        name: libxslt1-dev
+    - name: Render juju clouds.yaml
+      template:
+        src: clouds.yaml.j2
+        dest: clouds.yaml
+    - name: Add cloud
+      command: /snap/bin/juju add-cloud --client {{ serverstack_admin.region_name }} clouds.yaml
+    - name: 'render serverstackrc'
+      template:
+        src: serverstackrc
+        dest: /home/ubuntu/serverstackrc
+    - name: 'pickup new env variables'
+      lineinfile:
+        line: 'source /home/ubuntu/serverstackrc'
+        path: /home/ubuntu/bashrc
+    - name: 'render credentials.yaml'
+      template:
+        src: credentials.yaml.j2
+        dest: credentials.yaml
+    - name: Add credential
+      command: /snap/bin/juju add-credential {{ serverstack_admin.region_name }} --client -f credentials.yaml
+    - name: Clone charm-test-infra
+      command: git clone https://github.com/openstack-charmers/charm-test-infra /tmp/charm-test-infra
+    - name: 'Bootstrap Controller'
+      command: |
+        /snap/bin/juju bootstrap \
+          --bootstrap-constraints="virt-type=kvm cores=4 mem=8G" \
+          --constraints=virt-type=kvm \
+          --auto-upgrade=false \
+          --model-default=/tmp/charm-test-infra/juju-configs/model-default-serverstack.yaml \
+          --config=/tmp/charm-test-infra/juju-configs/controller-default.yaml \
+          {{ serverstack_admin.region_name }}/{{ serverstack_admin.region_name }}
