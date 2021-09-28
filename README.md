@@ -152,7 +152,6 @@ and these functional jobs:
 
 ```
 - hirsute-wallaby
-- groovy-victoria
 - focal-wallaby
 - focal-victoria
 - focal-ussuri-ec
