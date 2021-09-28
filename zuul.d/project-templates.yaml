@@ -45,7 +45,6 @@
     check:
       jobs:
         - hirsute-wallaby
-        - groovy-victoria
         - focal-wallaby
         - focal-victoria
         - focal-ussuri
