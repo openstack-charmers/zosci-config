@@ -248,6 +248,14 @@
     vars:
       tox_extra_args: focal
 - job:
+    name: impish
+    description: Run a functional test against impish
+    parent: func-target
+    dependencies:
+      - focal
+    vars:
+      tox_extra_args: impish
+- job:
     name: hirsute
     description: Run a functional test against hirsute
     parent: func-target
