@@ -59,6 +59,7 @@
       The default set of unit tests and lint checks for the OpenStack Charms
     check:
       jobs:
+        - charm-build
         - osci-lint
         - tox-py35
         - tox-py36
