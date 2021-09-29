@@ -85,6 +85,7 @@
     description: Jobs in this queue are triggered on a daily timer.
     manager: independent
     precedence: low
+    dequeue-on-new-patchset: false
     trigger:
       timer:
         - time: '0 4 * * *'
@@ -99,6 +100,7 @@
     description: Jobs in this queue are triggered on a weekly timer.
     manager: independent
     precedence: low
+    dequeue-on-new-patchset: false
     trigger:
       timer:
         # Saturday 4am UTC is a better time to start weekend jobs, as Sunday
