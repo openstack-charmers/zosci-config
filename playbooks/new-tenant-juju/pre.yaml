@@ -13,7 +13,11 @@
     - name: 'install ospurge'
       become: true
       pip:
-        name: ospurge
+        name:
+        - ospurge
+        # ospurge requires cryptography, and we don't want to have to bring
+        # in the setuptools_rust toolchain as well for this, it's not needed
+        - 'cryptography<3.4'
     - name: 'create tenant name'
       set_fact:
         tenant_project_name: "zosci-test-{{ zuul.job }}-{{ zuul.project.short_name }}-{{ zuul-build }}"
