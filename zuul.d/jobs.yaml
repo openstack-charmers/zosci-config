@@ -498,6 +498,5 @@
     pre-run: playbooks/new-tenant-juju/pre.yaml
     post-run: playbooks/juju/post.yaml
     cleanup-run: playbooks/new-tenant-juju/cleanup.yaml
-    post-review: false
     secrets:
       - serverstack_admin
