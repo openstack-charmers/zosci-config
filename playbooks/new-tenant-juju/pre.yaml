@@ -16,7 +16,7 @@
         name: ospurge
     - name: 'create tenant name'
       set_fact:
-        tenant_project_name: "zosci-test-{{ ansible_date_time.date }}-{{ zuul.job }}-{{ zuul.project.short_name }}-{{ zuul-build }}"
+        tenant_project_name: "zosci-test-{{ zuul.job }}-{{ zuul.project.short_name }}-{{ zuul-build }}"
     - name: 'create tenant password'
       set_fact:
         tenant_password: "{{ zuul.build }}"
@@ -37,7 +37,7 @@
         USER_DOMAIN=default
         tenant={{ tenant_project_name }}
         # setup project
-        project_id=$(get_id openstack project create ${tenant} --enable --domain $USER_DOMAIN)
+        project_id=$(get_id openstack project create ${tenant} --enable --domain $USER_DOMAIN --property "created-at={{ ansible_date_time.date }}" --tag zosci)
         password={{ tenant_password }}
         openstack user create ${tenant} --password ${password} --project ${project_id} --domain $USER_DOMAIN
         openstack role add --project ${tenant} --project-domain $USER_DOMAIN --user ${tenant} --user-domain $USER_DOMAIN Member || :
