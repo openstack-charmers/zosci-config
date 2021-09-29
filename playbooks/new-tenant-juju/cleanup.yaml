@@ -1,0 +1,8 @@
+- hosts: all
+  tasks:
+  - name: 'create tenant name'
+    set_fact:
+      tenant_project_name: "zosci-test-{{ zuul.job }}-{{ zuul.project.short_name }}-{{ zuul-build }}"
+  - name: Run ospurge
+    command: 'openstack project purge --verbose --project {{ tenant_project_name }}'
+    failed_when: false
