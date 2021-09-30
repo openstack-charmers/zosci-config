@@ -20,7 +20,7 @@
         - 'cryptography<3.4'
     - name: 'create tenant name'
       set_fact:
-        tenant_project_name: "zosci-test-{{ zuul.job }}-{{ zuul.project.short_name }}-{{ zuul-build }}"
+        tenant_project_name: "zosci-test-{{ zuul.job }}-{{ zuul.project.short_name }}-{{ zuul.build }}"
     - name: 'create tenant password'
       set_fact:
         tenant_password: "{{ zuul.build }}"
