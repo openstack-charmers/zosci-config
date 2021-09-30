@@ -16,7 +16,7 @@
       snap:
         name: juju
         classic: yes
-        channel: 2.9/stable
+        channel: 2.8/stable
     - name: Install libpq-dev
       become: true
       apt:
