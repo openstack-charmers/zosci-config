@@ -1,5 +1,5 @@
 - name: archive reactive built charm
-  when: charm_build_output.rc == 0 and build_type == "reactive"
+  when: needs_charm_build and charm_build_output.rc == 0 and build_type == "reactive"
   register: charm_archived_reactive
   args:
     chdir: "{{ zuul.project.src_dir }}"
@@ -7,7 +7,7 @@
   shell: |
     tar -cjf {{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 -C build/builds/{{ charm_build_name }} .
 - name: archive charmcraft built charm
-  when: charm_build_output.rc == 0 and build_type == "charmcraft"
+  when: needs_charm_build and charm_build_output.rc == 0 and build_type == "charmcraft"
   register: charm_archived_charmcraft
   args:
     chdir: "{{ zuul.project.src_dir }}"
@@ -24,8 +24,9 @@
     group: no
 - name: Upload built charm to swift
   delegate_to: localhost
-  when: (charm_archived_reactive.rc is defined and charm_archived_reactive.rc == 0) or
-        (charm_archived_charmcraft.rc is defined and charm_archived_charmcraft.rc == 0)
+  when: needs_charm_build and (
+          (charm_archived_reactive.rc is defined and charm_archived_reactive.rc == 0) or
+          (charm_archived_charmcraft.rc is defined and charm_archived_charmcraft.rc == 0))
   zuul_swift_upload:
     cloud: "{{ serverstack_cloud }}"
     partition: "false"
