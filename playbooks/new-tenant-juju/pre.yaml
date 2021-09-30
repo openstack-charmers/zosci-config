@@ -33,7 +33,7 @@
         executable: /bin/bash
       shell: |
         set -o pipefail
-        set -x
+        set -e
         export OS_USERNAME={{ serverstack_admin.auth.username }}
         export OS_PASSWORD={{ serverstack_admin.auth.password }}
         export OS_TENANT_NAME={{ serverstack_admin.auth.username }}
@@ -110,7 +110,7 @@
     - name: 'pickup new env variables'
       lineinfile:
         line: 'source /home/ubuntu/serverstackrc'
-        path: /home/ubuntu/bashrc
+        path: /home/ubuntu/.bashrc
     - name: 'render credentials.yaml'
       template:
         src: credentials.yaml.j2
