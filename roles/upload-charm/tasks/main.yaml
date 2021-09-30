@@ -18,6 +18,9 @@
     mv ${TMPDIR}/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 .
     rmdir ${TMPDIR}
 - name: fetch built charm
+  when: needs_charm_build and (
+          (charm_archived_reactive.rc is defined and charm_archived_reactive.rc == 0) or
+          (charm_archived_charmcraft.rc is defined and charm_archived_charmcraft.rc == 0))
   synchronize:
     dest: "{{ zuul.executor.log_root }}"
     mode: pull
