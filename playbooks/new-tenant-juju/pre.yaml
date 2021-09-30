@@ -10,6 +10,10 @@
       snap:
         name: juju-crashdump
         classic: yes
+    - name: 'install openstackclients'
+      become: true
+      snap:
+        name: openstackclients
     - name: 'install ospurge'
       become: true
       pip:
