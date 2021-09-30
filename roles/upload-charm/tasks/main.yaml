@@ -13,7 +13,10 @@
     chdir: "{{ zuul.project.src_dir }}"
     executable: /bin/bash
   shell: |
-    tar -cjf {{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 --exclude='.tox' --exclude='.git' --exclude='build' --exclude="*.tar.bz2" .
+    TMP_DIR=$(mktemp -d)
+    tar -cjf ${TMPDIR}/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 --exclude='.tox' --exclude='.git' --exclude='build' --exclude="*.tar.bz2" .
+    mv ${TMPDIR}/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 .
+    rmdir ${TMPDIR}
 - name: fetch built charm
   synchronize:
     dest: "{{ zuul.executor.log_root }}"
