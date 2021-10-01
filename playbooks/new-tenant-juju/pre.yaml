@@ -22,9 +22,12 @@
         # ospurge requires cryptography, and we don't want to have to bring
         # in the setuptools_rust toolchain as well for this, it's not needed
         - 'cryptography<3.4'
+    - name: 'prepare tenant name'
+      set_fact:
+        tenant_project_name_raw: "zosci-test-{{ zuul.change }}-{{ zuul.project.short_name }}-{{ zuul.build }}"
     - name: 'create tenant name'
       set_fact:
-        tenant_project_name: "zosci-test-{{ zuul.job }}-{{ zuul.project.short_name }}-{{ zuul.build }}"
+        tenant_project_name: "{{ tenant_project_name_raw | truncate(64, True, '') }}"
     - name: 'create tenant password'
       set_fact:
         tenant_password: "{{ zuul.build }}"
