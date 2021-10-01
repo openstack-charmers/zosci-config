@@ -12,6 +12,11 @@
       OS_TENANT_NAME: '{{ serverstack_admin.auth.username }}'
       OS_REGION_NAME: '{{ serverstack_admin.region_name }}'
       OS_AUTH_URL: '{{ serverstack_admin.auth.auth_url }}'
+      OS_IDENTITY_API_VERSION: '{{ serverstack_admin.identity_api_version }}'
+      OS_AUTH_VERSION: '{{ serverstack_admin.identity_api_version }}'
+      OS_PROJECT_NAME: '{{ serverstack_admin.auth.project_name }}'
+      OS_PROJECT_DOMAIN_NAME: '{{ serverstack_admin.auth.project_domain_name }}'
+      OS_USER_DOMAIN_NAME: '{{ serverstack_admin.auth.user_domain_name }}'
     shell: |
       set -o pipefail
       set -ex
