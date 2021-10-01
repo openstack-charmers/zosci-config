@@ -13,10 +13,11 @@
     chdir: "{{ zuul.project.src_dir }}"
     executable: /bin/bash
   shell: |
-    TMP_DIR=$(mktemp -d)
-    tar -cjf ${TMPDIR}/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 --exclude='.tox' --exclude='.git' --exclude='build' --exclude="*.tar.bz2" .
-    mv ${TMPDIR}/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 .
-    rmdir ${TMPDIR}
+    TMP_DIR="/tmp/{{ zuul.buildset }}"
+    mkdir $TMP_DIR
+    tar -cjf $TMPDIR/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 --exclude='.tox' --exclude='.git' --exclude='build' --exclude='*.tar.bz2' .
+    mv $TMPDIR/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 .
+    rmdir $TMPDIR
 - name: fetch built charm
   when: needs_charm_build and (
           (charm_archived_reactive.rc is defined and charm_archived_reactive.rc == 0) or
