@@ -14,7 +14,7 @@
       OS_AUTH_URL: '{{ serverstack_admin.auth.auth_url }}'
     shell: |
       set -o pipefail
-      set -e
+      set -ex
       ospurge --verbose --purge-project {{ tenant_project_name }} --admin-role-name=Admin
       openstack project purge --verbose --project {{ tenant_project_name }}
     failed_when: false

@@ -39,7 +39,7 @@
         OS_AUTH_URL: '{{ serverstack_admin.auth.auth_url }}'
       shell: |
         set -o pipefail
-        set -e
+        set -ex
         function get_id() {
           $@ | grep " id" | awk '{ print $4 }'
         }
