@@ -33,8 +33,9 @@
   when: needs_charm_build and fetch_charm.stdout.find("successfully fetched built") == -1
   args:
     chdir: "{{ zuul.project.src_dir }}"
+    executable: /bin/bash
   environment: "{{ tox_environment|combine(tox_constraints_env|default({})) }}"
-  command: |
+  shell: |
     sudo apt install ca-certificates
     {{ tox_executable }} -e build
   register: charm_build_output
