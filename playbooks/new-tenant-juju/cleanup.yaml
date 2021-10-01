@@ -1,8 +1,11 @@
 - hosts: all
   tasks:
+  - name: 'prepare tenant name'
+    set_fact:
+      tenant_project_name_raw: "zosci-test-{{ zuul.change }}-{{ zuul.build }}"
   - name: 'create tenant name'
     set_fact:
-      tenant_project_name: "zosci-test-{{ zuul.job }}-{{ zuul.project.short_name }}-{{ zuul.build }}"
+      tenant_project_name: "{{ tenant_project_name_raw | truncate(64, True, '') }}"
   - name: Purge test tenant
     args:
       executable: /bin/bash

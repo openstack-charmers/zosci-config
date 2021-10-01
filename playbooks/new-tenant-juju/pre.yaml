@@ -14,6 +14,10 @@
       become: true
       snap:
         name: openstackclients
+    - name: 'install jq'
+      become: true
+      snap:
+        name: jq
     - name: 'install ospurge'
       become: true
       pip:
@@ -67,8 +71,10 @@
         openstack router set $router_id --external-gateway $ext_net_id
         openstack network create --project ${tenant} --project-domain $USER_DOMAIN --disable-port-security ${tenant}_admin_net
         neutron net-update --dns-domain project.serverstack. ${tenant}_admin_net
-        openstack subnet create --project ${tenant} --project-domain $USER_DOMAIN --network ${tenant}_admin_net --subnet-range 10.5.0.0/16 --dhcp --allocation-pool start=10.5.0.2,end=10.5.20.255 ${tenant}_admin_subnet
+        openstack subnet create --project ${tenant} --project-domain $USER_DOMAIN --network ${tenant}_admin_net --subnet-range 10.6.0.0/16 --dhcp --allocation-pool start=10.6.0.2,end=10.6.20.255 ${tenant}_admin_subnet
         openstack router add subnet ${tenant}_router ${tenant}_admin_subnet
+        router_address=$(openstack router show icey_router -c external_gateway_info -f value | sed "s/'/\"/g" | sed "s/True/true/g"  | jq '.external_fixed_ips[0].ip_address')
+        ip route add 10.6.0.0/16 via $router_address
         # setup security groups
         tenant_openstack="openstack --os-project-name ${tenant} --os-username ${tenant} --os-password ${password} \
                           --os-user-domain-name $USER_DOMAIN --os-project-domain-name $USER_DOMAIN"
@@ -79,10 +85,10 @@
         $tenant_neutron security-group-rule-create --protocol icmp --direction ingress default || :
     - name: set test VIP CIDR
       set_fact:
-        network: "10.5.0"
+        network: "10.6.0"
     - name: set CIDR ext
       set_fact:
-        cidr_ext: "10.5.0.0/16"
+        cidr_ext: "10.6.0.0/16"
     # Setup Juju
     - name: 'install juju'
       become: true
