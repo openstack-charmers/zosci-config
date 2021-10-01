@@ -31,14 +31,15 @@
     - name: 'Setup tenant'
       args:
         executable: /bin/bash
+      environment:
+        OS_USERNAME: '{{ serverstack_admin.auth.username }}'
+        OS_PASSWORD: '{{ serverstack_admin.auth.password }}'
+        OS_TENANT_NAME: '{{ serverstack_admin.auth.username }}'
+        OS_REGION_NAME: '{{ serverstack_admin.region_name }}'
+        OS_AUTH_URL: '{{ serverstack_admin.auth.auth_url }}'
       shell: |
         set -o pipefail
         set -e
-        export OS_USERNAME={{ serverstack_admin.auth.username }}
-        export OS_PASSWORD={{ serverstack_admin.auth.password }}
-        export OS_TENANT_NAME={{ serverstack_admin.auth.username }}
-        export OS_REGION_NAME={{ serverstack_admin.region_name }}
-        export OS_AUTH_URL={{ serverstack_admin.auth.auth_url }}
         function get_id() {
           $@ | grep " id" | awk '{ print $4 }'
         }
