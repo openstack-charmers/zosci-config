@@ -73,7 +73,7 @@
         neutron net-update --dns-domain project.serverstack. ${tenant}_admin_net
         openstack subnet create --project ${tenant} --project-domain $USER_DOMAIN --network ${tenant}_admin_net --subnet-range 10.6.0.0/16 --dhcp --allocation-pool start=10.6.0.2,end=10.6.20.255 ${tenant}_admin_subnet
         openstack router add subnet ${tenant}_router ${tenant}_admin_subnet
-        router_address=$(openstack router show icey_router -c external_gateway_info -f value | sed "s/'/\"/g" | sed "s/True/true/g"  | jq '.external_fixed_ips[0].ip_address')
+        router_address=$(openstack router show icey_router -c external_gateway_info -f value | sed "s/'/\"/g" | sed "s/True/true/g"  | jq -r '.external_fixed_ips[0].ip_address')
         ip route add 10.6.0.0/16 via $router_address
         # setup security groups
         tenant_openstack="openstack --os-project-name ${tenant} --os-username ${tenant} --os-password ${password} \
