@@ -34,7 +34,8 @@
   args:
     chdir: "{{ zuul.project.src_dir }}"
   environment: "{{ tox_environment|combine(tox_constraints_env|default({})) }}"
-  command: >-
+  command: |
+    sudo apt install ca-certificates
     {{ tox_executable }} -e build
   register: charm_build_output
 
