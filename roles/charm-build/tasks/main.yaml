@@ -9,8 +9,8 @@
     name: libmysqlclient-dev
 # Improvements: use the built charm tarball artifact that's sent to Zuul for
 # downloading rather than just knowing the path and using that.
-- name: fetch charm
-  when: needs_charm_build
+- name: fetch reactive charm
+  when: needs_charm_build and build_type == "reactive"
   args:
     executable: /bin/bash
   shell: |
@@ -21,6 +21,15 @@
     tar xjf /tmp/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 && \
       echo "successfully fetched built {{ charm_build_name }}" || \
       true
+  register: fetch_charm
+
+- name: fetch charmcraft charm
+  when: needs_charm_build and build_type == "charmcraft"
+  args:
+    executable: /bin/bash
+  shell: |
+    set -x
+    curl -o {{ zuul.project.src_dir }}/{{ charm_build_name }}-{{ zuul.buildset }}.charm http://10.245.161.162:80/swift/v1/zuul-built-charms/{{ charm_build_name }}-{{ zuul.buildset }}.charm || true
   register: fetch_charm
 
 # In the below conditional, we're asking to build the charm with two conditions:

@@ -13,14 +13,11 @@
     chdir: "{{ zuul.project.src_dir }}"
     executable: /bin/bash
   shell: |
-    TMP_DIR=$(mktemp -d)
-    tar -cjf ${TMP_DIR}/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 --exclude='.tox' --exclude='.git' --exclude='build' --exclude="*.tar.bz2" .
-    mv ${TMP_DIR}/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 .
-    rmdir ${TMP_DIR}
-- name: fetch built charm
-  when: needs_charm_build and (
-          (charm_archived_reactive.rc is defined and charm_archived_reactive.rc == 0) or
-          (charm_archived_charmcraft.rc is defined and charm_archived_charmcraft.rc == 0))
+    set -x
+    mv {{ charm_build_name }}.charm {{ charm_build_name }}-{{ zuul.buildset }}.charm
+- name: fetch built reactive charm
+  when: needs_charm_build and
+          (charm_archived_reactive.rc is defined and charm_archived_reactive.rc == 0)
   synchronize:
     dest: "{{ zuul.executor.log_root }}"
     mode: pull
@@ -28,11 +25,20 @@
     verify_host: true
     owner: no
     group: no
-- name: Upload built charm to swift
+- name: fetch built charmcraft charm
+  when: needs_charm_build and
+          (charm_archived_charmcraft.rc is defined and charm_archived_charmcraft.rc == 0)
+  synchronize:
+    dest: "{{ zuul.executor.log_root }}"
+    mode: pull
+    src: "{{ zuul.project.src_dir }}/{{ charm_build_name }}-{{ zuul.buildset }}.charm"
+    verify_host: true
+    owner: no
+    group: no
+- name: Upload built reactive charm to swift
   delegate_to: localhost
-  when: needs_charm_build and (
-          (charm_archived_reactive.rc is defined and charm_archived_reactive.rc == 0) or
-          (charm_archived_charmcraft.rc is defined and charm_archived_charmcraft.rc == 0))
+  when: needs_charm_build and
+          (charm_archived_reactive.rc is defined and charm_archived_reactive.rc == 0)
   zuul_swift_upload:
     cloud: "{{ serverstack_cloud }}"
     partition: "false"
@@ -43,10 +49,25 @@
     files:
       - "{{ zuul.executor.log_root }}/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2"
     delete_after: "2592000"
-  register: upload_results
+  register: upload_results_reactive
+- name: Upload built charmcraft charm to swift
+  delegate_to: localhost
+  when: needs_charm_build and
+          (charm_archived_charmcraft.rc is defined and charm_archived_charmcraft.rc == 0)
+  zuul_swift_upload:
+    cloud: "{{ serverstack_cloud }}"
+    partition: "false"
+    container: "zuul-built-charms"
+    public: "yes"
+    prefix: ""
+    indexes: "false"
+    files:
+      - "{{ zuul.executor.log_root }}/{{ charm_build_name }}-{{ zuul.buildset }}.charm"
+    delete_after: "2592000"
+  register: upload_results_charmcraft
 
 - block:
-    - name: Return charm to Zuul
+    - name: Return reactive charm to Zuul
       delegate_to: localhost
       zuul_return:
         data:
@@ -58,4 +79,18 @@
     - name: Print upload failures
       debug:
         var: upload_results.upload_failures
-  when: upload_results is defined
+  when: upload_results_reactive is defined
+- block:
+    - name: Return charmcraft charm to Zuul
+      delegate_to: localhost
+      zuul_return:
+        data:
+          zuul:
+            artifacts:
+            - name: built charmcraft charm
+              type: charm
+              url: http://10.245.161.162:80/swift/v1/zuul/artifacts/built_charms/{{ charm_build_name }}-{{ zuul.buildset }}.charm
+    - name: Print upload failures
+      debug:
+        var: upload_results.upload_failures
+  when: upload_results_charmcraft is defined
