@@ -78,7 +78,7 @@
               url: http://10.245.161.162:80/swift/v1/zuul/artifacts/built_charms/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2
     - name: Print upload failures
       debug:
-        var: upload_results_reactive.upload_failures
+        var: upload_results.upload_failures
   when: upload_results_reactive is defined
 - block:
     - name: Return charmcraft charm to Zuul
@@ -92,5 +92,5 @@
               url: http://10.245.161.162:80/swift/v1/zuul/artifacts/built_charms/{{ charm_build_name }}-{{ zuul.buildset }}.charm
     - name: Print upload failures
       debug:
-        var: upload_results_charmcraft.upload_failures
+        var: upload_results.upload_failures
   when: upload_results_charmcraft is defined
