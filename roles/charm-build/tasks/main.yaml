@@ -29,7 +29,8 @@
     executable: /bin/bash
   shell: |
     set -x
-    curl -o {{ zuul.project.src_dir }}/{{ charm_build_name }}-{{ zuul.buildset }}.charm http://10.245.161.162:80/swift/v1/zuul-built-charms/{{ charm_build_name }}-{{ zuul.buildset }}.charm && \
+    curl -o {{ zuul.project.src_dir }}/{{ charm_build_name }}-{{ zuul.buildset }}.charm http://10.245.161.162:80/swift/v1/zuul-built-charms/{{ charm_build_name }}-{{ zuul.buildset }}.charm || true
+    mv {{ zuul.project.src_dir }}/{{ charm_build_name }}-{{ zuul.buildset }}.charm {{ zuul.project.src_dir }}/{{ charm_build_name }}.charm && \
       echo "successfully fetched built {{ charm_build_name }}" || \
       true
   register: fetch_charm_charmcraft
