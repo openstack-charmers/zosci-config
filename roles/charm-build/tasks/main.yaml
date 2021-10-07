@@ -31,6 +31,10 @@
     set -x
     curl -o {{ zuul.project.src_dir }}/{{ charm_build_name }}-{{ zuul.buildset }}.charm http://10.245.161.162:80/swift/v1/zuul-built-charms/{{ charm_build_name }}-{{ zuul.buildset }}.charm || true
     mv {{ zuul.project.src_dir }}/{{ charm_build_name }}-{{ zuul.buildset }}.charm {{ zuul.project.src_dir }}/{{ charm_build_name }}.charm || true
+    # Upload step seems to incorrectly gzip the already zip'd charm file
+    gzip -t  {{ zuul.project.src_dir }}/{{ charm_build_name }}.charm && \
+      mv {{ zuul.project.src_dir }}/{{ charm_build_name }}.charm {{ zuul.project.src_dir }}/{{ charm_build_name }}.charm.gz && \
+      gunzip {{ zuul.project.src_dir }}/{{ charm_build_name }}.charm.gz || true
     ls -l {{ zuul.project.src_dir }}/{{ charm_build_name }}.charm && grep -Ev 'NoSuchKey' {{ zuul.project.src_dir }}/{{ charm_build_name }}.charm && \
       echo "successfully fetched built {{ charm_build_name }}" || \
       true
