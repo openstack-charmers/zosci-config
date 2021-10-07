@@ -32,11 +32,11 @@
     curl -o {{ zuul.project.src_dir }}/{{ charm_build_name }}-{{ zuul.buildset }}.charm http://10.245.161.162:80/swift/v1/zuul-built-charms/{{ charm_build_name }}-{{ zuul.buildset }}.charm || true
     mv {{ zuul.project.src_dir }}/{{ charm_build_name }}-{{ zuul.buildset }}.charm {{ zuul.project.src_dir }}/{{ charm_build_name }}.charm || true
     # .charm files should be zip archives. But there seems to be a bug in zuul_swift_upload which is compressing the file
-    # when it is uploaded. The result is that the stored file is a zip file which has then been compressed to gzip. The
+    # when it is uploaded. The result is that the stored file is a zip file which has then been gzip compressed. The
     # file extension does not change during this process resulting in gzipped file without a gz extension.
-    # Once the charm has been downloaded the gzip compression needed to be undone. Once it is undone the resulting .charm
+    # Once the charm has been downloaded the gzip compression needs to be undone. Once it is undone the resulting .charm
     # file will be in the correct zip format. To remove the gzip compression the next line uses gzip -t to test if the
-    # .charm file has been compressed. If it is compressed then add the gz extension and run gunzip on the file.
+    # .charm file has been gzip compressed. If it is gzip compressed then add the gz extension and run gunzip on the file.
     gzip -t  {{ zuul.project.src_dir }}/{{ charm_build_name }}.charm && \
       mv {{ zuul.project.src_dir }}/{{ charm_build_name }}.charm {{ zuul.project.src_dir }}/{{ charm_build_name }}.charm.gz && \
       gunzip {{ zuul.project.src_dir }}/{{ charm_build_name }}.charm.gz || true
