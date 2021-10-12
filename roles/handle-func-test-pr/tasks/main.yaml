@@ -5,11 +5,12 @@
       awk 'tolower($0) ~ /func-test-pr: .*github.*zaza.*pull/ {print $2; exit;}' | \
       rev | cut -sf1,3,4 -d/ | rev
   register: func_test_pr
+  when: zuul.message is defined
   args:
     executable: /bin/bash
 
 - name: func-test repo
-  when: func_test_pr.rc == 0
+  when: func_test_pr is defined and func_test_pr.rc == 0
   shell: |
     set -o pipefail
     echo {{ func_test_pr.stdout }} | cut -f1-2 -d/
