@@ -65,3 +65,14 @@
         - tox-py36
         - tox-py37
         - tox-py38
+- project-template:
+    name: charm-yoga-unit-jobs
+    description: |
+      The default set of unit tests and lint checks for the OpenStack Charms
+    check:
+      jobs:
+        - charm-build
+        - osci-lint
+        - tox-py36
+        - tox-py38
+        - tox-py39
