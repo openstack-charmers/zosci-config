@@ -34,6 +34,7 @@
           - openstack/charm-barbican-vault: *default-project
           - openstack/charm-ceilometer: *default-project
           - openstack/charm-ceilometer-agent: *default-project
+          - openstack/charm-ceph-dashboard: *default-project
           - openstack/charm-ceph-osd: *default-project
           - openstack/charm-ceph-proxy: *default-project
           - openstack/charm-ceph-radosgw: *default-project
@@ -43,6 +44,7 @@
           - openstack/charm-cinder-backup-swift-proxy: *default-project
           - openstack/charm-cinder-ceph: *default-project
           - openstack/charm-cinder-lvm: *default-project
+          - openstack/charm-cinder-netapp: *default-project
           - openstack/charm-cinder-purestorage: *default-project
           - openstack/charm-designate: *default-project
           - openstack/charm-designate-bind: *default-project
