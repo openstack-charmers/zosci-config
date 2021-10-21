@@ -20,21 +20,18 @@
               shadow: openstack-charmers/zosci-config
       gerrit:
         untrusted-projects:
-          - openstack/charm-ceph-fs: &default-project
+          - openstack/charm-aodh: &default-project
               extra-config-paths:
                 - osci.yaml
                 - osci.d/
-          - openstack/charm-ceph-dashboard: *default-project
-          - openstack/charm-ceph-iscsi: *default-project
-          - openstack/charm-ceph-mon: *default-project
-          - openstack/charm-keystone: *default-project
-          - openstack/charm-neutron-api: *default-project
-          - openstack/charm-aodh: *default-project
           - openstack/charm-barbican: *default-project
           - openstack/charm-barbican-vault: *default-project
           - openstack/charm-ceilometer: *default-project
           - openstack/charm-ceilometer-agent: *default-project
           - openstack/charm-ceph-dashboard: *default-project
+          - openstack/charm-ceph-fs: *default-project
+          - openstack/charm-ceph-iscsi: *default-project
+          - openstack/charm-ceph-mon: *default-project
           - openstack/charm-ceph-osd: *default-project
           - openstack/charm-ceph-proxy: *default-project
           - openstack/charm-ceph-radosgw: *default-project
@@ -55,6 +52,7 @@
           - openstack/charm-heat: *default-project
           - openstack/charm-ironic-api: *default-project
           - openstack/charm-ironic-conductor: *default-project
+          - openstack/charm-keystone: *default-project
           - openstack/charm-keystone-kerberos: *default-project
           - openstack/charm-keystone-ldap: *default-project
           - openstack/charm-keystone-saml-mellon: *default-project
@@ -70,6 +68,7 @@
           - openstack/charm-masakari-monitors: *default-project
           - openstack/charm-mysql-innodb-cluster: *default-project
           - openstack/charm-mysql-router: *default-project
+          - openstack/charm-neutron-api: *default-project
           - openstack/charm-neutron-api-plugin-arista: *default-project
           - openstack/charm-neutron-api-plugin-ironic: *default-project
           - openstack/charm-neutron-api-plugin-ovn: *default-project
