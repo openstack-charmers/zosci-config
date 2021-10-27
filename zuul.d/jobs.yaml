@@ -210,6 +210,8 @@
         BAK_USER_HOST: "ubuntu@10.245.168.2"
         OS_PURESTORAGE_SAN_IP: 10.246.112.11
         OS_PURESTORAGE_API_TOKEN: "{{ purestorage_api_token.value }}"
+        TEST_GRAFANA_PLUGIN_VONAGE_URL: 'http://10.245.161.162:80/swift/v1/grafana_plugins/vonage-status-panel-1.0.11.zip'
+        TEST_GRAFANA_PLUGIN_PIECHART_URL: 'http://10.245.161.162:80/swift/v1/grafana_plugins/grafana-piechart-panel-1.6.2.zip'
         TEST_NETAPP_SAN_IP: 10.245.168.123
         TEST_NETAPP_SAN_PORT: 80
         TEST_NETAPP_SAN_VSERVER: svm01
