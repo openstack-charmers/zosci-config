@@ -243,7 +243,6 @@
     parent: func-target
     dependencies: &lint_and_unit
         - osci-lint
-        - tox-py35
         - tox-py36
         - tox-py37
         - tox-py38
