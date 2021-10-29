@@ -67,6 +67,7 @@
 - job:
     name: tox-py35
     parent: tox
+    branches: stable/21.10
     description: |
       Run unit tests for a Python project under cPython version 3.5.
 
@@ -79,6 +80,16 @@
     vars:
       tox_envlist: py35
       python_version: 3.5
+- job:
+    name: tox-py35
+    parent: noop
+    branches: master
+    description: |
+      Noop job to skip py35 tests on master
+    nodeset:
+      nodes:
+        - name: xenial-medium
+          label: xenial-medium
 
 - job:
     name: charm-build
