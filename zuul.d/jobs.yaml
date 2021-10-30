@@ -303,6 +303,13 @@
     vars:
       tox_extra_args: groovy-victoria
 - job:
+    name: focal-yoga
+    description: Run a functional test against focal-yoga
+    parent: func-target
+    dependencies: *smoke-jobs
+    vars:
+      tox_extra_args: focal-yoga
+- job:
     name: focal-xena
     description: Run a functional test against focal-xena
     parent: func-target
