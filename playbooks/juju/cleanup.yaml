@@ -1,8 +1,13 @@
 - hosts: all
   tasks:
-    - name: 'tear down controller'
+    - name: 'force remove Juju machines'
+      command: juju remove-machine --force `seq 0 100`
+      failed_when: false
+    - name: 'destroy controller'
       command: >
-        juju remove-machine --force `seq 0 100`
         timeout 120 juju destroy-controller --destroy-all-models --destroy-storage -y {{ serverstack_cloud.region_name }}-{{ serverstack_cloud.region_name }}
-        juju kill-controller -t 60s -y {{ serverstack_cloud.region_name }}-{{ serverstack_cloud.region_name }}
+      failed_when: false
+    - name: 'kill controller'
+      command: >
+        juju kill-controller -t 120s -y {{ serverstack_cloud.region_name }}-{{ serverstack_cloud.region_name }}
       failed_when: false

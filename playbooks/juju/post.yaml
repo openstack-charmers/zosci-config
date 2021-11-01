@@ -37,3 +37,14 @@
         verify_host: true
         owner: no
         group: no
+    - name: 'force remove Juju machines'
+      command: juju remove-machine --force `seq 0 100`
+      failed_when: false
+    - name: 'destroy controller'
+      command: >
+        timeout 240 juju destroy-controller --destroy-all-models --destroy-storage -y {{ serverstack_cloud.region_name }}-{{ serverstack_cloud.region_name }}
+      failed_when: false
+    - name: 'kill controller'
+      command: >
+        juju kill-controller -t 120s -y {{ serverstack_cloud.region_name }}-{{ serverstack_cloud.region_name }}
+      failed_when: false
