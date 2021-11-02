@@ -38,7 +38,7 @@
         owner: no
         group: no
     - name: 'force remove Juju machines'
-      shell: juju remove-machine --force `seq 0 100`
+      shell: juju remove-machine --force $(seq 0 100)
       failed_when: false
     - name: 'destroy controller'
       shell: >
