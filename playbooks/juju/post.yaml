@@ -38,7 +38,11 @@
         owner: no
         group: no
     - name: 'force remove Juju machines'
-      shell: juju remove-machine --force $(seq 0 100)
+      shell: |
+        set -o pipefail
+        for model in $(juju models | grep zaza- | awk '{gsub(/\*?/,""); print $1}'); do
+          juju remove-machine --force $(seq 0 100)
+        done
       failed_when: false
     - name: 'destroy controller'
       shell: >
