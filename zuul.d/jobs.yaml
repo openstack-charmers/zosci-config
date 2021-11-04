@@ -250,6 +250,14 @@
     vars:
       tox_extra_args: focal
 - job:
+    name: jammy
+    description: Run a functional test against jammy
+    parent: func-target
+    dependencies:
+      - focal
+    vars:
+      tox_extra_args: jammy
+- job:
     name: impish
     description: Run a functional test against impish
     parent: func-target
