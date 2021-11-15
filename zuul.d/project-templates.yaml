@@ -58,6 +58,62 @@
         - bionic-queens
         - xenial-mitaka
 - project-template:
+    name: charm-yoga-functional-jobs
+    description: |
+      The default set of yoga functional test jobs for the OpenStack Charms
+    check:
+      jobs:
+        - jammy-yoga:
+            voting: false
+        - focal-yoga:
+            voting: false
+- project-template:
+    name: charm-xena-functional-jobs
+    description: |
+      The default set of xena functional test jobs for the OpenStack Charms
+    check:
+      jobs:
+        - impish-xena:
+            voting: false
+        - focal-xena
+- project-template:
+    name: charm-wallaby-functional-jobs
+    description: |
+      The default set of wallaby functional test jobs for the OpenStack Charms
+    check:
+      jobs:
+        - hirsute-wallaby
+        - focal-wallaby
+- project-template:
+    name: charm-victoria-functional-jobs
+    description: |
+      The default set of victoria functional test jobs for the OpenStack Charms
+    check:
+      jobs:
+        - focal-victoria
+- project-template:
+    name: charm-ussuri-functional-jobs
+    description: |
+      The default set of ussuri functional test jobs for the OpenStack Charms
+    check:
+      jobs:
+        - focal-ussuri
+        - bionic-ussuri
+- project-template:
+    name: charm-stein-functional-jobs
+    description: |
+      The default set of stein functional test jobs for the OpenStack Charms
+    check:
+      jobs:
+        - bionic-stein
+- project-template:
+    name: charm-queens-functional-jobs
+    description: |
+      The default set of queens functional test jobs for the OpenStack Charms
+    check:
+      jobs:
+        - bionic-queens
+- project-template:
     name: charm-unit-jobs
     description: |
       The default set of unit tests and lint checks for the OpenStack Charms
