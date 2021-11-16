@@ -79,6 +79,21 @@
     vars:
       tox_envlist: py35
       python_version: 3.5
+- job:
+    name: tox-py39
+    parent: tox
+    description: |
+      Run unit tests for a Python project under cPython version 3.9.
+
+      Uses tox with the ``py39`` environment.
+
+    nodeset:
+      nodes:
+        - name: impish-medium
+          label: impish-medium
+    vars:
+      tox_envlist: py39
+      python_version: 3.9
 
 - job:
     name: charm-build
