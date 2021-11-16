@@ -242,12 +242,20 @@
     description: Run a functional test against focal
     parent: func-target
     dependencies: &lint_and_unit
+        # The soft dependencies mean that if they are not configured to run
+        # (ie. by charm-*unit-jobs in zuul.d/project-templates.yaml) they
+        # will be ignored.
         - osci-lint
         - name: tox-py35
           soft: true
-        - tox-py36
-        - tox-py37
-        - tox-py38
+        - name: tox-py36
+          soft: true
+        - name: tox-py37
+          soft: true
+        - name: tox-py38
+          soft: true
+        - name: tox-py39
+          soft: true
     vars:
       tox_extra_args: focal
 - job:
