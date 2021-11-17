@@ -89,8 +89,8 @@
 
     nodeset:
       nodes:
-        - name: impish-medium
-          label: impish-medium
+        - name: focal-medium
+          label: focal-medium
     vars:
       tox_envlist: py39
       python_version: 3.9
