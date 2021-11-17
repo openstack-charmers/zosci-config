@@ -1,4 +1,0 @@
-- project:
-    name: openstack/charm-ceph-mon
-    # templates:
-    #   - official-openstack-repo-jobs
