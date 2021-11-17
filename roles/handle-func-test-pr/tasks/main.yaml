@@ -10,7 +10,7 @@
     executable: /bin/bash
 
 - name: func-test repo
-  when: func_test_pr is defined and func_test_pr.rc == 0
+  when: func_test_pr is defined and func_test_pr.rc is defined and func_test_pr.rc == 0
   shell: |
     set -o pipefail
     echo {{ func_test_pr.stdout }} | cut -f1-2 -d/
@@ -19,7 +19,7 @@
     executable: /bin/bash
 
 - name: Github PR repo
-  when: func_pr_repo.rc == 0
+  when: func_test_pr.rc is defined and func_test_pr.rc == 0
   shell: |
     set -o pipefail
     echo {{ func_pr_repo.stdout }} | cut -f2 -d/
