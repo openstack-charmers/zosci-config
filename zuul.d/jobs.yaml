@@ -8,8 +8,8 @@
     attempts: 2
     nodeset:
       nodes:
-        - name: bionic-medium
-          label: bionic-medium
+        - name: focal-medium
+          label: focal-medium
     secrets: &log_clouds
       # - serverstack_cloud
       - artifact_cloud
@@ -79,6 +79,21 @@
     vars:
       tox_envlist: py35
       python_version: 3.5
+- job:
+    name: tox-py36
+    parent: tox
+    description: |
+      Run unit tests for a Python project under cPython version 3.6.
+
+      Uses tox with the ``py36`` environment.
+
+    nodeset:
+      nodes:
+        - name: bionic-medium
+          label: bionic-medium
+    vars:
+      tox_envlist: py36
+      python_version: 3.6
 - job:
     name: tox-py39
     parent: tox
