@@ -188,6 +188,7 @@
         TEST_FIP_START: "{{ network }}.200"
         TEST_FIP_END: "{{ network }}.229"
         TEST_FIP_RANGE: "{{ network }}.200:{{ network }}.229"
+        TEST_SWIFT_IP: 10.245.161.162
         TEST_VIP00: "{{network }}.230"
         TEST_VIP01: "{{ network }}.231"
         TEST_VIP02: "{{ network }}.232"
@@ -499,6 +500,7 @@
         TEST_FIP_START: "10.6.0.200"
         TEST_FIP_END: "10.6.0.229"
         TEST_FIP_RANGE: "10.6.0.200:10.6.0.229"
+        TEST_SWIFT_IP: 10.245.161.162
         TEST_VIP00: "10.6.0.230"
         TEST_VIP01: "10.6.0.231"
         TEST_VIP02: "10.6.0.232"
