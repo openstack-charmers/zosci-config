@@ -28,7 +28,7 @@
     executable: /bin/bash
 
 - name: Github PR org
-  when: func_pr_repo.rc == 0
+  when: func_pr_repo.rc is defined and func_pr_repo.rc == 0
   shell: |
     set -o pipefail
     echo {{ func_pr_repo.stdout }} | cut -f1 -d/
@@ -37,7 +37,7 @@
     executable: /bin/bash
 
 - name: func-test PR number
-  when: func_test_pr.rc == 0
+  when: func_test_pr.rc is defined and func_test_pr.rc == 0
   shell: |
     set -o pipefail
     echo {{ func_test_pr.stdout }} | cut -f3 -d/
@@ -47,7 +47,7 @@
 # _github_api_pr_url="https://api.github.com/repos/$_pr_repo/pulls/$_pr_num"
 
 - name: func-test pr label
-  when: func_pr_repo.rc == 0
+  when: func_pr_repo.rc is defined and func_pr_repo.rc == 0
   args:
     executable: /bin/bash
   shell: |
@@ -57,7 +57,7 @@
   register: func_pr_label_cmd
 
 - name: func-test pr
-  when: func_pr_label_cmd.rc == 0
+  when: func_pr_label_cmd.rc is defined and func_pr_label_cmd.rc == 0
   set_fact:
     func_pr_label: "{{ func_pr_label_cmd.stdout }}"
 
@@ -85,7 +85,7 @@
 # NOTE(lourot): this won't work for Operator charms, as the build output ends up
 # in a different folder, see issue #47.
 - name: inject func-test-pr in test-requirements.txt
-  when: github_pr_login.rc == 0
+  when: github_pr_login.rc is defined and github_pr_login.rc == 0
   args:
     executable: /bin/bash
   shell: |
