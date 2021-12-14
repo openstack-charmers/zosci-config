@@ -78,6 +78,7 @@
           - openstack/charm-nova-cell-controller: *default-project
           - openstack/charm-nova-cloud-controller: *default-project
           - openstack/charm-nova-compute: *default-project
+          - openstack/charm-nova-compute-nvidia-vgpu: *default-project
           - openstack/charm-octavia: *default-project
           - openstack/charm-octavia-dashboard: *default-project
           - openstack/charm-octavia-diskimage-retrofit: *default-project
