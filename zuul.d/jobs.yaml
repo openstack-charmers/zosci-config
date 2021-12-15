@@ -184,7 +184,7 @@
         TEST_CIDR_EXT: "{{ cidr_ext }}"
         TEST_CIDR_END: "{{ network }}.254"
         TEST_GATEWAY: 172.16.0.1
-        TEST_NAME_SERVER: 172.16.0.2
+        TEST_NAME_SERVER: 10.245.160.2
         TEST_FIP_START: "{{ network }}.200"
         TEST_FIP_END: "{{ network }}.229"
         TEST_FIP_RANGE: "{{ network }}.200:{{ network }}.229"
@@ -216,7 +216,7 @@
         CIDR_EXT: "{{ cidr_ext }}"
         CIDR_END: "{{ network }}.254"
         GATEWAY: 172.16.0.1
-        NAME_SERVER: 172.16.0.2
+        NAME_SERVER: 10.245.160.2
         FIP_START: "{{ network }}.200"
         FIP_END: "{{ network }}.229"
         FIP_RANGE: "{{ network }}.200:{{ network }}.229"
@@ -496,7 +496,7 @@
         TEST_CIDR_EXT: "10.6.0.0/16"
         TEST_CIDR_END: "10.6.0.254"
         TEST_GATEWAY: 172.16.0.1
-        TEST_NAME_SERVER: 172.16.0.2
+        TEST_NAME_SERVER: 10.245.160.2
         TEST_FIP_START: "10.6.0.200"
         TEST_FIP_END: "10.6.0.229"
         TEST_FIP_RANGE: "10.6.0.200:10.6.0.229"
@@ -528,7 +528,7 @@
         CIDR_EXT: "10.6.0.0/16"
         CIDR_END: "10.6.0.254"
         GATEWAY: 10.6.0.1
-        NAME_SERVER: 10.6.0.2
+        NAME_SERVER: 10.245.160.2
         FIP_START: "10.6.0.200"
         FIP_END: "10.6.0.229"
         FIP_RANGE: "10.6.0.200:10.6.0.229"
