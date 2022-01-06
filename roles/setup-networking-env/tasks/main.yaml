@@ -17,3 +17,7 @@
   shell: set -o pipefail && env | grep -v OS_
   args:
     executable: /bin/bash
+- name: check dns
+  shell: resolvectl; resolvectl query caipora.serverstack; resolvectl query api.jujucharms.com; host caipora.serverstack 10.245.160.2; host api.jujucharms.com 10.245.160.2; host api.jujucharms.com 10.245.160.1
+  args:
+    executable: /bin/bash
