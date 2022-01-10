@@ -56,3 +56,16 @@
           --model-default=/tmp/charm-test-infra/juju-configs/model-default-serverstack.yaml \
           --config=/tmp/charm-test-infra/juju-configs/controller-default.yaml \
           {{ serverstack_cloud.region_name }}/{{ serverstack_cloud.region_name }}
+    - name: 'Configure cloudinit-userdata model-default'
+      shell:
+        cmd: |
+          cat > /tmp/cloudinit-userdata.yaml << EOF
+          cloudinit-userdata: |
+            preruncmd:
+              - sed -i "/^ExecStart.*systemd-resolved/a Environment=SYSTEMD_LOG_LEVEL=debug" /lib/systemd/system/systemd-resolved.service
+              - systemctl daemon-reload
+              - systemctl restart systemd-resolved
+          EOF
+          /snap/bin/juju model-default /tmp/cloudinit-userdata.yaml
+      args:
+        executable: /bin/bash
