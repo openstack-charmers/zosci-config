@@ -7,6 +7,13 @@
   become: true
   apt:
     name: libmysqlclient-dev
+- name: Install charmcraft
+  when: needs_charm_build and build_type == "charmcraft"
+  become: true
+  snap:
+    name: charmcraft
+    classic: yes
+
 # Improvements: use the built charm tarball artifact that's sent to Zuul for
 # downloading rather than just knowing the path and using that.
 - name: fetch reactive charm
