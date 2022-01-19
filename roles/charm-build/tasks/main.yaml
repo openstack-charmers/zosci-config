@@ -13,6 +13,14 @@
   snap:
     name: charmcraft
     classic: yes
+- name: Install lxd
+  when: needs_charm_build and build_type == "charmcraft"
+  become: true
+  snap:
+    name: lxd
+- name: Print installed snaps
+  when: needs_charm_build and build_type == "charmcraft"
+  command: /usr/bin/snap list
 
 # Improvements: use the built charm tarball artifact that's sent to Zuul for
 # downloading rather than just knowing the path and using that.
