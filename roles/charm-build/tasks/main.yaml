@@ -7,14 +7,19 @@
   become: true
   apt:
     name: libmysqlclient-dev
-- name: Install charmcraft
+- name: Install charmcraft snap
   when: needs_charm_build and build_type == "charmcraft"
   become: true
   snap:
     name: charmcraft
     classic: yes
-- name: Install lxd
-  when: needs_charm_build and build_type == "charmcraft"
+- name: Purge lxd apt package
+  become: true
+  apt:
+    name: lxd
+    state: absent
+    purge: yes
+- name: Install lxd snap
   become: true
   snap:
     name: lxd
