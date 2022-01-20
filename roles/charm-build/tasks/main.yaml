@@ -13,12 +13,15 @@
   snap:
     name: charmcraft
     classic: yes
-- name: Purge lxd apt package
+- name: Purge lxd apt packages
   become: true
   apt:
-    name: lxd
+    name: "{{ item }}"
     state: absent
     purge: yes
+  loop:
+    - lxd
+    - lxd-client
 - name: Install lxd snap
   become: true
   snap:
