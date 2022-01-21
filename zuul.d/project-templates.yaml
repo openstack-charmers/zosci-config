@@ -126,6 +126,51 @@
         - tox-py37
         - tox-py38
 - project-template:
+    name: charm-unit-jobs-py35
+    description: |
+      The default set of unit tests and lint checks for the OpenStack Charms
+    check:
+      jobs:
+        - charm-build
+        - osci-lint
+        - tox-py35
+- project-template:
+    name: charm-unit-jobs-py36
+    description: |
+      The default set of unit tests and lint checks for the OpenStack Charms
+    check:
+      jobs:
+        - charm-build
+        - osci-lint
+        - tox-py36
+- project-template:
+    name: charm-unit-jobs-py37
+    description: |
+      The default set of unit tests and lint checks for the OpenStack Charms
+    check:
+      jobs:
+        - charm-build
+        - osci-lint
+        - tox-py37
+- project-template:
+    name: charm-unit-jobs-py38
+    description: |
+      The default set of unit tests and lint checks for the OpenStack Charms
+    check:
+      jobs:
+        - charm-build
+        - osci-lint
+        - tox-py38
+- project-template:
+    name: charm-unit-jobs-py39
+    description: |
+      The default set of unit tests and lint checks for the OpenStack Charms
+    check:
+      jobs:
+        - charm-build
+        - osci-lint
+        - tox-py39
+- project-template:
     name: charm-yoga-unit-jobs
     description: |
       The default set of unit tests and lint checks for the OpenStack Charms
