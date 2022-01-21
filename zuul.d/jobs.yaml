@@ -153,6 +153,8 @@
 - job:
     name: func-target
     description: Run a functional test
+    # abstract job; use as parent for other jobs
+    abstract: true
     parent: configure-juju
     timeout: 10800
     attempts: 2
@@ -277,199 +279,237 @@
       - serverstack_cloud
       - purestorage_api_token
       - netapp_vsadmin_password
+
+### jobs for CI
+#
+# * lint and unit tests (osci-lint, tox-py*)
+# * named jobs for func-target
+#
+# The key is that all the named jobs for func-target need to be isolated in
+# that they don't depend on any other named jobs, as charms in branches tend to
+# only target a SINGLE Ubuntu and, optionally, OpenStack series.
+
+- job:
+    name: func-target-pre-jobs
+    description: |
+      A func-target derived job that has lint and py* dependences.
+
+      This job, which is abstract, is designed to be used as a parent for
+      func-target jobs, and it includes doing osci-lint (as a hard dependency).
+
+      This is to allow linting to prevent expensive func-target jobs to
+      continue. Note that py* jobs need to be defined separately, as in
+      charmhub world, the python version that has to be supported is dependent
+      on the underlying Ubuntu version.
+
+      Inheritors of this job must set the vars.tox_extra_args to the
+      func-target that is required.
+
+        vars:
+          tox_extra_args: focal
+    abstract: true
+    parent: func-target
+    dependencies:
+      - osci-lint
+
 - job:
     name: bionic
     description: Run a functional test against bionic
-    parent: func-target
+    parent: func-target-pre-jobs
     dependencies:
-      - focal
+      - tox-py36
     vars:
       tox_extra_args: bionic
 - job:
     name: focal
     description: Run a functional test against focal
-    parent: func-target
-    dependencies: &lint_and_unit
-        # The soft dependencies mean that if they are not configured to run
-        # (ie. by charm-*unit-jobs in zuul.d/project-templates.yaml) they
-        # will be ignored.
-        - osci-lint
-        - name: tox-py35
-          soft: true
-        - name: tox-py36
-          soft: true
-        - name: tox-py37
-          soft: true
-        - name: tox-py38
-          soft: true
-        - name: tox-py39
-          soft: true
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py38
     vars:
       tox_extra_args: focal
 - job:
     name: jammy
     description: Run a functional test against jammy
-    parent: func-target
+    parent: func-target-pre-jobs
     dependencies:
-      - focal
+      - tox-py39
     vars:
       tox_extra_args: jammy
 - job:
     name: impish
     description: Run a functional test against impish
-    parent: func-target
+    parent: func-target-pre-jobs
     dependencies:
-      - focal
+      - tox-py39
     vars:
       tox_extra_args: impish
 - job:
     name: hirsute
     description: Run a functional test against hirsute
-    parent: func-target
+    parent: func-target-pre-jobs
     dependencies:
-      - focal
+      - tox-py39
     vars:
       tox_extra_args: hirsute
 - job:
     name: groovy
     description: Run a functional test against groovy
-    parent: func-target
+    parent: func-target-pre-jobs
     dependencies:
-      - focal
+      - tox-py38
     vars:
       tox_extra_args: groovy
 - job:
     name: bionic-queens
     description: Run a functional test against bionic-queens
-    parent: func-target
-    dependencies: &smoke-jobs
-      - bionic-ussuri
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py36
     vars:
       tox_extra_args: bionic-queens
 - job:
     name: jammy-yoga
     description: Run a functional test against jammy-yoga
-    parent: func-target
-    dependencies: *smoke-jobs
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py39
     vars:
       tox_extra_args: jammy-yoga
 - job:
     name: impish-xena
     description: Run a functional test against impish-xena
-    parent: func-target
-    dependencies: *smoke-jobs
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py39
     vars:
       tox_extra_args: impish-xena
 - job:
     name: hirsute-wallaby
     description: Run a functional test against hirsute-wallaby
-    parent: func-target
-    dependencies: *smoke-jobs
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py39
     vars:
       tox_extra_args: hirsute-wallaby
 - job:
     name: groovy-victoria
     description: Run a functional test against groovy-victoria
-    parent: func-target
-    dependencies: *smoke-jobs
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py38
     vars:
       tox_extra_args: groovy-victoria
 - job:
     name: focal-yoga
     description: Run a functional test against focal-yoga
-    parent: func-target
-    dependencies: *smoke-jobs
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py38
     vars:
       tox_extra_args: focal-yoga
 - job:
     name: focal-xena
     description: Run a functional test against focal-xena
-    parent: func-target
-    dependencies: *smoke-jobs
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py38
     vars:
       tox_extra_args: focal-xena
 - job:
     name: focal-wallaby
     description: Run a functional test against focal-wallaby
-    parent: func-target
-    dependencies: *smoke-jobs
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py38
     vars:
       tox_extra_args: focal-wallaby
 - job:
     name: focal-victoria
     description: Run a functional test against focal-victoria
-    parent: func-target
-    dependencies: *smoke-jobs
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py38
     vars:
       tox_extra_args: focal-victoria
 - job:
     name: focal-ussuri
     description: Run a functional test against focal-ussuri
-    parent: func-target
-    dependencies: *smoke-jobs
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py38
     vars:
       tox_extra_args: focal-ussuri
 - job:
     name: bionic-ussuri
     description: Run a functional test against bionic-ussuri
-    parent: func-target
-    dependencies: *lint_and_unit
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py36
     vars:
       tox_extra_args: bionic-ussuri
 - job:
     name: bionic-train
     description: Run a functional test against bionic-train
-    parent: func-target
-    dependencies: *smoke-jobs
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py36
     vars:
       tox_extra_args: bionic-train
 - job:
     name: bionic-stein
     description: Run a functional test against bionic-stein
-    parent: func-target
-    dependencies: *smoke-jobs
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py36
     vars:
       tox_extra_args: bionic-stein
 - job:
     name: bionic-rocky
     description: Run a functional test against bionic-rocky
-    parent: func-target
-    dependencies: *smoke-jobs
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py36
     vars:
       tox_extra_args: bionic-rocky
 - job:
     name: xenial-queens
     description: Run a functional test against xenial-queens
-    parent: func-target
-    dependencies: *smoke-jobs
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py35
     vars:
       tox_extra_args: xenial-queens
 - job:
     name: xenial-pike
     description: Run a functional test against xenial-pike
-    parent: func-target
-    dependencies: *smoke-jobs
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py35
     vars:
       tox_extra_args: xenial-pike
 - job:
     name: xenial-ocata
     description: Run a functional test against xenial-ocata
-    parent: func-target
-    dependencies: *smoke-jobs
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py35
     vars:
       tox_extra_args: xenial-ocata
 - job:
     name: xenial-mitaka
     description: Run a functional test against xenial-mitaka
-    parent: func-target
-    dependencies: *smoke-jobs
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py35
     vars:
       tox_extra_args: xenial-mitaka
 - job:
     name: trusty-mitaka
     description: Run a functional test against trusty-mitaka
-    parent: func-target
-    dependencies: *smoke-jobs
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py35
     vars:
       tox_extra_args: trusty-mitaka
 
