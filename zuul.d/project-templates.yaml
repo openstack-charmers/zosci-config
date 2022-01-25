@@ -48,7 +48,6 @@
       The default set of functional test jobs for the OpenStack Charms
     check:
       jobs:
-        - hirsute-wallaby
         - focal-wallaby
         - focal-victoria
         - focal-ussuri
@@ -82,7 +81,6 @@
       The default set of wallaby functional test jobs for the OpenStack Charms
     check:
       jobs:
-        - hirsute-wallaby
         - focal-wallaby
 - project-template:
     name: charm-victoria-functional-jobs

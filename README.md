@@ -151,7 +151,6 @@ run the following unit test type jobs:
 and these functional jobs:
 
 ```
-- hirsute-wallaby
 - focal-wallaby
 - focal-victoria
 - focal-ussuri-ec
