@@ -311,6 +311,8 @@
     parent: func-target
     dependencies:
       - osci-lint
+      - name: charm-build
+        soft: true
 
 - job:
     name: bionic
