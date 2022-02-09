@@ -20,6 +20,8 @@
               shadow: openstack-charmers/zosci-config
       gerrit:
         untrusted-projects:
+          # NOTE: after having added a project to this list, it is necessary to
+          # run the `reload-config` action on the `zuul-scheduler` charm.
           - openstack/charm-aodh: &default-project
               extra-config-paths:
                 - osci.yaml
