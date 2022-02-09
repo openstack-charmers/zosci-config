@@ -275,6 +275,9 @@
         TEST_TRILIO_LICENSE: /tmp/tvault-license.lic
         TEST_MODEL_CONSTRAINTS: "cores=2"
       tox_envlist: func-target
+      # The first two -v's go to tox itself, and the three last ones are
+      # passed on to pip
+      tox_extra_args: -vvvvv
     secrets:
       - serverstack_cloud
       - purestorage_api_token
