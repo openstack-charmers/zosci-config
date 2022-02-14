@@ -268,6 +268,7 @@
         TEST_NETAPP_STORAGE_TYPE: ontap_cluster
         TEST_NETAPP_SAN_USERNAME: vsadmin
         TEST_NETAPP_SAN_PASSWORD: "{{ netapp_vsadmin_password.value }}"
+        TEST_NETAPP_ROOT_VOL_AGGR_NAME: openstack
         TEST_ARISTA_IMAGE_REMOTE: 'http://10.245.161.162/swift/v1/images/arista-cvx-virt-test.qcow2'
         TEST_IRONIC_DEPLOY_INITRD: 'http://10.245.161.162/swift/v1/images/ironic-python-agent.initramfs'
         TEST_IRONIC_DEPLOY_VMLINUZ: 'http://10.245.161.162/swift/v1/images/ironic-python-agent.kernel'
