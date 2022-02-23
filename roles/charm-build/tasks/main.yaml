@@ -26,6 +26,7 @@
   become: true
   snap:
     name: lxd
+    channel: 4.22/stable
 - name: Initialize lxd
   command: lxd init --auto
 - name: Print information about installed software
