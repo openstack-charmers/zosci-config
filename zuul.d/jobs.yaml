@@ -275,6 +275,7 @@
         TEST_IRONIC_DEPLOY_VMLINUZ: 'http://10.245.161.162/swift/v1/images/ironic-python-agent.kernel'
         TEST_IRONIC_RAW_BM_IMAGE: 'http://10.245.161.162/swift/v1/images/baremetal-ubuntu-focal.img'
         TEST_TRILIO_LICENSE: /tmp/tvault-license.lic
+        TEST_NVIDIA_VGPU_HOST_SW: 'http://10.245.161.162/swift/v1/images/nvidia-vgpu-ubuntu-510_510.47.03_amd64.deb'
         TEST_MODEL_CONSTRAINTS: "cores=2"
         TEST_MAX_RESOLVE_COUNT: 3
       tox_envlist: func-target
@@ -616,6 +617,7 @@
         TEST_IRONIC_DEPLOY_VMLINUZ: 'http://10.245.161.162/swift/v1/images/ironic-python-agent.kernel'
         TEST_IRONIC_RAW_BM_IMAGE: 'http://10.245.161.162/swift/v1/images/baremetal-ubuntu-focal.img'
         TEST_TRILIO_LICENSE: /tmp/tvault-license.lic
+        TEST_NVIDIA_VGPU_HOST_SW: 'http://10.245.161.162/swift/v1/images/nvidia-vgpu-ubuntu-510_510.47.03_amd64.deb'
         TEST_MODEL_CONSTRAINTS: "cores=2"
 
 - job:
