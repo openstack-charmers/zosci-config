@@ -323,6 +323,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py36
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: bionic
 - job:
@@ -331,6 +333,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py38
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: focal
 - job:
@@ -339,6 +343,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py39
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: jammy
 - job:
@@ -347,6 +353,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py39
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: impish
 - job:
@@ -355,6 +363,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py39
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: hirsute
 - job:
@@ -363,6 +373,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py38
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: groovy
 - job:
@@ -371,6 +383,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py36
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: bionic-queens
 - job:
@@ -379,6 +393,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py39
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: jammy-yoga
 - job:
@@ -387,6 +403,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py39
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: impish-xena
 - job:
@@ -395,6 +413,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py39
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: hirsute-wallaby
 - job:
@@ -403,6 +423,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py38
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: groovy-victoria
 - job:
@@ -411,6 +433,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py38
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: focal-yoga
 - job:
@@ -419,6 +443,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py38
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: focal-xena
 - job:
@@ -427,6 +453,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py38
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: focal-wallaby
 - job:
@@ -435,6 +463,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py38
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: focal-victoria
 - job:
@@ -443,6 +473,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py38
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: focal-ussuri
 - job:
@@ -451,6 +483,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py36
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: bionic-ussuri
 - job:
@@ -459,6 +493,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py36
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: bionic-train
 - job:
@@ -467,6 +503,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py36
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: bionic-stein
 - job:
@@ -475,6 +513,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py36
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: bionic-rocky
 - job:
@@ -483,6 +523,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py35
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: xenial-queens
 - job:
@@ -491,6 +533,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py35
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: xenial-pike
 - job:
@@ -499,6 +543,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py35
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: xenial-ocata
 - job:
@@ -507,6 +553,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py35
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: xenial-mitaka
 - job:
@@ -515,6 +563,8 @@
     parent: func-target-pre-jobs
     dependencies:
       - tox-py35
+      - osci-lint
+      - charm-build
     vars:
       tox_extra_args: trusty-mitaka
 
