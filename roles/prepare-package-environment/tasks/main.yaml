@@ -15,4 +15,11 @@
   apt:
     name: unattended-upgrades
     state: absent
-
+- name: "apt-get update"
+  become: yes
+  apt:
+    update_cache: yes
+- name: "apt install dist-upgrade"
+  become: yes
+  apt:
+    upgrade: dist
