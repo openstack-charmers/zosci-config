@@ -2,6 +2,7 @@
 # until then manually check for the lock.
 - name: Wait for apt lock
   command: /usr/bin/lsof /var/lib/dpkg/lock-frontend
+  become: yes
   retries: 30
   delay: 10
   register: result
@@ -12,6 +13,7 @@
 # installed.
 # WARNING: This is a throw-away CI environment, do not do this at home
 - name: Remove unattended-upgrades
+  become: yes
   apt:
     name: unattended-upgrades
     state: absent
