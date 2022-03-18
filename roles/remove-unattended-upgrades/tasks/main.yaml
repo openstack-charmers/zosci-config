@@ -1,5 +1,5 @@
-# apt supports lock_timeout from 2.12 (impish onwards) until then manually
-# check for the lock.
+# The ansible apt module supports lock_timeout from 2.12 (impish onwards)
+# until then manually check for the lock.
 - name: Wait for apt lock
   command: /usr/bin/lsof /var/lib/dpkg/lock-frontend
   retries: 30
@@ -8,6 +8,9 @@
   until: result.rc == 1
   failed_when:
     - result.rc == 0
+# Remove unattended-upgrades to stop clashes when other packages need to be
+# installed.
+# WARNING: This is a throw-away CI environment, do not do this at home
 - name: Remove unattended-upgrades
   apt:
     name: unattended-upgrades
