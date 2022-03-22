@@ -36,9 +36,9 @@ def extract_lines(commit_message, match_pattern):
     :returns: Matching lines
     :rtype: List[str]"""
     lines = []
-    for l in commit_message.split('\n'):
-        if re.match(match_pattern, l, flags=re.IGNORECASE):
-            lines.append(l)
+    for line in commit_message.split('\n'):
+        if re.match(match_pattern, line, flags=re.IGNORECASE):
+            lines.append(line)
     return lines
 
 
@@ -80,8 +80,8 @@ def process_func_test_pr(commit_message, files):
     """
     lines = extract_lines(commit_message, 'func-test-pr')
     updates = []
-    for l in lines:
-        pr_url = urlparse(l.split()[-1])
+    for line in lines:
+        pr_url = urlparse(line.split()[-1])
         _r = re.sub('/pull/.*', '', pr_url.path)
         _r = re.sub('^/', '', _r)
         pr_org, pr_repo = _r.split('/')
