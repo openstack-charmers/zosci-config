@@ -84,8 +84,6 @@
       The default set of xena functional test jobs for the OpenStack Charms
     check:
       jobs:
-        - impish-xena:
-            voting: false
         - focal-xena
 - project-template:
     name: charm-wallaby-functional-jobs
