@@ -128,6 +128,22 @@
       python_version: 3.9
 
 - job:
+    name: tox-py310
+    parent: tox
+    description: |
+      Run unit tests for a Python project under cPython version 3.10.
+
+      Uses tox with the ``py310`` environment.
+
+    nodeset:
+      nodes:
+        - name: focal-medium
+          label: focal-medium
+    vars:
+      tox_envlist: py310
+      python_version: 3.10
+
+- job:
     name: charm-build
     description: Build a source charm into a deployable charm
     timeout: 3600
