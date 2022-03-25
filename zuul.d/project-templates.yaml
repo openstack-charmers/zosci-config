@@ -76,8 +76,7 @@
       jobs:
         - jammy-yoga:
             voting: false
-        - focal-yoga:
-            voting: false
+        - focal-yoga
 - project-template:
     name: charm-xena-functional-jobs
     description: |
