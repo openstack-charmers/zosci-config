@@ -195,6 +195,15 @@
         - osci-lint
         - tox-py39
 - project-template:
+    name: charm-unit-jobs-py310
+    description: |
+      The default set of unit tests and lint checks for the OpenStack Charms
+    check:
+      jobs:
+        - charm-build
+        - osci-lint
+        - tox-py310
+- project-template:
     name: charm-yoga-unit-jobs
     description: |
       The default set of unit tests and lint checks for the OpenStack Charms
