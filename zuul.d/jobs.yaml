@@ -141,7 +141,7 @@
           label: focal-medium
     vars:
       tox_envlist: py310
-      python_version: 3.10
+      python_version: '3.10'
 
 - job:
     name: charm-build
