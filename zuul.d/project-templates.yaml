@@ -39,6 +39,10 @@
     description: |
       placeholder
 - project-template:
+    name: openstack-tox-py310
+    description: |
+      placeholder
+- project-template:
     name: openstack-cover-jobs
     description: |
       placeholder
