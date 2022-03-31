@@ -68,6 +68,7 @@ def apply_updates(updates, files):
                     flags=re.MULTILINE)
             f.seek(0)
             f.write(contents)
+            f.truncate()
 
 
 def process_func_test_pr(commit_message, files):
@@ -79,6 +80,9 @@ def process_func_test_pr(commit_message, files):
     :type files: List[str]
     """
     lines = extract_lines(commit_message, 'func-test-pr')
+    # regex to check stable branches in the git url
+    # eg: @stable/xena#egg=zaza.openstack, @stable/xena
+    stable_branch_regex = r'[@\S]*?(?=[#\n])'
     updates = []
     for line in lines:
         pr_url = urlparse(line.split()[-1])
@@ -94,7 +98,7 @@ def process_func_test_pr(commit_message, files):
         pr_label = request.json()['head']['label']
         pr_login, pr_branch = pr_label.split(':')
         updates.append((
-            "{}/{}.git".format(pr_org, pr_repo),
+            "{}/{}.git{}".format(pr_org, pr_repo, stable_branch_regex),
             "{}/{}.git@{}".format(pr_login, pr_repo, pr_branch)))
     apply_updates(updates, files)
 

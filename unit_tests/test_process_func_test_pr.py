@@ -43,7 +43,11 @@ Depends-On: https://review.opendev.org/c/openstack/charm-keystone/+/830986
 Depends-On: https://review.opendev.org/c/openstack/interface-keystone/+/830988
 Change-Id: Iadd11634d1fe44731ecf0a6104561b4aeebff23f
 """
-DEFAULT_LOCATIONS = """
+DEFAULT_LOCATIONS_MAIN = """
+git+https://github.com/charmers/zaza.git#egg=zaza
+git+https://github.com/charmers/zaza-tests.git#egg=zaza.openstack
+"""
+DEFAULT_LOCATIONS_STABLE_BRANCHES = """
 git+https://github.com/charmers/zaza.git@stable/xena#egg=zaza
 git+https://github.com/charmers/zaza-tests.git@stable/xena#egg=zaza.openstack
 """
@@ -105,7 +109,7 @@ class TestProcessFuncTestPR(unittest.TestCase):
                  'Béchamel sauce'))
 
     @mock.patch.object(process_func_test_pr.requests, 'get')
-    def test_process_func_test_pr(self, mock_get):
+    def _test_process_func_test_pr(self, locations, mock_get):
         with tempfile.TemporaryDirectory() as tmpdirname:
             def fake_get(url):
                 key = url.split('/')[-1]
@@ -115,7 +119,7 @@ class TestProcessFuncTestPR(unittest.TestCase):
             mock_get.side_effect = fake_get
             file1 = '{}/file1.txt'.format(tmpdirname)
             with open(file1, 'w') as f:
-                f.write(DEFAULT_LOCATIONS)
+                f.write(locations)
             process_func_test_pr.process_func_test_pr(
                 TEST_MESSAGE,
                 [file1])
@@ -124,5 +128,11 @@ class TestProcessFuncTestPR(unittest.TestCase):
             contents = [c.strip() for c in contents if c != '\n']
             self.assertEqual(
                 contents,
-                ['git+https://github.com/gnuoy/zaza.git@bug/some-bug@stable/xena#egg=zaza',  # noqa: E501
-                 'git+https://github.com/gnuoy/zaza-tests.git@bug/1964117@stable/xena#egg=zaza.openstack'])  # noqa: E501
+                ['git+https://github.com/gnuoy/zaza.git@bug/some-bug#egg=zaza',  # noqa: E501
+                 'git+https://github.com/gnuoy/zaza-tests.git@bug/1964117#egg=zaza.openstack'])  # noqa: E501
+
+    def test_process_func_test_pr_main_branch(self):
+        self._test_process_func_test_pr(DEFAULT_LOCATIONS_MAIN)
+
+    def test_process_func_test_pr_stable_branches(self):
+        self._test_process_func_test_pr(DEFAULT_LOCATIONS_STABLE_BRANCHES)
