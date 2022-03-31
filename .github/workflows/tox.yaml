@@ -23,3 +23,5 @@ jobs:
         pip install tox tox-gh-actions
     - name: Lint with tox
       run: tox -e linters
+    - name: Run python unit tests
+      run: tox -e py3
