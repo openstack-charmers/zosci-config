@@ -9,20 +9,20 @@
     state: directory
   register: tmp_dir
 
-- name: Copy over process-func-test-pr.py
+- name: Copy over process_func_test_pr.py
   when: zuul.message is defined
   copy:
-    src: "process-func-test-pr.py"
-    dest: "{{ tmp_dir.path }}/process-func-test-pr.py"
+    src: "process_func_test_pr.py"
+    dest: "{{ tmp_dir.path }}/process_func_test_pr.py"
     mode: '0500'
 
-- name: Run process-func-test-pr.py
+- name: Run process_func_test_pr.py
   when: zuul.message is defined
   args:
     executable: /bin/bash
   shell: |
     set -o pipefail
-    {{ tmp_dir.path }}/process-func-test-pr.py \
+    {{ tmp_dir.path }}/process_func_test_pr.py \
       -f "{{ zuul.project.src_dir }}/test-requirements.txt" \
       -f "{{ zuul.project.src_dir }}/src/test-requirements.txt" \
       -f "{{ zuul.project.src_dir }}/build/builds/{{ charm_name }}/test-requirements.txt" \
