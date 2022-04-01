@@ -3,29 +3,11 @@
   set_fact:
     charm_name: "{{ zuul.project.short_name | replace('charm-', '') }}"
 
-- name: Create temporary directory
+- name: Process commit message
   when: zuul.message is defined
-  tempfile:
-    state: directory
-  register: tmp_dir
-
-- name: Copy over process_func_test_pr.py
-  when: zuul.message is defined
-  copy:
-    src: "process_func_test_pr.py"
-    dest: "{{ tmp_dir.path }}/process_func_test_pr.py"
-    mode: '0500'
-
-- name: Run process_func_test_pr.py
-  when: zuul.message is defined
-  args:
-    executable: /bin/bash
-  shell: |
-    set -o pipefail
-    {{ tmp_dir.path }}/process_func_test_pr.py \
-      -f "{{ zuul.project.src_dir }}/test-requirements.txt" \
-      -f "{{ zuul.project.src_dir }}/src/test-requirements.txt" \
-      -f "{{ zuul.project.src_dir }}/build/builds/{{ charm_name }}/test-requirements.txt" \
-      {{ zuul.message }}
-
-
+  process_commit_msg:
+    commit_message: "{{ zuul.message }}"
+    files:
+      - "{{ zuul.project.src_dir }}/test-requirements.txt"
+      - "{{ zuul.project.src_dir }}/src/test-requirements.txt"
+      - "{{ zuul.project.src_dir }}/build/builds/{{ charm_name }}/test-requirements.txt"

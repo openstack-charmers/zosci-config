@@ -14,4 +14,4 @@
 
 import sys
 
-sys.path.append('roles/handle-func-test-pr/files/')
+sys.path.append('roles/handle-func-test-pr/library')

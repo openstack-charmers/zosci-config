@@ -16,7 +16,7 @@ import mock
 import tempfile
 import unittest
 
-import process_func_test_pr
+import process_commit_msg
 
 TEST_MESSAGE = """
 Update to build using charmcraft
@@ -66,23 +66,15 @@ API_GITHUB_RESPONSES = {
 
 class TestProcessFuncTestPR(unittest.TestCase):
 
-    def test_parser(self):
-        args = process_func_test_pr.parse_args([
-            '-f', 'file1',
-            '-f', 'file2',
-            'My Message'])
-        self.assertEqual(args.file, ['file1', 'file2'])
-        self.assertEqual(args.commit_message, 'My Message')
-
     def test_extract_lines(self):
         self.assertEqual(
-            process_func_test_pr.extract_lines(TEST_MESSAGE, 'Im not there'),
+            process_commit_msg.extract_lines(TEST_MESSAGE, 'Im not there'),
             [])
         self.assertEqual(
-            process_func_test_pr.extract_lines(TEST_MESSAGE, 'Change-Id'),
+            process_commit_msg.extract_lines(TEST_MESSAGE, 'Change-Id'),
             ["Change-Id: Iadd11634d1fe44731ecf0a6104561b4aeebff23f"])
         self.assertEqual(
-            process_func_test_pr.extract_lines(
+            process_commit_msg.extract_lines(
                 TEST_MESSAGE,
                 r'.*(Unit test fi|add a build).*'),
             ['- add a build-requirements.txt',
@@ -93,7 +85,7 @@ class TestProcessFuncTestPR(unittest.TestCase):
             file1 = '{}/file1.txt'.format(tmpdirname)
             with open(file1, 'w') as f:
                 f.write("Yo, hit me with some biscuits and gravy")
-            process_func_test_pr.apply_updates(
+            process_commit_msg.apply_updates(
                 [
                     ('Im not there', 'foo'),
                     ('Yo,', 'Good morning,'),
@@ -108,7 +100,7 @@ class TestProcessFuncTestPR(unittest.TestCase):
                 ('Good morning, please may I have a savoury scone with '
                  'Béchamel sauce'))
 
-    @mock.patch.object(process_func_test_pr.requests, 'get')
+    @mock.patch.object(process_commit_msg.requests, 'get')
     def _test_process_func_test_pr(self, locations, mock_get):
         with tempfile.TemporaryDirectory() as tmpdirname:
             def fake_get(url):
@@ -120,7 +112,7 @@ class TestProcessFuncTestPR(unittest.TestCase):
             file1 = '{}/file1.txt'.format(tmpdirname)
             with open(file1, 'w') as f:
                 f.write(locations)
-            process_func_test_pr.process_func_test_pr(
+            process_commit_msg.process_func_test_pr(
                 TEST_MESSAGE,
                 [file1])
             with open(file1, 'r') as f:
