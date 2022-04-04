@@ -203,7 +203,9 @@
       jobs:
         - charm-build
         - osci-lint
-        - tox-py310
+        # NOTE(ajkavanagh) disabled until we can get zuul, ansible and py310 on
+        # jammy to play together.
+        #- tox-py310
 - project-template:
     name: charm-yoga-unit-jobs
     description: |
