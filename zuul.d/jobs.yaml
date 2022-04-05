@@ -358,7 +358,8 @@
     description: Run a functional test against jammy
     parent: func-target-pre-jobs
     dependencies:
-      # - tox-py310 # Disable until OSCI has jammy images
+      - name: tox-py310
+        soft: true
       - osci-lint
       - charm-build
     vars:
