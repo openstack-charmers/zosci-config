@@ -27,10 +27,6 @@
   snap:
     name: lxd
     channel: latest/stable
-  retries: 5
-  delay: 5
-  register: result
-  until: result.rc == 0
 - name: Initialize lxd
   command: lxd init --auto
 - name: Print information about installed software
