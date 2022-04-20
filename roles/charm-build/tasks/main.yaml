@@ -13,6 +13,7 @@
   snap:
     name: charmcraft
     classic: yes
+    channel: "1.5/stable"
 - name: Purge lxd apt packages
   become: true
   apt:
