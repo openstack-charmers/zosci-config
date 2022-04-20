@@ -34,6 +34,7 @@
           - openstack/charm-ceph-fs: *default-project
           - openstack/charm-ceph-iscsi: *default-project
           - openstack/charm-ceph-mon: *default-project
+          - openstack/charm-ceph-nfs: *default-project
           - openstack/charm-ceph-osd: *default-project
           - openstack/charm-ceph-proxy: *default-project
           - openstack/charm-ceph-radosgw: *default-project
