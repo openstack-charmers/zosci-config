@@ -5,7 +5,7 @@
     roles:
       - zuul: zuul/zuul-jobs
     timeout: 1800
-    attempts: 2
+    attempts: 4
     nodeset:
       nodes:
         - name: focal-medium
