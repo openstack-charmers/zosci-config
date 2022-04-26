@@ -174,7 +174,7 @@
     abstract: true
     parent: configure-juju
     timeout: 10800
-    attempts: 2
+    attempts: 4
     semaphore: functional-test
     # as an alternate to semaphores, or along side them, we could define
     # a custom node label to use for the func jobs. This would have a potential
