@@ -48,6 +48,7 @@
           - openstack/charm-cinder-nimblestorage: *default-project
           - openstack/charm-cinder-purestorage: *default-project
           - openstack/charm-cinder-solidfire: *default-project
+          - openstack/charm-cinder-three-par: *default-project
           - openstack/charm-designate: *default-project
           - openstack/charm-designate-bind: *default-project
           - openstack/charm-glance: *default-project
