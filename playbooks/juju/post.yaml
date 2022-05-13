@@ -11,7 +11,10 @@
       shell: |
         set -o pipefail
         for model in $(juju models | grep zaza- | awk '{gsub(/\*?/,""); print $1}'); do
-          juju-crashdump -o "{{ zuul.project.src_dir }}/log" -m $model \
+          juju-crashdump \
+            -o "{{ zuul.project.src_dir }}/log" \
+            -m $model \
+            --as-root \
             /etc/apache2 \
             /etc/haproxy \
             /etc/openvswitch \
