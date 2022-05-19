@@ -111,6 +111,14 @@
         - focal-ussuri
         - bionic-ussuri
 - project-template:
+    name: charm-focal-ussuri-functional-jobs
+    description: |
+      The default set of ussuri functional test jobs (focal only) for the
+      OpenStack Charms
+    check:
+      jobs:
+        - focal-ussuri
+- project-template:
     name: charm-train-functional-jobs
     description: |
       The default set of stein functional test jobs for the OpenStack Charms
