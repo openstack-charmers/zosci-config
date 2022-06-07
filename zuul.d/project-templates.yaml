@@ -27,6 +27,10 @@
     description: |
       placeholder
 - project-template:
+    name: openstack-python3-charm-zed-jobs
+    description: |
+      placeholder
+- project-template:
     name: openstack-python3-charm-yoga-jobs
     description: |
       placeholder
@@ -72,6 +76,16 @@
         - bionic-stein
         - bionic-queens
         - xenial-mitaka
+- project-template:
+    name: charm-zed-functional-jobs
+    description: |
+      The default set of zed functional test jobs for the OpenStack Charms
+    check:
+      jobs:
+        - kinetic-zed:
+            voting: false
+        - jammy-zed:
+            voting: false
 - project-template:
     name: charm-yoga-functional-jobs
     description: |
