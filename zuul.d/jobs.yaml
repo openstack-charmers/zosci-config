@@ -405,6 +405,17 @@
     vars:
       tox_extra_args: bionic-queens
 - job:
+    name: kinetic-zed
+    description: Run a functional test against kinetic-zed
+    parent: func-target-pre-jobs
+    dependencies:
+      - name: tox-py310
+        soft: true
+      - osci-lint
+      - charm-build
+    vars:
+      tox_extra_args: kinetic-zed
+- job:
     name: jammy-yoga
     description: Run a functional test against jammy-yoga
     parent: func-target-pre-jobs
@@ -445,6 +456,16 @@
       - charm-build
     vars:
       tox_extra_args: groovy-victoria
+- job:
+    name: jammy-zed
+    description: Run a functional test against jammy-zed
+    parent: func-target-pre-jobs
+    dependencies:
+      - tox-py310
+      - osci-lint
+      - charm-build
+    vars:
+      tox_extra_args: jammy-zed
 - job:
     name: focal-yoga
     description: Run a functional test against focal-yoga
