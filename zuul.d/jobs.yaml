@@ -410,7 +410,6 @@
     parent: func-target-pre-jobs
     dependencies:
       - name: tox-py310
-        soft: true
       - osci-lint
       - charm-build
     vars:
