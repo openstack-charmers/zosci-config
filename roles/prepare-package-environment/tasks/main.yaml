@@ -26,10 +26,28 @@
   apt:
     name: unattended-upgrades
     state: absent
+- name: Wait for apt lock
+  command: /usr/bin/lsof /var/lib/dpkg/lock-frontend
+  become: yes
+  retries: 30
+  delay: 10
+  register: result
+  until: result.rc == 1
+  failed_when:
+    - result.rc == 0
 - name: "apt-get update"
   become: yes
   apt:
     update_cache: yes
+- name: Wait for apt lock
+  command: /usr/bin/lsof /var/lib/dpkg/lock-frontend
+  become: yes
+  retries: 30
+  delay: 10
+  register: result
+  until: result.rc == 1
+  failed_when:
+    - result.rc == 0
 - name: "apt install dist-upgrade"
   become: yes
   apt:
