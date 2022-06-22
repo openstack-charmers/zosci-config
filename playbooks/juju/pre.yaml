@@ -69,6 +69,13 @@
         cmd: |
           cat > /tmp/cloudinit-userdata.yaml << EOF
           cloudinit-userdata: |
+            apt:
+              conf: |
+                APT {
+                  Get {
+                    Always-Include-Phased-Updates 'true';
+                  }
+                }
             preruncmd:
               - sed -i "/^ExecStart.*systemd-resolved/a Environment=SYSTEMD_LOG_LEVEL=debug" /lib/systemd/system/systemd-resolved.service
               - systemctl daemon-reload
