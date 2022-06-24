@@ -20,7 +20,8 @@
             /etc/openvswitch \
             /etc/ovn \
             /var/lib/openvswitch \
-            /var/lib/ovn
+            /var/lib/ovn \
+            /var/snap/simplestreams/common
         done
       when: not zuul_success | bool
     - name: juju status
