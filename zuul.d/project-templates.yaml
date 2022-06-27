@@ -249,4 +249,8 @@
       jobs:
         - charm-build
         - osci-lint
-        - tox-py310
+        # NOTE(ajkavanagh) disabled until we can get zuul, ansible and py310 on
+        # jammy to play together.
+        # NOTE(icey) BUT REALLY, DO NOT ENABLE THE FOLLOWING UNTIL YOU KNOW WE CAN
+        # RUN A 3.10 JOB ON ZOSCI.
+        #- tox-py310
