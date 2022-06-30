@@ -409,7 +409,8 @@
     description: Run a functional test against kinetic-zed
     parent: func-target-pre-jobs
     dependencies:
-      - tox-py310
+      - name: tox-py310
+        soft: true
       - osci-lint
       - charm-build
     vars:
