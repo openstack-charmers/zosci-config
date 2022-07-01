@@ -4,7 +4,7 @@
     # report-build-page is disabled so that we don't send links
     # to this Zuul to Gerrit when reporting job success/failure
     report-build-page: false
-    max-job-timeout: 28800
+    max-job-timeout: 86400
     source:
       github-git:
         config-projects:
