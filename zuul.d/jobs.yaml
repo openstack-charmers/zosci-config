@@ -294,6 +294,8 @@
         TEST_NVIDIA_VGPU_HOST_SW: 'http://10.245.161.162/swift/v1/images/nvidia-vgpu-ubuntu-510_510.47.03_amd64.deb'
         TEST_MODEL_CONSTRAINTS: "cores=2"
         TEST_MAX_RESOLVE_COUNT: 3
+        # allow more time for deployements - 2 hours
+        TEST_DEPLOY_TIMEOUT: 7200
       tox_envlist: func-target
     secrets:
       - serverstack_cloud
