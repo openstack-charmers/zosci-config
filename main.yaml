@@ -9,11 +9,13 @@
       github-git:
         config-projects:
           - openstack-charmers/zosci-config
-        untrusted-projects:
-          - openstack-charmers/charmed-openstack-tester:
-              extra-config-paths:
-                - osci.yaml
-                - osci.d/
+        # Temporarily disable the charmed-openstack-testser projects (periodic)
+        # whilst charmhub migration is pushed through.
+        #untrusted-projects:
+          #- openstack-charmers/charmed-openstack-tester:
+              #extra-config-paths:
+                #- osci.yaml
+                #- osci.d/
       opendev:
         untrusted-projects:
           - zuul/zuul-jobs:
