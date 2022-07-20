@@ -92,8 +92,7 @@
       The default set of yoga functional test jobs for the OpenStack Charms
     check:
       jobs:
-        - jammy-yoga:
-            voting: false
+        - jammy-yoga
         - focal-yoga
 - project-template:
     name: charm-xena-functional-jobs
