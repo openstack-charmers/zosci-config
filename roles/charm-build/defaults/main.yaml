@@ -1,3 +1,4 @@
 needs_charm_build: false
 charm_build_name: null
 build_type: reactive
+charmcraft_channel: "1.5/stable"
