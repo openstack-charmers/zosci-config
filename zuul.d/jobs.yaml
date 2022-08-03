@@ -728,3 +728,18 @@
       - serverstack_admin
     vars:
       juju_snap_channel: "2.9/stable"
+
+- job:
+    name: publish-charm
+    description: Publish a charm to charmhub
+    timeout: 1200
+    parent: tox
+    provides: charm
+    run: playbooks/charm/publish.yaml
+    secrets:
+      - serverstack_cloud
+      - charmhub_token
+    nodeset:
+      nodes:
+        - name: focal-medium
+          label: focal-medium

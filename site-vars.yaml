@@ -1,0 +1,6 @@
+# Placeholder to update site specific variables
+
+# Internal docker pull-through cache/mirror registry
+zuul_site_mirror_fqdn: 10.245.167.88
+docker_insecure_registries:
+  - 10.245.167.88:8082

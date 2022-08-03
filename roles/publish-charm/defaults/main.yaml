@@ -1,0 +1,6 @@
+needs_charm_build: false
+charm_build_name: null
+build_type: charmcraft
+publish_charm: false
+charmcraft_channel: 2.0/stable
+publish_channel: latest/edge
