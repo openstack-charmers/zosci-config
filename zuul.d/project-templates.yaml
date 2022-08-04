@@ -86,6 +86,7 @@
             voting: false
         - jammy-zed:
             voting: false
+        - jammy-yoga
 - project-template:
     name: charm-yoga-functional-jobs
     description: |
