@@ -173,7 +173,7 @@
     # abstract job; use as parent for other jobs
     abstract: true
     parent: configure-juju
-    timeout: 10800
+    timeout: 14400
     attempts: 4
     semaphore: functional-test
     # as an alternate to semaphores, or along side them, we could define
