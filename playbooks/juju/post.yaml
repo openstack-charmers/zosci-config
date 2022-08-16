@@ -15,6 +15,7 @@
             -o "{{ zuul.project.src_dir }}/log" \
             -m $model \
             --as-root \
+            -j '*' \
             /etc/apache2 \
             /etc/haproxy \
             /etc/openvswitch \
