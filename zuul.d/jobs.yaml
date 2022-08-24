@@ -297,6 +297,9 @@
         TEST_MAX_RESOLVE_COUNT: 3
         # allow more time for deployements - 2 hours
         TEST_DEPLOY_TIMEOUT: 7200
+        # Enable workaround for bug http://pad.lv/1987332
+        # https://github.com/openstack-charmers/zaza/commit/fc268181e8da1cb4293328fa2e78082873d98697
+        TEST_ZAZA_BUG_LP1987332: "1"
       tox_envlist: func-target
     secrets:
       - serverstack_cloud
