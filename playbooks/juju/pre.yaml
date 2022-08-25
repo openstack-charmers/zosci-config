@@ -20,7 +20,7 @@
       snap:
         name: juju
         classic: yes
-        channel: 2.9/stable
+        channel: "{{ juju_snap_channel }}"
       register: result
       until: result is not failed
       retries: 10
