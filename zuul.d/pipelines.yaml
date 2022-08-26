@@ -110,3 +110,25 @@
       mysql:
     failure:
       mysql:
+
+- pipeline:
+    name: promote
+    description: |
+      This pipeline runs jobs that operate after each change is merged
+      in order to promote artifacts generated in the gate pipeline.
+    success-message: |
+      Build SUCCESS by Canonical OpenStack Charm CI (promote pipeline).
+    failure-message: |
+      Build FAILURE by Canonical OpenStack Charm CI (promote pipeline).
+    manager: supercedent
+    precedence: low
+    post-review: True
+    trigger:
+      gerrit:
+        - event: change-merged
+    success:
+      gerrit: {}
+      sqlreporter:
+    failure:
+      gerrit: {}
+      sqlreporter:

@@ -1,0 +1,6 @@
+- hosts: all
+  vars_files:
+    - ../../site-vars.yaml
+  roles:
+    - charm-build
+    - publish-charm

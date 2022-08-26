@@ -254,3 +254,10 @@
         # NOTE(icey) BUT REALLY, DO NOT ENABLE THE FOLLOWING UNTIL YOU KNOW WE CAN
         # RUN A 3.10 JOB ON ZOSCI.
         #- tox-py310
+- project-template:
+    name: charm-publish-jobs
+    description: |
+      The set of publish jobs for the OpenStack Charms
+    promote:
+      jobs:
+        - publish-charm
