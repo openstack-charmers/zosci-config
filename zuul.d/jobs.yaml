@@ -732,7 +732,7 @@
 - job:
     name: publish-charm
     description: Publish a charm to charmhub
-    timeout: 1200
+    timeout: 3600
     parent: tox
     provides: charm
     run: playbooks/charm/publish.yaml
