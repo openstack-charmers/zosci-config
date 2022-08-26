@@ -128,7 +128,7 @@
         - event: change-merged
     success:
       gerrit: {}
-      sqlreporter:
+      mysql:
     failure:
       gerrit: {}
-      sqlreporter:
+      mysql:
