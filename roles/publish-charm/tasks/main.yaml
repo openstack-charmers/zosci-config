@@ -9,7 +9,7 @@
     - name: Upload oci-image to charmhub
       register: upload_oci_image_output
       vars:
-        metadata: "{{ lookup('file', zuul.project.src_dir+'/metadata.yaml') | from_yaml }}"
+        metadata: "{{ lookup('file', zuul.executor.work_root+'/'zuul.project.src_dir+'/metadata.yaml') | from_yaml }}"
       args:
         executable: /bin/bash
       shell: |
