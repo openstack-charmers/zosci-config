@@ -19,7 +19,7 @@
         # from mirror if configured.
         image=${image#"docker.io/"}
         docker pull $image
-        digest=`docker inspect --format='\{\{.RepoDigests\}\}' $image | sed  -e "s/^\[//" -e "s/\]$//"`
+        digest=`docker inspect --format {% raw %}'{{ index .RepoDigests 0 }}' {% endraw %} $image`
         charmcraft upload-resource {{ charm_build_name }} {{ item.key }} --image $digest
       retries: 3
       until: >
