@@ -36,8 +36,10 @@
       register: upload_charm_output
       args:
         chdir: "{{ zuul.project.src_dir }}"
-      command:
-        charmcraft upload --name {{ charm_build_name }} {{ charm_build_name }}.charm
+        executable: /bin/bash
+      shell: |
+        set -x
+        charmcraft upload -v --name {{ charm_build_name }} {{ charm_build_name }}.charm
         # TODO: The above command can error out with a message that says
         # upload with that digest already exists. This case need to be handled.
         # More details https://github.com/canonical/charmcraft/issues/826
