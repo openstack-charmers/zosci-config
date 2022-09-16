@@ -735,6 +735,7 @@
     timeout: 3600
     parent: tox
     provides: charm
+    post-review: true
     run: playbooks/charm/publish.yaml
     secrets:
       - serverstack_cloud
