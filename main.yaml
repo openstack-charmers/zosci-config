@@ -68,6 +68,7 @@
           - openstack/charm-keystone-k8s: *default-project
           - openstack/charm-keystone-kerberos: *default-project
           - openstack/charm-keystone-ldap: *default-project
+          - openstack/charm-keystone-openidc: *default-project
           - openstack/charm-keystone-saml-mellon: *default-project
           - openstack/charm-magnum: *default-project
           - openstack/charm-magnum-dashboard: *default-project
