@@ -84,8 +84,7 @@
       jobs:
         - kinetic-zed:
             voting: false
-        - jammy-zed:
-            voting: false
+        - jammy-zed
         - jammy-yoga
 - project-template:
     name: charm-yoga-functional-jobs
