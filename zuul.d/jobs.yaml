@@ -373,6 +373,17 @@
     vars:
       tox_extra_args: jammy
 - job:
+    name: kinetic
+    description: Run a functional test against kinetic
+    parent: func-target-pre-jobs
+    dependencies:
+      - name: tox-py310
+        soft: true
+      - osci-lint
+      - charm-build
+    vars:
+      tox_extra_args: kinetic
+- job:
     name: impish
     description: Run a functional test against impish
     parent: func-target-pre-jobs
