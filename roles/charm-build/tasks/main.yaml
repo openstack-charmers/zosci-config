@@ -18,6 +18,24 @@
   until: result is not failed
   retries: 10
   delay: 10
+- name: Purge lxd apt packages
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: absent
+    purge: yes
+  loop:
+    - lxd
+    - lxd-client
+- name: Install lxd snap
+  become: true
+  snap:
+    name: lxd
+    channel: latest/stable
+  register: result
+  until: result is not failed
+  retries: 10
+  delay: 10
 - name: Initialize lxd
   command: lxd init --auto
 - name: Print information about installed software
