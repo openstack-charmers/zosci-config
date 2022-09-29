@@ -6,7 +6,7 @@
       shell: |
         set -o pipefail
         for model in $(juju models | grep zaza- | awk '{gsub(/\*?/,""); print $1}'); do
-          juju remove-machine --force $(seq 0 100)
+          juju remove-machine --model $model --force $(seq 0 100)
         done
       failed_when: false
     - name: 'destroy controller'
