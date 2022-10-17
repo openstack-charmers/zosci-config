@@ -260,3 +260,8 @@
     promote:
       jobs:
         - publish-charm
+- project-template:
+    name: microk8s-func-test
+    description: |
+      microk8s-func-test is defined upstream but not in zosci so define noop
+      project here to avoid errors about missing project.
