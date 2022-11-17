@@ -1,0 +1,22 @@
+- hosts: all
+  vars:
+    sqalab:
+      auth:
+  tasks:
+    - name: 'install weebl-tools'
+      become: true
+      snap:
+        name: weebl-tools
+        classic: no
+      register: result
+      until: result is not failed
+      retries: 10
+      delay: 10
+    - name: 'render credentials.yaml'
+      template:
+        src: credentials.yaml.j2
+        dest: credentials.yaml
+    - name: Add credential
+      command: /snap/bin/weebl-tools.sqalab environment create --yaml credentials.yaml
+          #    - name: Clone charm-test-infra
+          #      command: git clone https://github.com/openstack-charmers/charm-test-infra /tmp/charm-test-infra
