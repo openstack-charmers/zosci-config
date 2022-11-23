@@ -755,3 +755,11 @@
       nodes:
         - name: focal-medium
           label: focal-medium
+- job:
+    name: sqa-integration
+    description: Sets up a sqalab connection for this test environment
+    pre-run: playbooks/sqalab/pre.yaml
+    run: playbooks/sqalab/run.yaml
+    abstract: true
+    secrets:
+      - sqalab
