@@ -4,6 +4,7 @@
       command: |
         /snap/bin/weebl-tools.sqalab build add \
           --deployment-branch {{ sqalab.branch }} \
+          --deployment-repo {{ sqalab.repo }} \
           --lab {{ sqalab.lab }} \
           --format json \
       register: build_info
