@@ -1,29 +1,42 @@
 #!/usr/bin/env python3
 
-import argparse
 import base64
 import os
+import hashlib
+import pathlib
 import re
 import requests
-import sys
 from urllib.parse import urlparse
 
+from ansible.module_utils.basic import AnsibleModule
 
-def parse_args(args):
-    """Parse command line arguments.
+__metaclass__ = type
 
-    :param args: Command arguments
-    :type list: [str1, str2,...] List of command line arguments
-    :returns: Parsed arguments
-    :rtype: Namespace
-    """
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-f', '--file', action='append',
-                        help='File to update',
-                        required=True)
-    parser.add_argument('commit_message', type=str,
-                        help='Commit message to process')
-    return parser.parse_args(args)
+DOCUMENTATION = r'''
+---
+module: process_commit_msg
+
+short_description: Read commit message and perform any actions
+'''
+
+EXAMPLES = r'''
+# Update requrements files based on commit message
+- name: Process commit message
+  process_commit_msg:
+    commit_message: "{{ zm.content }}"
+    files:
+      - /home/ubuntu/charm-mycharm/test-requirements.txt
+      - /home/ubuntu/charm-mycharm/src/test-requirements.txt
+'''
+
+RETURN = r'''
+# Example of possible return value
+message:
+    description: The output message that the test module generates.
+    type: str
+    returned: always
+    sample: 'Updated Files: /home/ubuntu/charm-mycharm/test-requirements.txt'
+'''
 
 
 def extract_lines(commit_message, match_pattern):
@@ -117,10 +130,74 @@ def process_commit(encoded_commit_message, files):
         func(commit_message, files)
 
 
+def get_file_hash(file_loc):
+    """Calculate a hash for the file contents.
+
+    :param files: File path
+    :type files: pathlib.Path
+    :returns: File hash
+    :rtype: str
+    """
+    return hashlib.md5(file_loc.read_bytes()).hexdigest()
+
+
+def get_files_hashes(files):
+    """Calculate a has for the contents of each file.
+
+    :param files: List of file names.
+    :type files: List[str]
+    :returns: File hashes
+    :rtype: Dict[str]
+    """
+    hashes = {}
+    for f in files:
+        file_loc = pathlib.Path(f)
+        if file_loc.exists():
+            hashes[f] = get_file_hash(file_loc)
+    return hashes
+
+
+def run_module():
+    module_args = dict(
+        files=dict(type='list', required=True),
+        commit_message=dict(type='str', required=True)
+    )
+
+    result = dict(
+        changed=False,
+        message=''
+    )
+
+    module = AnsibleModule(
+        argument_spec=module_args,
+        supports_check_mode=True
+    )
+
+    if module.check_mode:
+        module.exit_json(**result)
+
+    old_hashes = get_files_hashes(module.params['files'])
+
+    process_commit(
+        module.params['commit_message'],
+        module.params['files'])
+
+    new_hashes = get_files_hashes(module.params['files'])
+    changed_files = [f for f, h in old_hashes.items() if h != new_hashes[f]]
+
+    if changed_files:
+        result['changed'] = True
+        result['message'] = 'Updated Files: {}'.format(','.join(changed_files))
+    else:
+        result['changed'] = False
+        result['message'] = 'No files updated'
+
+    module.exit_json(**result)
+
+
 def main():
-    args = parse_args(sys.argv[1:])
-    process_commit(args.commit_message, args.file)
+    run_module()
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    main()
