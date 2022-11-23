@@ -14,8 +14,7 @@
       delay: 600
       retries: 90
     - name: 'print info'
-      command: |
-        set +x
+      shell: |
         /snap/bin/weebl-tools.sqalab build show {{ (build_info.stdout | from_json)[0].uuid }}
         cat << EOF
           Testrun results are summarized at:
