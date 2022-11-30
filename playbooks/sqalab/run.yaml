@@ -11,6 +11,7 @@
     - name: 'wait for test run'
       command: /snap/bin/weebl-tools.sqalab build show --format json {{ (build_info.stdout | from_json)[0].uuid }}
       register: build_info
+      # To keep the playbook in sync with the sqalab we check the status every 10 min
       until: (build_info.stdout | from_json)[0].status in ["Finished", "Canceled", "Aborted"]
       delay: 600
       retries: 90
