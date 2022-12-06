@@ -762,4 +762,4 @@
     run: playbooks/sqalab/run.yaml
     abstract: true
     secrets:
-      - sqalab
+      - sqalab_environment
