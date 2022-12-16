@@ -115,7 +115,7 @@ to the charm's local zuul configuration file. An example of a custom job is:
       ceph-mon charm itself.
     parent: func-target
     vars:
-      tox_extra_args: focal-ussuri-ec
+      tox_extra_args: '-- focal-ussuri-ec'
 ```
 
 This job was taken from the ceph-mon charm to ensure that we can use both
