@@ -5,4 +5,5 @@
     - handle-func-test-pr
     - revoke-sudo
     - setup-test-fixtures
+    - tox-config-file
     - tox
