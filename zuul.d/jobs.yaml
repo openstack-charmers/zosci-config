@@ -331,10 +331,10 @@
       on the underlying Ubuntu version.
 
       Inheritors of this job must set the vars.tox_extra_args to the
-      func-target that is required.
+      func-target that is required (Remember the `--` to make tox 4.x happy).
 
         vars:
-          tox_extra_args: focal
+          tox_extra_args: '-- focal'
     abstract: true
     parent: func-target
     dependencies:
@@ -350,7 +350,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: bionic
+      tox_extra_args: '-- bionic'
 - job:
     name: focal
     description: Run a functional test against focal
@@ -360,7 +360,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: focal
+      tox_extra_args: '-- focal'
 - job:
     name: jammy
     description: Run a functional test against jammy
@@ -371,7 +371,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: jammy
+      tox_extra_args: '-- jammy'
 - job:
     name: kinetic
     description: Run a functional test against kinetic
@@ -382,7 +382,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: kinetic
+      tox_extra_args: '-- kinetic'
 - job:
     name: impish
     description: Run a functional test against impish
@@ -392,7 +392,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: impish
+      tox_extra_args: '-- impish'
 - job:
     name: hirsute
     description: Run a functional test against hirsute
@@ -402,7 +402,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: hirsute
+      tox_extra_args: '-- hirsute'
 - job:
     name: groovy
     description: Run a functional test against groovy
@@ -412,7 +412,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: groovy
+      tox_extra_args: '-- groovy'
 - job:
     name: bionic-queens
     description: Run a functional test against bionic-queens
@@ -422,7 +422,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: bionic-queens
+      tox_extra_args: '-- bionic-queens'
 - job:
     name: kinetic-zed
     description: Run a functional test against kinetic-zed
@@ -433,7 +433,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: kinetic-zed
+      tox_extra_args: '-- kinetic-zed'
 - job:
     name: jammy-yoga
     description: Run a functional test against jammy-yoga
@@ -444,7 +444,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: jammy-yoga
+      tox_extra_args: '-- jammy-yoga'
 - job:
     name: impish-xena
     description: Run a functional test against impish-xena
@@ -454,7 +454,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: impish-xena
+      tox_extra_args: '-- impish-xena'
 - job:
     name: hirsute-wallaby
     description: Run a functional test against hirsute-wallaby
@@ -464,7 +464,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: hirsute-wallaby
+      tox_extra_args: '-- hirsute-wallaby'
 - job:
     name: groovy-victoria
     description: Run a functional test against groovy-victoria
@@ -474,7 +474,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: groovy-victoria
+      tox_extra_args: '-- groovy-victoria'
 - job:
     name: jammy-zed
     description: Run a functional test against jammy-zed
@@ -485,7 +485,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: jammy-zed
+      tox_extra_args: '-- jammy-zed'
 - job:
     name: focal-yoga
     description: Run a functional test against focal-yoga
@@ -495,7 +495,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: focal-yoga
+      tox_extra_args: '-- focal-yoga'
 - job:
     name: focal-xena
     description: Run a functional test against focal-xena
@@ -505,7 +505,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: focal-xena
+      tox_extra_args: '-- focal-xena'
 - job:
     name: focal-wallaby
     description: Run a functional test against focal-wallaby
@@ -515,7 +515,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: focal-wallaby
+      tox_extra_args: '-- focal-wallaby'
 - job:
     name: focal-victoria
     description: Run a functional test against focal-victoria
@@ -525,7 +525,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: focal-victoria
+      tox_extra_args: '-- focal-victoria'
 - job:
     name: focal-ussuri
     description: Run a functional test against focal-ussuri
@@ -535,7 +535,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: focal-ussuri
+      tox_extra_args: '-- focal-ussuri'
 - job:
     name: bionic-ussuri
     description: Run a functional test against bionic-ussuri
@@ -545,7 +545,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: bionic-ussuri
+      tox_extra_args: '-- bionic-ussuri'
 - job:
     name: bionic-train
     description: Run a functional test against bionic-train
@@ -555,7 +555,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: bionic-train
+      tox_extra_args: '-- bionic-train'
 - job:
     name: bionic-stein
     description: Run a functional test against bionic-stein
@@ -565,7 +565,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: bionic-stein
+      tox_extra_args: '-- bionic-stein'
 - job:
     name: bionic-rocky
     description: Run a functional test against bionic-rocky
@@ -575,7 +575,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: bionic-rocky
+      tox_extra_args: '-- bionic-rocky'
 - job:
     name: xenial-queens
     description: Run a functional test against xenial-queens
@@ -585,7 +585,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: xenial-queens
+      tox_extra_args: '-- xenial-queens'
 - job:
     name: xenial-pike
     description: Run a functional test against xenial-pike
@@ -595,7 +595,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: xenial-pike
+      tox_extra_args: '-- xenial-pike'
 - job:
     name: xenial-ocata
     description: Run a functional test against xenial-ocata
@@ -605,7 +605,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: xenial-ocata
+      tox_extra_args: '-- xenial-ocata'
 - job:
     name: xenial-mitaka
     description: Run a functional test against xenial-mitaka
@@ -615,7 +615,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: xenial-mitaka
+      tox_extra_args: '-- xenial-mitaka'
 - job:
     name: trusty-mitaka
     description: Run a functional test against trusty-mitaka
@@ -625,7 +625,7 @@
       - osci-lint
       - charm-build
     vars:
-      tox_extra_args: trusty-mitaka
+      tox_extra_args: '-- trusty-mitaka'
 
 # In development jobs, don't use them generally yet!
 
