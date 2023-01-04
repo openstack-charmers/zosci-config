@@ -1,9 +1,10 @@
 - name: check for src/tox.ini
   stat:
-    path: src/tox.ini
+    path: "{{ zuul.project.src_dir }}/src/tox.ini"
   register: stat_src_tox_ini
 
 - name: set tox_config_file to src/tox.ini
   when: stat_src_tox_ini.stat.exists
   set_fact:
+    # Note that tox will be executed with zuul.project.src_dir as CWD
     tox_config_file: src/tox.ini
