@@ -1,0 +1,9 @@
+- name: check for src/tox.ini
+  stat:
+    path: src/tox.ini
+  register: stat_src_tox_ini
+
+- name: set tox_config_file to src/tox.ini
+  when: stat_src_tox_ini.stat.exists
+  set_fact:
+    tox_config_file: src/tox.ini
