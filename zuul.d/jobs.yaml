@@ -13,12 +13,40 @@
     secrets: &log_clouds
       # - serverstack_cloud
       - artifact_cloud
+    branches: ^(?!stable/(train|ussuri|victoria|wallaby|xena|yoga|zed)).*$
     # vars:
     #   tox_environment:
     #     HTTP_PROXY: "http://squid.internal:3128/"
     #     HTTPS_PROXY: "http://squid.internal:3128/"
     #     http_proxy: "http://squid.internal:3128/"
     #     https_proxy: "http://squid.internal:3128/"
+- job:
+    name: base
+    pre-run: playbooks/base/pre.yaml
+    post-run: playbooks/base/post.yaml
+    roles:
+      - zuul: zuul/zuul-jobs
+    timeout: 1800
+    attempts: 4
+    nodeset:
+      nodes:
+        - name: focal-medium
+          label: focal-medium
+    secrets: &log_clouds
+      # - serverstack_cloud
+      - artifact_cloud
+    branches: ^stable/(train|ussuri|victoria|wallaby|xena|yoga|zed).*$
+    vars:
+      # NOTE(coreycb): This job is for stable branches <= stable/zed. Tox 4
+      # requires changes to be compatible, therefore we pin tox <4 for current
+      # stable branches (<= stable/zed). This is inline with gmann's upstream
+      # openstack-zuul-jobs change.
+      ensure_tox_version: '<4'
+      # tox_environment:
+      #   HTTP_PROXY: "http://squid.internal:3128/"
+      #   HTTPS_PROXY: "http://squid.internal:3128/"
+      #   http_proxy: "http://squid.internal:3128/"
+      #   https_proxy: "http://squid.internal:3128/"
 - job:
     name: osci-lint
     description: "Run OSCI's lint task"
