@@ -23,8 +23,28 @@
     name: osci-lint
     description: "Run OSCI's lint task"
     parent: tox
+    branches: ^(?!stable/(train|ussuri|victoria|wallaby|xena|yoga|zed)).*$
     vars:
       tox_envlist: pep8
+- job:
+    name: osci-lint
+    description: "Run OSCI's lint task"
+    parent: tox
+    branches:
+      - stable/train
+      - stable/ussuri
+      - stable/victoria
+      - stable/wallaby
+      - stable/xena
+      - stable/yoga
+      - stable/zed
+    vars:
+      tox_envlist: pep8
+      # NOTE(coreycb): This job is for stable branches <= stable/zed. Tox 4
+      # requires changes to be compatible, therefore we pin tox <4 for current
+      # stable branches (<= stable/zed). This is inline with gmann's upstream
+      # openstack-zuul-jobs change.
+      ensure_tox_version: '<4'
 - job:
     name: openstack-tox-linters
     parent: tox
@@ -32,9 +52,33 @@
       Runs code linting tests.
 
       Uses tox with the ``linters`` environment.
+    branches: ^(?!stable/(train|ussuri|victoria|wallaby|xena|yoga|zed)).*$
     vars:
       tox_envlist: linters
       bindep_profile: test linters
+- job:
+    name: openstack-tox-linters
+    parent: tox
+    description: |
+      Runs code linting tests.
+
+      Uses tox with the ``linters`` environment.
+    branches:
+      - stable/train
+      - stable/ussuri
+      - stable/victoria
+      - stable/wallaby
+      - stable/xena
+      - stable/yoga
+      - stable/zed
+    vars:
+      tox_envlist: linters
+      bindep_profile: test linters
+      # NOTE(coreycb): This job is for stable branches <= stable/zed. Tox 4
+      # requires changes to be compatible, therefore we pin tox <4 for current
+      # stable branches (<= stable/zed). This is inline with gmann's upstream
+      # openstack-zuul-jobs change.
+      ensure_tox_version: '<4'
 - job:
     name: openstack-tox-with-sudo
     parent: tox
@@ -43,10 +87,36 @@
       Job to run tox for tests with OpenStack project specific
       settings such as constraints but without sudo access being revoked.
     run: playbooks/tox-with-sudo/run.yaml
+    branches: ^(?!stable/(train|ussuri|victoria|wallaby|xena|yoga|zed)).*$
     vars:
       tox_environment:
         HTTP_PROXY: "http://squid.internal:3128"
         HTTPS_PROXY: "http://squid.internal:3128"
+- job:
+    name: openstack-tox-with-sudo
+    parent: tox
+    timeout: 14400
+    description: |
+      Job to run tox for tests with OpenStack project specific
+      settings such as constraints but without sudo access being revoked.
+    run: playbooks/tox-with-sudo/run.yaml
+    branches:
+      - stable/train
+      - stable/ussuri
+      - stable/victoria
+      - stable/wallaby
+      - stable/xena
+      - stable/yoga
+      - stable/zed
+    vars:
+      tox_environment:
+        HTTP_PROXY: "http://squid.internal:3128"
+        HTTPS_PROXY: "http://squid.internal:3128"
+      # NOTE(coreycb): This job is for stable branches <= stable/zed. Tox 4
+      # requires changes to be compatible, therefore we pin tox <4 for current
+      # stable branches (<= stable/zed). This is inline with gmann's upstream
+      # openstack-zuul-jobs change.
+      ensure_tox_version: '<4'
 - job:
     name: openstack-tox-snap-with-sudo
     parent: openstack-tox-with-sudo
@@ -55,6 +125,7 @@
 
       Uses tox with the ``snap`` environment.
       Sudo access is not revoked.
+    branches: ^(?!stable/(train|ussuri|victoria|wallaby|xena|yoga|zed)).*$
     irrelevant-files:
       - ^.*\.rst$
       - ^api-ref/.*$
@@ -63,6 +134,35 @@
       - ^deliverables/.*$
     vars:
       tox_envlist: snap
+- job:
+    name: openstack-tox-snap-with-sudo
+    parent: openstack-tox-with-sudo
+    description: |
+      Run tox-based functional tests for an OpenStack Python project.
+
+      Uses tox with the ``snap`` environment.
+      Sudo access is not revoked.
+    branches:
+      - stable/train
+      - stable/ussuri
+      - stable/victoria
+      - stable/wallaby
+      - stable/xena
+      - stable/yoga
+      - stable/zed
+    irrelevant-files:
+      - ^.*\.rst$
+      - ^api-ref/.*$
+      - ^doc/.*$
+      - ^releasenotes/.*$
+      - ^deliverables/.*$
+    vars:
+      tox_envlist: snap
+      # NOTE(coreycb): This job is for stable branches <= stable/zed. Tox 4
+      # requires changes to be compatible, therefore we pin tox <4 for current
+      # stable branches (<= stable/zed). This is inline with gmann's upstream
+      # openstack-zuul-jobs change.
+      ensure_tox_version: '<4'
 
 - job:
     name: tox-py35
@@ -79,6 +179,11 @@
     vars:
       tox_envlist: py35
       python_version: 3.5
+      # NOTE(coreycb): This job is for stable branches <= stable/zed. Tox 4
+      # requires changes to be compatible, therefore we pin tox <4 for current
+      # stable branches (<= stable/zed). This is inline with gmann's upstream
+      # openstack-zuul-jobs change.
+      ensure_tox_version: '<4'
 - job:
     name: tox-py36
     parent: tox
@@ -94,6 +199,11 @@
     vars:
       tox_envlist: py36
       python_version: 3.6
+      # NOTE(coreycb): This job is for stable branches <= stable/zed. Tox 4
+      # requires changes to be compatible, therefore we pin tox <4 for current
+      # stable branches (<= stable/zed). This is inline with gmann's upstream
+      # openstack-zuul-jobs change.
+      ensure_tox_version: '<4'
 
 - job:
     name: tox-py37
@@ -110,6 +220,11 @@
     vars:
       tox_envlist: py37
       python_version: 3.7
+      # NOTE(coreycb): This job is for stable branches <= stable/zed. Tox 4
+      # requires changes to be compatible, therefore we pin tox <4 for current
+      # stable branches (<= stable/zed). This is inline with gmann's upstream
+      # openstack-zuul-jobs change.
+      ensure_tox_version: '<4'
 
 - job:
     name: tox-py39
@@ -126,6 +241,11 @@
     vars:
       tox_envlist: py39
       python_version: 3.9
+      # NOTE(coreycb): This job is for stable branches <= stable/zed. Tox 4
+      # requires changes to be compatible, therefore we pin tox <4 for current
+      # stable branches (<= stable/zed). This is inline with gmann's upstream
+      # openstack-zuul-jobs change.
+      ensure_tox_version: '<4'
 
 - job:
     name: tox-py310
@@ -139,9 +259,34 @@
       nodes:
         - name: jammy-medium
           label: jammy-medium
+    branches: ^(?!stable/(train|ussuri|victoria|wallaby|xena|yoga|zed)).*$
     vars:
       tox_envlist: py310
       python_version: '3.10'
+
+- job:
+    name: tox-py310
+    parent: tox
+    description: |
+      Run unit tests for a Python project under cPython version 3.10.
+
+      Uses tox with the ``py310`` environment.
+
+    nodeset:
+      nodes:
+        - name: jammy-medium
+          label: jammy-medium
+    branches:
+      - stable/yoga
+      - stable/zed
+    vars:
+      tox_envlist: py310
+      python_version: '3.10'
+      # NOTE(coreycb): This job is for stable branches <= stable/zed. Tox 4
+      # requires changes to be compatible, therefore we pin tox <4 for current
+      # stable branches (<= stable/zed). This is inline with gmann's upstream
+      # openstack-zuul-jobs change.
+      ensure_tox_version: '<4'
 
 - job:
     name: charm-build
@@ -156,6 +301,34 @@
       nodes:
         - name: xenial-medium
           label: xenial-medium
+    branches: ^(?!stable/(train|ussuri|victoria|wallaby|xena|yoga|zed)).*$
+- job:
+    name: charm-build
+    description: Build a source charm into a deployable charm
+    timeout: 7200
+    parent: tox
+    provides: charm
+    run: playbooks/charm/build.yaml
+    secrets:
+      - serverstack_cloud
+    nodeset:
+      nodes:
+        - name: xenial-medium
+          label: xenial-medium
+    branches:
+      - stable/train
+      - stable/ussuri
+      - stable/victoria
+      - stable/wallaby
+      - stable/xena
+      - stable/yoga
+      - stable/zed
+    vars:
+      # NOTE(coreycb): This job is for stable branches <= stable/zed. Tox 4
+      # requires changes to be compatible, therefore we pin tox <4 for current
+      # stable branches (<= stable/zed). This is inline with gmann's upstream
+      # openstack-zuul-jobs change.
+      ensure_tox_version: '<4'
 
 - job:
     name: configure-juju
@@ -166,8 +339,33 @@
     cleanup-run: playbooks/juju/cleanup.yaml
     secrets:
       - serverstack_cloud
+    branches: ^(?!stable/(train|ussuri|victoria|wallaby|xena|yoga|zed)).*$
     vars:
       juju_snap_channel: "2.9/stable"
+- job:
+    name: configure-juju
+    description: Sets up a Juju controller for this test environment
+    parent: tox
+    pre-run: playbooks/juju/pre.yaml
+    post-run: playbooks/juju/post.yaml
+    cleanup-run: playbooks/juju/cleanup.yaml
+    secrets:
+      - serverstack_cloud
+    branches:
+      - stable/train
+      - stable/ussuri
+      - stable/victoria
+      - stable/wallaby
+      - stable/xena
+      - stable/yoga
+      - stable/zed
+    vars:
+      juju_snap_channel: "2.9/stable"
+      # NOTE(coreycb): This job is for stable branches <= stable/zed. Tox 4
+      # requires changes to be compatible, therefore we pin tox <4 for current
+      # stable branches (<= stable/zed). This is inline with gmann's upstream
+      # openstack-zuul-jobs change.
+      ensure_tox_version: '<4'
 
 - job:
     name: func-target
@@ -199,6 +397,7 @@
       # ref: https://zuul-ci.org/docs/zuul/reference/job_def.html#attr-job.dependencies
       - name: 'charm-build'
         soft: true
+    branches: ^(?!stable/(train|ussuri|victoria|wallaby|xena|yoga|zed)).*$
     vars:
       tox_environment:
         TEST_NET_ID: "94a87d6a-6d82-4931-878d-aedcf0e62962"
@@ -303,6 +502,157 @@
         # https://github.com/openstack-charmers/zaza/commit/fc268181e8da1cb4293328fa2e78082873d98697
         TEST_ZAZA_BUG_LP1987332: "1"
       tox_envlist: func-target
+    secrets:
+      - serverstack_cloud
+      - purestorage_api_token
+      - netapp_vsadmin_password
+- job:
+    name: func-target
+    description: Run a functional test
+    # abstract job; use as parent for other jobs
+    abstract: true
+    parent: configure-juju
+    timeout: 14400
+    attempts: 4
+    semaphore: functional-test
+    # as an alternate to semaphores, or along side them, we could define
+    # a custom node label to use for the func jobs. This would have a potential
+    # advantage of allowing us to pre-bake in cloud credentials and such in
+    # addition to other node preparation we could do (snap install juju,
+    # juju add-cloud, etc)
+    #
+    # nodeset:
+    #   nodes:
+    #     - name: bionic-medium
+    #       label: bionic-medium
+    run: playbooks/juju/run.yaml
+    dependencies:
+      # The charm-build job being a soft dependency means that, if the charm-build
+      # job is configured to run, it will be run, and expected to pass, before
+      # starting a func-target job. If, however, the charm-build job is not
+      # configured, it will be ignored here and the func-target will continue
+      # as normal.
+      #
+      # ref: https://zuul-ci.org/docs/zuul/reference/job_def.html#attr-job.dependencies
+      - name: 'charm-build'
+        soft: true
+    branches:
+      - stable/train
+      - stable/ussuri
+      - stable/victoria
+      - stable/wallaby
+      - stable/xena
+      - stable/yoga
+      - stable/zed
+    vars:
+      tox_environment:
+        TEST_NET_ID: "94a87d6a-6d82-4931-878d-aedcf0e62962"
+        TEST_CIDR_EXT: "{{ cidr_ext }}"
+        TEST_CIDR_END: "{{ network }}.254"
+        TEST_GATEWAY: 172.16.0.1
+        TEST_NAME_SERVER: 10.245.160.2
+        TEST_FIP_START: "{{ network }}.200"
+        TEST_FIP_END: "{{ network }}.229"
+        TEST_FIP_RANGE: "{{ network }}.200:{{ network }}.229"
+        TEST_SWIFT_IP: 10.245.161.162
+        TEST_VIP00: "{{network }}.230"
+        TEST_VIP01: "{{ network }}.231"
+        TEST_VIP02: "{{ network }}.232"
+        TEST_VIP03: "{{ network }}.233"
+        TEST_VIP04: "{{ network }}.234"
+        TEST_VIP05: "{{ network }}.235"
+        TEST_VIP06: "{{ network }}.236"
+        TEST_VIP07: "{{ network }}.237"
+        TEST_VIP08: "{{ network }}.238"
+        TEST_VIP09: "{{ network }}.239"
+        TEST_VIP10: "{{ network }}.240"
+        TEST_VIP11: "{{ network }}.241"
+        TEST_VIP12: "{{ network }}.242"
+        TEST_VIP13: "{{ network }}.243"
+        TEST_VIP14: "{{ network }}.244"
+        TEST_VIP15: "{{ network }}.245"
+        TEST_VIP16: "{{ network }}.246"
+        TEST_VIP17: "{{ network }}.247"
+        TEST_VIP18: "{{ network }}.248"
+        TEST_VIP19: "{{ network }}.249"
+        TEST_VIP20: "{{ network }}.250"
+        TEST_VIP: "{{ network }}.230"
+        TEST_VIP_RANGE: "{{ network }}.230:{{ network }}.250"
+        # Legacy variables
+        CIDR_EXT: "{{ cidr_ext }}"
+        CIDR_END: "{{ network }}.254"
+        GATEWAY: 172.16.0.1
+        NAME_SERVER: 10.245.160.2
+        FIP_START: "{{ network }}.200"
+        FIP_END: "{{ network }}.229"
+        FIP_RANGE: "{{ network }}.200:{{ network }}.229"
+        OS_VIP00: "{{network }}.230"
+        OS_VIP01: "{{ network }}.231"
+        OS_VIP02: "{{ network }}.232"
+        OS_VIP03: "{{ network }}.233"
+        OS_VIP04: "{{ network }}.234"
+        OS_VIP05: "{{ network }}.235"
+        OS_VIP06: "{{ network }}.236"
+        OS_VIP07: "{{ network }}.237"
+        OS_VIP08: "{{ network }}.238"
+        OS_VIP09: "{{ network }}.239"
+        OS_VIP10: "{{ network }}.240"
+        OS_VIP11: "{{ network }}.241"
+        OS_VIP12: "{{ network }}.242"
+        OS_VIP13: "{{ network }}.243"
+        OS_VIP14: "{{ network }}.244"
+        OS_VIP15: "{{ network }}.245"
+        OS_VIP16: "{{ network }}.246"
+        OS_VIP17: "{{ network }}.247"
+        OS_VIP18: "{{ network }}.248"
+        OS_VIP19: "{{ network }}.249"
+        OS_VIP20: "{{ network }}.250"
+        VIP_RANGE: "{{ network }}.230:{{ network }}.250"
+        OS_AUTH_URL: "{{ serverstack_cloud.auth.auth_url }}"
+        OS_USERNAME: "{{ serverstack_cloud.auth.username }}"
+        OS_PASSWORD: "{{ serverstack_cloud.auth.password }}"
+        OS_USER_DOMAIN_NAME: "{{ serverstack_cloud.auth.user_domain_name }}"
+        OS_PROJECT_NAME: "{{ serverstack_cloud.auth.project_name }}"
+        OS_PROJECT_DOMAIN_NAME: user
+        OS_AUTH_VERSION: 3
+        OS_IDENTITY_API_VERSION: 3
+        OS_REGION_NAME: serverstack
+        AMULET_HTTP_PROXY: "http://squid.internal:3128/"
+        OS_TEST_HTTP_PROXY: "http://squid.internal:3128/"
+        TEST_HTTP_PROXY: "http://squid.internal:3128/"
+        BAK_REMOTE_BASE_DIR: "/home/ubuntu/osci/bak-osci-master"
+        BAK_USER_HOST: "ubuntu@10.245.168.2"
+        OS_PURESTORAGE_SAN_IP: 10.246.112.11
+        OS_PURESTORAGE_API_TOKEN: "{{ purestorage_api_token.value }}"
+        TEST_GRAFANA_PLUGIN_VONAGE_URL: 'http://10.245.161.162:80/swift/v1/grafana_plugins/vonage-status-panel-1.0.11.zip'
+        TEST_GRAFANA_PLUGIN_PIECHART_URL: 'http://10.245.161.162:80/swift/v1/grafana_plugins/grafana-piechart-panel-1.6.2.zip'
+        TEST_NETAPP_SAN_IP: 10.245.168.123
+        TEST_NETAPP_SAN_PORT: 80
+        TEST_NETAPP_SAN_VSERVER: svm01
+        TEST_NETAPP_STORAGE_TYPE: ontap_cluster
+        TEST_NETAPP_SAN_USERNAME: vsadmin
+        TEST_NETAPP_SAN_PASSWORD: "{{ netapp_vsadmin_password.value }}"
+        TEST_NETAPP_ROOT_VOL_AGGR_NAME: openstack
+        TEST_NETAPP_POOL_NAME_SEARCH_PATTERN: zaza
+        TEST_ARISTA_IMAGE_REMOTE: 'http://10.245.161.162/swift/v1/images/arista-cvx-virt-test.qcow2'
+        TEST_IRONIC_DEPLOY_INITRD: 'http://10.245.161.162/swift/v1/images/ironic-python-agent.initramfs'
+        TEST_IRONIC_DEPLOY_VMLINUZ: 'http://10.245.161.162/swift/v1/images/ironic-python-agent.kernel'
+        TEST_IRONIC_RAW_BM_IMAGE: 'http://10.245.161.162/swift/v1/images/baremetal-ubuntu-focal.img'
+        TEST_TRILIO_LICENSE: /tmp/tvault-license.lic
+        TEST_NVIDIA_VGPU_HOST_SW: 'http://10.245.161.162/swift/v1/images/nvidia-vgpu-ubuntu-510_510.47.03_amd64.deb'
+        TEST_MODEL_CONSTRAINTS: "cores=2"
+        TEST_MAX_RESOLVE_COUNT: 3
+        # allow more time for deployements - 2 hours
+        TEST_DEPLOY_TIMEOUT: 7200
+        # Enable workaround for bug http://pad.lv/1987332
+        # https://github.com/openstack-charmers/zaza/commit/fc268181e8da1cb4293328fa2e78082873d98697
+        TEST_ZAZA_BUG_LP1987332: "1"
+      tox_envlist: func-target
+      # NOTE(coreycb): This job is for stable branches <= stable/zed. Tox 4
+      # requires changes to be compatible, therefore we pin tox <4 for current
+      # stable branches (<= stable/zed). This is inline with gmann's upstream
+      # openstack-zuul-jobs change.
+      ensure_tox_version: '<4'
     secrets:
       - serverstack_cloud
       - purestorage_api_token
