@@ -32,9 +32,7 @@
       nodes:
         - name: focal-medium
           label: focal-medium
-    secrets: &log_clouds
-      # - serverstack_cloud
-      - artifact_cloud
+    secrets: *log_clouds
     branches: ^stable\/(train|ussuri|victoria|wallaby|xena|yoga|zed).*$
     vars:
       # NOTE(coreycb): This job is for stable branches <= stable/zed. Tox 4
