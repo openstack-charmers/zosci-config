@@ -14,10 +14,6 @@
               extra-config-paths:
                 - osci.yaml
                 - osci.d/
-          - openstack-charmers/sqa-integration-tester:
-              extra-config-paths:
-                - osci.yaml
-                - osci.d/
       opendev:
         untrusted-projects:
           - zuul/zuul-jobs:
@@ -122,3 +118,17 @@
           - x/charm-ovn-dedicated-chassis: *default-project
           - x/charm-ovn-relay-k8s: *default-project
           - x/microstack: *default-project
+- tenant:
+    name: openstack-sqa-integration
+    max-nodes-per-job: 1
+    report-build-page: false
+    max-job-timeout: 54600
+    source:
+      github-git:
+        config-projects:
+          - openstack-charmers/zosci-config
+        untrusted-projects:
+          - openstack-charmers/sqa-integration-tester:
+              extra-config-paths:
+                - osci.yaml
+                - osci.d/
