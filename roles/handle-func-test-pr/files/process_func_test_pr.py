@@ -97,9 +97,10 @@ def process_func_test_pr(commit_message, files):
         request = requests.get(api_url)
         pr_label = request.json()['head']['label']
         pr_login, pr_branch = pr_label.split(':')
+        forked_repo = request.json()['head']['repo']['name']
         updates.append((
             "{}/{}.git{}".format(pr_org, pr_repo, stable_branch_regex),
-            "{}/{}.git@{}".format(pr_login, pr_repo, pr_branch)))
+            "{}/{}.git@{}".format(pr_login, forked_repo, pr_branch)))
     apply_updates(updates, files)
 
 
