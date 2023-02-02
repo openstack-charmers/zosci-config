@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import copy
 import mock
 import tempfile
 import unittest
@@ -56,11 +57,13 @@ API_GITHUB_RESPONSES = {
         'head': {
             'label': 'gnuoy:bug/1964117',
             'ref': 'bug/1964117',
+            'repo': {'name': 'zaza-tests'},
             'sha': '4fcf8d2c7a5b99528806103daffd7eeeac5d161f'}},
     '499': {
         'head': {
             'label': 'gnuoy:bug/some-bug',
             'ref': 'bug/some-bug',
+            'repo': {'name': 'zaza'},
             'sha': '4fcf8d2c7a33333333333333333333333333'}}}
 
 
@@ -136,3 +139,44 @@ class TestProcessFuncTestPR(unittest.TestCase):
 
     def test_process_func_test_pr_stable_branches(self):
         self._test_process_func_test_pr(DEFAULT_LOCATIONS_STABLE_BRANCHES)
+
+    @mock.patch.object(process_func_test_pr.requests, 'get')
+    def _test_process_func_test_pr_different_fork_name(
+        self, locations, api_response, mock_get
+    ):
+        with tempfile.TemporaryDirectory() as tmpdirname:
+            def fake_get(url):
+                key = url.split('/')[-1]
+                rq_mock = mock.MagicMock()
+                rq_mock.json.return_value = api_response[key]
+                return rq_mock
+            mock_get.side_effect = fake_get
+            file1 = '{}/file1.txt'.format(tmpdirname)
+            with open(file1, 'w') as f:
+                f.write(locations)
+            process_func_test_pr.process_func_test_pr(
+                TEST_MESSAGE,
+                [file1])
+            with open(file1, 'r') as f:
+                contents = f.readlines()
+            contents = [c.strip() for c in contents if c != '\n']
+            self.assertEqual(
+                contents,
+                ['git+https://github.com/gnuoy/zaza-1.git@bug/some-bug#egg=zaza',  # noqa: E501
+                 'git+https://github.com/gnuoy/zaza-tests-1.git@bug/1964117#egg=zaza.openstack'])  # noqa: E501
+
+    def test_process_func_test_pr_main_branch_different_fork_name(self):
+        github_responses = copy.deepcopy(API_GITHUB_RESPONSES)
+        github_responses['723']['head']['repo']['name'] = 'zaza-tests-1'
+        github_responses['499']['head']['repo']['name'] = 'zaza-1'
+        self._test_process_func_test_pr_different_fork_name(
+            DEFAULT_LOCATIONS_MAIN, github_responses
+        )
+
+    def test_process_func_test_pr_stable_branches_different_fork_name(self):
+        github_responses = copy.deepcopy(API_GITHUB_RESPONSES)
+        github_responses['723']['head']['repo']['name'] = 'zaza-tests-1'
+        github_responses['499']['head']['repo']['name'] = 'zaza-1'
+        self._test_process_func_test_pr_different_fork_name(
+            DEFAULT_LOCATIONS_STABLE_BRANCHES, github_responses
+        )
