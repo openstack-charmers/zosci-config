@@ -27,10 +27,6 @@
     description: |
       placeholder
 - project-template:
-    name: openstack-python3-charm-antelope-jobs
-    description: |
-      placeholder
-- project-template:
     name: openstack-python3-charm-zed-jobs
     description: |
       placeholder
@@ -67,29 +63,48 @@
     description: |
       placeholder
 - project-template:
+    # NOTE(coreycb): We are using this generic template starting with
+    # stable/antelope testing. When a new development cycle starts,
+    # we need to do two things:
+    # 1. Update this template for the functional jobs. Use the 'branches'
+    #    variant to run the applicable functional jobs.
+    # 2. Make sure the previous cycle applicable jobs continue to run for
+    #    the new stable branch. Use the 'branches' variant to run the
+    #    applicable functional jobs.
     name: charm-functional-jobs
     description: |
       The default set of functional test jobs for the OpenStack Charms
     check:
       jobs:
-        - focal-wallaby
-        - focal-victoria
-        - focal-ussuri
-        - bionic-ussuri
-        - bionic-train
-        - bionic-stein
-        - bionic-queens
-        - xenial-mitaka
-- project-template:
-    name: charm-antelope-functional-jobs
-    description: |
-      The default set of antelope functional test jobs for the OpenStack Charms
-    check:
-      jobs:
         - lunar-antelope:
             voting: false
-        - jammy-antelope
-        - jammy-zed
+            branches:
+              - master
+              - stable/antelope
+        - jammy-antelope:
+            branches:
+              - master
+              - stable/antelope
+        - jammy-zed:
+            branches:
+              - master
+              - stable/antelope
+        - focal-wallaby:
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
+        - focal-victoria:
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
+        - focal-ussuri:
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
+        - bionic-ussuri:
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
+        - bionic-train:
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
+        - bionic-stein:
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
+        - bionic-queens:
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
+        - xenial-mitaka:
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
 - project-template:
     name: charm-zed-functional-jobs
     description: |
@@ -174,6 +189,17 @@
       jobs:
         - bionic-queens
 - project-template:
+    # NOTE(coreycb): We are using this generic template starting with
+    # stable/antelope testing. When a new development cycle starts,
+    # we need to do two things:
+    # 1. Update this template for the python version jobs as per the
+    #    new development cycle tetsing runtime defined by TC
+    #    https://governance.openstack.org/tc/reference/runtimes/
+    #    Use the 'branches' variant to run the applicable python version
+    #    jobs.
+    # 2. Make sure the previous cycle applicable jobs continue to run for
+    #    the new stable branch. Use the 'branches' variant to run the
+    #    applicable python version jobs.
     name: charm-unit-jobs
     description: |
       The default set of unit tests and lint checks for the OpenStack Charms
@@ -181,10 +207,22 @@
       jobs:
         - charm-build
         - osci-lint
-        - tox-py35
-        - tox-py36
-        - tox-py37
-        - tox-py38
+        - tox-py35:
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
+        - tox-py36:
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
+        - tox-py37:
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
+        - tox-py38:
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
+        # NOTE(ajkavanagh) disabled until we can get zuul, ansible and py310 on
+        # jammy to play together.
+        # NOTE(icey) BUT REALLY, DO NOT ENABLE THE FOLLOWING UNTIL YOU KNOW WE CAN
+        # RUN A 3.10 JOB ON ZOSCI.
+        #- tox-py310:
+        #    branches:
+        #      - master
+        #      - stable/antelope
 - project-template:
     name: charm-unit-jobs-py35
     description: |
@@ -256,19 +294,6 @@
         - tox-py39
 - project-template:
     name: charm-zed-unit-jobs
-    description: |
-      The default set of unit tests and lint checks for the OpenStack Charms
-    check:
-      jobs:
-        - charm-build
-        - osci-lint
-        # NOTE(ajkavanagh) disabled until we can get zuul, ansible and py310 on
-        # jammy to play together.
-        # NOTE(icey) BUT REALLY, DO NOT ENABLE THE FOLLOWING UNTIL YOU KNOW WE CAN
-        # RUN A 3.10 JOB ON ZOSCI.
-        #- tox-py310
-- project-template:
-    name: charm-antelope-unit-jobs
     description: |
       The default set of unit tests and lint checks for the OpenStack Charms
     check:
