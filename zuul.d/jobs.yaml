@@ -328,6 +328,7 @@
         # Enable workaround for bug http://pad.lv/1987332
         # https://github.com/openstack-charmers/zaza/commit/fc268181e8da1cb4293328fa2e78082873d98697
         TEST_ZAZA_BUG_LP1987332: "1"
+        TEST_REGISTRY_PREFIX: "10.245.164.190:5000"
       tox_envlist: func-target
     secrets:
       - serverstack_cloud
