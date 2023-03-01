@@ -64,7 +64,7 @@
       placeholder
 - project-template:
     # NOTE(coreycb): We are using this generic template starting with
-    # stable/antelope testing. When a new development cycle starts,
+    # stable/2023.1 (antelope) testing. When a new development cycle starts,
     # we need to do two things:
     # 1. Update this template for the functional jobs. Use the 'branches'
     #    variant to run the applicable functional jobs.
@@ -80,15 +80,15 @@
             voting: false
             branches:
               - master
-              - stable/antelope
+              - stable/2023.1
         - jammy-antelope:
             branches:
               - master
-              - stable/antelope
+              - stable/2023.1
         - jammy-zed:
             branches:
               - master
-              - stable/antelope
+              - stable/2023.1
         - focal-wallaby:
             branches: ^stable\/(1\.5|1\.6|1\.7|1\.8).*$
             branches: ^stable\/(4\.0|4\.1|4\.2).*$
@@ -230,7 +230,7 @@
         - bionic-queens
 - project-template:
     # NOTE(coreycb): We are using this generic template starting with
-    # stable/antelope testing. When a new development cycle starts,
+    # stable/2023.1 (antelope) testing. When a new development cycle starts,
     # we need to do two things:
     # 1. Update this template for the python version jobs as per the
     #    new development cycle tetsing runtime defined by TC
@@ -282,7 +282,7 @@
         #- tox-py310:
         #    branches:
         #      - master
-        #      - stable/antelope
+        #      - stable/2023.1
 - project-template:
     name: charm-unit-jobs-py35
     description: |
