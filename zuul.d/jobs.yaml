@@ -13,7 +13,13 @@
     secrets: &log_clouds
       # - serverstack_cloud
       - artifact_cloud
-    branches: ^(?!stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2))$
+    branches:
+      - ^(?!stable\/(1\.5|1\.6|1\.7|1\.8))$
+      - ^(?!stable\/(4\.0|4\.1|4\.2))$
+      - ^(?!stable\/(20\.03|20\.12|21\.09|21\.10|22\.03|22\.09))$
+      - ^(?!stable\/(focal|jammy))$
+      - ^(?!stable\/(train|ussuri|victoria|wallaby|xena|yoga|zed))$
+      - ^(?!stable\/(luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2))$
     # vars:
     #   tox_environment:
     #     HTTP_PROXY: "http://squid.internal:3128/"
@@ -33,7 +39,13 @@
         - name: focal-medium
           label: focal-medium
     secrets: *log_clouds
-    branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2)$
+    branches:
+      - ^stable\/(1\.5|1\.6|1\.7|1\.8)$
+      - ^stable\/(4\.0|4\.1|4\.2)$
+      - ^stable\/(20\.03|20\.12|21\.09|21\.10|22\.03|22\.09)$
+      - ^stable\/(focal|jammy)$
+      - ^stable\/(train|ussuri|victoria|wallaby|xena|yoga|zed)$
+      - ^stable\/(luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2)$
     vars:
       # NOTE(coreycb): This job is for stable branches <= stable/zed. Tox 4
       # requires changes to be compatible, therefore we pin tox <4 for current
