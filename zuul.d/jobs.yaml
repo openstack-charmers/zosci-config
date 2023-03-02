@@ -192,8 +192,8 @@
       - serverstack_cloud
     nodeset:
       nodes:
-        - name: xenial-medium
-          label: xenial-medium
+        - name: focal-medium
+          label: focal-medium
 
 - job:
     name: configure-juju
