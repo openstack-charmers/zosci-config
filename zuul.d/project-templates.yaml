@@ -90,69 +90,21 @@
               - master
               - stable/2023.1
         - focal-wallaby:
-            branches:
-              - ^stable\/(1\.5|1\.6|1\.7|1\.8)$
-              - ^stable\/(4\.0|4\.1|4\.2)$
-              - ^stable\/(20\.03|20\.12|21\.09|21\.10|22\.03|22\.09)$
-              - ^stable\/(focal|jammy)$
-              - ^stable\/(train|ussuri|victoria|wallaby|xena|yoga|zed)$
-              - ^stable\/(luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2)$
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
         - focal-victoria:
-            branches:
-              - ^stable\/(1\.5|1\.6|1\.7|1\.8)$
-              - ^stable\/(4\.0|4\.1|4\.2)$
-              - ^stable\/(20\.03|20\.12|21\.09|21\.10|22\.03|22\.09)$
-              - ^stable\/(focal|jammy)$
-              - ^stable\/(train|ussuri|victoria|wallaby|xena|yoga|zed)$
-              - ^stable\/(luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2)$
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
         - focal-ussuri:
-            branches:
-              - ^stable\/(1\.5|1\.6|1\.7|1\.8)$
-              - ^stable\/(4\.0|4\.1|4\.2)$
-              - ^stable\/(20\.03|20\.12|21\.09|21\.10|22\.03|22\.09)$
-              - ^stable\/(focal|jammy)$
-              - ^stable\/(train|ussuri|victoria|wallaby|xena|yoga|zed)$
-              - ^stable\/(luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2)$
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
         - bionic-ussuri:
-            branches:
-              - ^stable\/(1\.5|1\.6|1\.7|1\.8)$
-              - ^stable\/(4\.0|4\.1|4\.2)$
-              - ^stable\/(20\.03|20\.12|21\.09|21\.10|22\.03|22\.09)$
-              - ^stable\/(focal|jammy)$
-              - ^stable\/(train|ussuri|victoria|wallaby|xena|yoga|zed)$
-              - ^stable\/(luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2)$
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
         - bionic-train:
-            branches:
-              - ^stable\/(1\.5|1\.6|1\.7|1\.8)$
-              - ^stable\/(4\.0|4\.1|4\.2)$
-              - ^stable\/(20\.03|20\.12|21\.09|21\.10|22\.03|22\.09)$
-              - ^stable\/(focal|jammy)$
-              - ^stable\/(train|ussuri|victoria|wallaby|xena|yoga|zed)$
-              - ^stable\/(luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2)$
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
         - bionic-stein:
-            branches:
-              - ^stable\/(1\.5|1\.6|1\.7|1\.8)$
-              - ^stable\/(4\.0|4\.1|4\.2)$
-              - ^stable\/(20\.03|20\.12|21\.09|21\.10|22\.03|22\.09)$
-              - ^stable\/(focal|jammy)$
-              - ^stable\/(train|ussuri|victoria|wallaby|xena|yoga|zed)$
-              - ^stable\/(luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2)$
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
         - bionic-queens:
-            branches:
-              - ^stable\/(1\.5|1\.6|1\.7|1\.8)$
-              - ^stable\/(4\.0|4\.1|4\.2)$
-              - ^stable\/(20\.03|20\.12|21\.09|21\.10|22\.03|22\.09)$
-              - ^stable\/(focal|jammy)$
-              - ^stable\/(train|ussuri|victoria|wallaby|xena|yoga|zed)$
-              - ^stable\/(luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2)$
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
         - xenial-mitaka:
-            branches:
-              - ^stable\/(1\.5|1\.6|1\.7|1\.8)$
-              - ^stable\/(4\.0|4\.1|4\.2)$
-              - ^stable\/(20\.03|20\.12|21\.09|21\.10|22\.03|22\.09)$
-              - ^stable\/(focal|jammy)$
-              - ^stable\/(train|ussuri|victoria|wallaby|xena|yoga|zed)$
-              - ^stable\/(luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2)$
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
 - project-template:
     name: charm-zed-functional-jobs
     description: |
