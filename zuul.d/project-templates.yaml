@@ -82,6 +82,7 @@
               - master
               - stable/2023.1
         - jammy-antelope:
+            voting: false
             branches:
               - master
               - stable/2023.1
