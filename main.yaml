@@ -67,6 +67,7 @@
           - openstack/charm-horizon-k8s: *default-project
           - openstack/charm-ironic-api: *default-project
           - openstack/charm-ironic-conductor: *default-project
+          - openstack/charm-ironic-dashboard: *default-project
           - openstack/charm-keystone: *default-project
           - openstack/charm-keystone-k8s: *default-project
           - openstack/charm-keystone-kerberos: *default-project
