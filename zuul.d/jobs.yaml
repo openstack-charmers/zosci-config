@@ -411,6 +411,17 @@
     vars:
       tox_extra_args: '-- kinetic'
 - job:
+    name: lunar
+    description: Run a functional test against lunar
+    parent: func-target-pre-jobs
+    dependencies:
+      - name: tox-py310
+        soft: true
+      - osci-lint
+      - charm-build
+    vars:
+      tox_extra_args: '-- lunar'
+- job:
     name: impish
     description: Run a functional test against impish
     parent: func-target-pre-jobs
