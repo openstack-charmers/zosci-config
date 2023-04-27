@@ -101,12 +101,15 @@
               - stable/23.03
               - stable/quincy.2
               - stable/jammy
+        - focal-yoga:
+            branches:
+              - stable/quincy.2 # other charms are using charm-yoga-functional-jobs
         - focal-wallaby:
-            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|pacific).*$
         - focal-victoria:
-            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|octopus).*$
         - focal-ussuri:
-            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2).*$
+            branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|octopus).*$
         - bionic-ussuri:
             branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|octopus).*$
         - bionic-train:
