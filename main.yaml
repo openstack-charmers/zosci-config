@@ -117,6 +117,8 @@
           - openstack/charm-trilio-horizon-plugin: *default-project
           - openstack/charm-trilio-wlm: *default-project
           - openstack/charm-vault: *default-project
+          - openstack/charm-watcher: *default-project
+          - openstack/charm-watcher-dashboard: *default-project
           - x/charm-ovn-central: *default-project
           - x/charm-ovn-central-k8s: *default-project
           - x/charm-ovn-chassis: *default-project
