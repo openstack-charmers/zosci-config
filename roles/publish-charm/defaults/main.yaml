@@ -4,3 +4,4 @@ build_type: charmcraft
 publish_charm: false
 charmcraft_channel: 2.0/stable
 publish_channel: latest/edge
+machine_charm: false
