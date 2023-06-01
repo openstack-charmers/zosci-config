@@ -1,5 +1,5 @@
-- name: Publish k8s charms to charmhub
-  when: publish_charm and not machine_charm
+- name: Publish charms to charmhub
+  when: publish_charm
   environment:
     CHARMCRAFT_AUTH: "{{ charmhub_token.value }}"
   block:
@@ -25,7 +25,7 @@
       retries: 3
       until: >
         ("Revision" in upload_oci_image_output.stdout)
-      loop: "{{ lookup('ansible.builtin.dict', metadata.resources, wantlist=True) }}"
+      loop: "{{ lookup('ansible.builtin.dict', metadata.resources|default({}), wantlist=True) }}"
       when: "item.value.type == 'oci-image'"
 
     - name: Extract Resource revisions
@@ -53,38 +53,7 @@
     - name: Release charm
       register: release_charm_output
       command:
-        charmcraft release {{ charm_build_name }} --revision {{ charm_revision }} --channel {{ publish_channel }} {{ resource_revision_flags }}
-      retries: 3
-      until: >
-        ("Revision" in release_charm_output.stdout)
-
-# XXX There is duplicate code here. Given the complexity it looks like this should be converted into a module.
-- name: Publish machine charm to charmhub
-  when: publish_charm and machine_charm
-  environment:
-    CHARMCRAFT_AUTH: "{{ charmhub_token.value }}"
-  block:
-    - name: Upload machine charm to charmhub
-      register: upload_charm_output
-      args:
-        chdir: "{{ zuul.project.src_dir }}"
-      # TODO: The below command can error out with a message that says
-      # upload with that digest already exists. This case need to be handled.
-      # More details https://github.com/canonical/charmcraft/issues/826
-      command:
-        charmcraft upload -v --name {{ charm_build_name }} {{ charm_build_name }}.charm
-      retries: 3
-      until: >
-        ("Revision" in upload_charm_output.stdout)
-
-    - name: Extract Charm revision
-      set_fact:
-        charm_revision: "{{ upload_charm_output.stdout | regex_search('Revision ([0-9]+)', '\\1', multiline=True) | first }}"
-
-    - name: Release charm
-      register: release_charm_output
-      command:
-        charmcraft release {{ charm_build_name }} --revision {{ charm_revision }} --channel {{ publish_channel }}
+        charmcraft release {{ charm_build_name }} --revision {{ charm_revision }} --channel {{ publish_channel }} {{ resource_revision_flags | default("") }}
       retries: 3
       until: >
         ("Revision" in release_charm_output.stdout)
