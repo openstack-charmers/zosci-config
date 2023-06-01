@@ -25,7 +25,7 @@
       retries: 3
       until: >
         ("Revision" in upload_oci_image_output.stdout)
-      loop: "{{ lookup('ansible.builtin.dict', metadata.resources, wantlist=True) }}"
+      loop: "{{ lookup('ansible.builtin.dict', metadata.resources|default({}), wantlist=True) }}"
       when: "item.value.type == 'oci-image'"
 
     - name: Extract Resource revisions
@@ -53,7 +53,7 @@
     - name: Release charm
       register: release_charm_output
       command:
-        charmcraft release {{ charm_build_name }} --revision {{ charm_revision }} --channel {{ publish_channel }} {{ resource_revision_flags }}
+        charmcraft release {{ charm_build_name }} --revision {{ charm_revision }} --channel {{ publish_channel }} {{ resource_revision_flags | default("") }}
       retries: 3
       until: >
         ("Revision" in release_charm_output.stdout)
