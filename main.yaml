@@ -64,6 +64,7 @@
           - openstack/charm-gnocchi: *default-project
           - openstack/charm-hacluster: *default-project
           - openstack/charm-heat: *default-project
+          - openstack/charm-heat-k8s: *default-project
           - openstack/charm-horizon-k8s: *default-project
           - openstack/charm-ironic-api: *default-project
           - openstack/charm-ironic-conductor: *default-project
