@@ -31,6 +31,7 @@
                 - osci.yaml
                 - osci.d/
           - openstack/charm-barbican: *default-project
+          - openstack/charm-barbican-k8s: *default-project
           - openstack/charm-barbican-vault: *default-project
           - openstack/charm-ceilometer: *default-project
           - openstack/charm-ceilometer-agent: *default-project
