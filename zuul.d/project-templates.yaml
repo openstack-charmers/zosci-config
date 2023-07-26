@@ -86,6 +86,7 @@
               - stable/reef
               - stable/jammy
         - jammy-bobcat:
+            voting: false
             branches:
               - master
               - stable/2023.2
