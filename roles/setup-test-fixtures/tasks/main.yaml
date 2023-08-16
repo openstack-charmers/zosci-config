@@ -1,4 +1,4 @@
 - name: Setup Trilio Vault license
   get_url:
-    url: "http://10.245.161.162/swift/v1/licenses/Canonical_Engineering_NFR_100_nodes_12312022.lic"
+    url: "http://10.245.161.162/swift/v1/licenses/Canonical_Partner_15compute_08112024.lic"
     dest: /tmp/tvault-license.lic
