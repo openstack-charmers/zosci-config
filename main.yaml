@@ -81,6 +81,7 @@
           - openstack/charm-keystone-saml-mellon: *default-project
           - openstack/charm-magnum: *default-project
           - openstack/charm-magnum-dashboard: *default-project
+          - openstack/charm-magnum-k8s: *default-project
           - openstack/charm-magpie: *default-project
           - openstack/charm-manila: *default-project
           - openstack/charm-manila-dashboard: *default-project
