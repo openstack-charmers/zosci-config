@@ -41,6 +41,10 @@
       become: true
       apt:
         name: libxslt1-dev
+    - name: Install qemu-utils
+      become: true
+      apt:
+        name: qemu-utils
     - name: Render juju clouds.yaml
       template:
         src: clouds.yaml.j2
