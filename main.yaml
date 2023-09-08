@@ -61,6 +61,7 @@
           - openstack/charm-cloudkitty: *default-project
           - openstack/charm-designate: *default-project
           - openstack/charm-designate-bind: *default-project
+          - openstack/charm-designate-k8s: *default-project
           - openstack/charm-glance: *default-project
           - openstack/charm-glance-k8s: *default-project
           - openstack/charm-glance-simplestreams-sync: *default-project
