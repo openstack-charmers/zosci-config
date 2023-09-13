@@ -274,7 +274,7 @@
               - ^stable\/(20\.03|20\.12|21\.09|21\.10|22\.03|22\.09)$
               - ^stable\/(focal|jammy)$
               - ^stable\/(train|ussuri|victoria|wallaby|xena|yoga|zed)$
-              - ^stable\/(luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2)$
+              - ^stable\/(luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2|reef)$
         # NOTE(ajkavanagh) disabled until we can get zuul, ansible and py310 on
         # jammy to play together.
         # NOTE(icey) BUT REALLY, DO NOT ENABLE THE FOLLOWING UNTIL YOU KNOW WE CAN
