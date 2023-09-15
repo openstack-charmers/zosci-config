@@ -104,6 +104,7 @@
           - openstack/charm-octavia: *default-project
           - openstack/charm-octavia-dashboard: *default-project
           - openstack/charm-octavia-diskimage-retrofit: *default-project
+          - openstack/charm-octavia-k8s: *default-project
           - openstack/charm-openstack-dashboard: *default-project
           - openstack/charm-openstack-hypervisor: *default-project
           - openstack/charm-openstack-loadbalancer: *default-project
