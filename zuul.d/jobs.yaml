@@ -170,6 +170,22 @@
       python_version: '3.10'
 
 - job:
+    name: tox-py311
+    parent: tox
+    description: |
+      Run unit tests for a Python project under cPython version 3.11.
+
+      Uses tox with the ``py311`` environment.
+
+    nodeset:
+      nodes:
+        - name: jammy-medium
+          label: jammy-medium
+    vars:
+      tox_envlist: py311
+      python_version: '3.11'
+
+- job:
     name: charm-build
     description: Build a source charm into a deployable charm
     timeout: 10800  # 3hr
@@ -466,7 +482,7 @@
     description: Run a functional test against mantic-bobcat
     parent: func-target-pre-jobs
     dependencies:
-      - name: tox-py310
+      - name: tox-py311
         soft: true
       - osci-lint
       - charm-build

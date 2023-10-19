@@ -73,6 +73,10 @@
     description: |
       placeholder
 - project-template:
+    name: openstack-tox-py311
+    description: |
+      placeholder
+- project-template:
     name: openstack-cover-jobs
     description: |
       placeholder
@@ -294,8 +298,15 @@
         # RUN A 3.10 JOB ON ZOSCI.
         #- tox-py310:
         #    branches:
-        #      - master
         #      - stable/2023.1
+        # NOTE(ajkavanagh) disabled until we can get zuul, ansible and py311 on
+        # jammy to play together.
+        # NOTE(icey) BUT REALLY, DO NOT ENABLE THE FOLLOWING UNTIL YOU KNOW WE CAN
+        # RUN A 3.11 JOB ON ZOSCI.
+        #- tox-py311:
+        #    branches:
+        #      - master
+        #      - stable/2023.2
 - project-template:
     name: charm-unit-jobs-py35
     description: |
@@ -354,6 +365,19 @@
         # NOTE(icey) BUT REALLY, DO NOT ENABLE THE FOLLOWING UNTIL YOU KNOW WE CAN
         # RUN A 3.10 JOB ON ZOSCI.
         #- tox-py310
+- project-template:
+    name: charm-unit-jobs-py311
+    description: |
+      The default set of unit tests and lint checks for the OpenStack Charms
+    check:
+      jobs:
+        - charm-build
+        - osci-lint
+        # NOTE(ajkavanagh) disabled until we can get zuul, ansible and py311 on
+        # jammy to play together.
+        # NOTE(icey) BUT REALLY, DO NOT ENABLE THE FOLLOWING UNTIL YOU KNOW WE CAN
+        # RUN A 3.11 JOB ON ZOSCI.
+        #- tox-py311
 - project-template:
     name: charm-yoga-unit-jobs
     description: |
