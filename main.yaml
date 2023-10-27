@@ -112,6 +112,7 @@
           - openstack/charm-octavia-diskimage-retrofit: *default-project
           - openstack/charm-octavia-k8s: *default-project
           - openstack/charm-openstack-dashboard: *default-project
+          - openstack/charm-openstack-exporter-k8s: *default-project
           - openstack/charm-openstack-hypervisor: *default-project
           - openstack/charm-openstack-loadbalancer: *default-project
           - openstack/charm-pacemaker-remote: *default-project
