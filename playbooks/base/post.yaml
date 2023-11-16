@@ -17,7 +17,7 @@
       # Unique log prefix to avoid container name collisions when ceph is
       # used.
       # zuul_log_container: zuul_logs
-      zuul_log_container: uosci-artifacts
+      zuul_log_container: zosci-artifacts
 
 # - hosts: localhost
 #   gather_facts: False
