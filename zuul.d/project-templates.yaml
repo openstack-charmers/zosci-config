@@ -94,6 +94,22 @@
       The default set of functional test jobs for the OpenStack Charms
     check:
       jobs:
+        - noble-caracal:
+            voting: false
+            branches:
+              - main
+              - master
+              - stable/2024.1  # OpenStack
+              - stable/24.03   # OVN
+              - stable/noble   # Ubuntu
+        - jammy-caracal:
+            voting: false
+            branches:
+              - main
+              - master
+              - stable/2024.1  # OpenStack
+              - stable/24.03   # OVN
+              - stable/noble   # Ubuntu
         - mantic-bobcat:
             voting: false
             branches:

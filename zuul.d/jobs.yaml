@@ -478,6 +478,18 @@
     vars:
       tox_extra_args: '-- bionic-queens'
 - job:
+    name: noble-caracal
+    description: Run a functional test against noble-caracal
+    parent: func-target-pre-jobs
+    dependencies:
+      - name: tox-py312
+        soft: true
+      - osci-lint
+      - charm-build
+    vars:
+      tox_extra_args: '-- noble-caracal'
+      juju_snap_channel: '3.3/stable'
+- job:
     name: mantic-bobcat
     description: Run a functional test against mantic-bobcat
     parent: func-target-pre-jobs
@@ -551,6 +563,18 @@
       - charm-build
     vars:
       tox_extra_args: '-- groovy-victoria'
+- job:
+    name: jammy-caracal
+    description: Run a functional test against jammy-caracal
+    parent: func-target-pre-jobs
+    dependencies:
+      - name: tox-py310
+        soft: true
+      - osci-lint
+      - charm-build
+    vars:
+      tox_extra_args: '-- jammy-caracal'
+      juju_snap_channel: '3.3/stable'
 - job:
     name: jammy-bobcat
     description: Run a functional test against jammy-bobcat
