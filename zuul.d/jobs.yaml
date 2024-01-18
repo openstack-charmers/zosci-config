@@ -502,7 +502,12 @@
       - charm-build
     vars:
       tox_extra_args: '-- noble-caracal'
-      juju_snap_channel: '3.3/stable'
+      # NOTE: the next two variables need to be updated together, because the
+      # constraints have pinning to install the right version of python-libjuju
+      # based on what snap channel is being used to bootstrap the controller
+      # from.
+      juju_snap_channel: '3.1/stable'
+      pip_constraints_url: 'https://raw.githubusercontent.com/openstack-charmers/zaza-openstack-tests/master/constraints/constraints-2024.1.txt'
 - job:
     name: mantic-bobcat
     description: Run a functional test against mantic-bobcat
@@ -588,7 +593,12 @@
       - charm-build
     vars:
       tox_extra_args: '-- jammy-caracal'
-      juju_snap_channel: '3.3/stable'
+      # NOTE: the next two variables need to be updated together, because the
+      # constraints have pinning to install the right version of python-libjuju
+      # based on what snap channel is being used to bootstrap the controller
+      # from.
+      juju_snap_channel: '3.1/stable'
+      pip_constraints_url: 'https://raw.githubusercontent.com/openstack-charmers/zaza-openstack-tests/master/constraints/constraints-2024.1.txt'
 - job:
     name: jammy-bobcat
     description: Run a functional test against jammy-bobcat
