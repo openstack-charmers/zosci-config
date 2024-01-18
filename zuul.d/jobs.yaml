@@ -186,6 +186,22 @@
       python_version: '3.11'
 
 - job:
+    name: tox-py312
+    parent: tox
+    description: |
+      Run unit tests for a Python project under cPython version 3.12.
+
+      Uses tox with the ``py312`` environment.
+
+    nodeset:
+      nodes:
+        - name: noble-medium
+          label: noble-medium
+    vars:
+      tox_envlist: py312
+      python_version: '3.12'
+
+- job:
     name: charm-build
     description: Build a source charm into a deployable charm
     timeout: 10800  # 3hr
