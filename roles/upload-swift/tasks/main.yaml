@@ -36,7 +36,7 @@
       zuul_return:
         data:
           zuul:
-            log_url: "https://openstack-ci-reports.ubuntu.com/artifacts{{ upload_results.url.split('zosci-artifacts') | last }}/index.html"
+            log_url: "https://openstack-ci-reports.ubuntu.com/artifacts{{ upload_results.url.split('zosci-artifacts') | last }}/"
     - name: Print upload failures
       debug:
         var: upload_results.upload_failures
