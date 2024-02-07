@@ -112,6 +112,111 @@
       mysql:
 
 - pipeline:
+    name: periodic-weekly-sunday
+    post-review: true
+    description: Jobs in this queue are triggered on a weekly timer on Sundays.
+    manager: independent
+    precedence: low
+    dequeue-on-new-patchset: false
+    trigger:
+      timer:
+        - time: '11 1 * * 0'
+    success:
+      mysql:
+    failure:
+      mysql:
+
+- pipeline:
+    name: periodic-weekly-monday
+    post-review: true
+    description: Jobs in this queue are triggered on a weekly timer on Mondays.
+    manager: independent
+    precedence: low
+    dequeue-on-new-patchset: false
+    trigger:
+      timer:
+        - time: '11 1 * * 1'
+    success:
+      mysql:
+    failure:
+      mysql:
+
+- pipeline:
+    name: periodic-weekly-tuesday
+    post-review: true
+    description: Jobs in this queue are triggered on a weekly timer on Tuesdays.
+    manager: independent
+    precedence: low
+    dequeue-on-new-patchset: false
+    trigger:
+      timer:
+        - time: '11 1 * * 2'
+    success:
+      mysql:
+    failure:
+      mysql:
+
+- pipeline:
+    name: periodic-weekly-wednesday
+    post-review: true
+    description: Jobs in this queue are triggered on a weekly timer on Wednesdays.
+    manager: independent
+    precedence: low
+    dequeue-on-new-patchset: false
+    trigger:
+      timer:
+        - time: '11 1 * * 3'
+    success:
+      mysql:
+    failure:
+      mysql:
+
+- pipeline:
+    name: periodic-weekly-thursday
+    post-review: true
+    description: Jobs in this queue are triggered on a weekly timer on Thursdays.
+    manager: independent
+    precedence: low
+    dequeue-on-new-patchset: false
+    trigger:
+      timer:
+        - time: '11 1 * * 4'
+    success:
+      mysql:
+    failure:
+      mysql:
+
+- pipeline:
+    name: periodic-weekly-friday
+    post-review: true
+    description: Jobs in this queue are triggered on a weekly timer on Fridays.
+    manager: independent
+    precedence: low
+    dequeue-on-new-patchset: false
+    trigger:
+      timer:
+        - time: '11 1 * * 5'
+    success:
+      mysql:
+    failure:
+      mysql:
+
+- pipeline:
+    name: periodic-weekly-saturday
+    post-review: true
+    description: Jobs in this queue are triggered on a weekly timer on Saturdays.
+    manager: independent
+    precedence: low
+    dequeue-on-new-patchset: false
+    trigger:
+      timer:
+        - time: '11 1 * * 6'
+    success:
+      mysql:
+    failure:
+      mysql:
+
+- pipeline:
     name: promote
     description: |
       This pipeline runs jobs that operate after each change is merged
