@@ -5,6 +5,17 @@
         src: "/home/ubuntu/{{ zuul.project.src_dir }}/"
         dest: "/home/ubuntu/{{ zuul.project.src_dir | replace('charm-', '') }}"
         remote_src: yes
+    # NOTE(freyes): fixes the error below when running `juju` in a fresh
+    # environment.
+    # ERROR cannot create juju home directory: mkdir /home/ubuntu/.local/share: permission denied
+    # WARNING Installing Juju in a strictly confined Snap. To ensure correct operation, create the ~/.local/share/juju directory manually.
+    - name: Create ~/.local/share/juju directory to run Juju snap in strict mode
+      ansible.builtin.file:
+        path: /home/ubuntu/.local/share/juju
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: '0700'
     - name: 'install crashdump'
       become: true
       snap:
