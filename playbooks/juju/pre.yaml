@@ -24,7 +24,7 @@
         # instead of asking users to understand this, we encapsulate this
         # information into this inline-if where if the juju_snap_channel has the
         # '2.9/' prefix the classic field is set to True, otherwise False.
-        classic: "{{ True if juju_snap_channel and juju_snap_channel.startswith('2.9/') else False }}"
+        classic: "{{ juju_snap_channel is defined and juju_snap_channel.startswith('2.9/') }}"
         channel: "{{ juju_snap_channel }}"
       register: result
       until: result is not failed
