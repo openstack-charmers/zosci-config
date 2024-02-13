@@ -82,6 +82,12 @@
       --model-default=/home/ubuntu/charm-test-infra/juju-configs/model-default-serverstack.yaml \
       --config=/home/ubuntu/charm-test-infra/juju-configs/controller-default.yaml \
       {{ serverstack_cloud.region_name }}/{{ serverstack_cloud.region_name }}
+- name: 'Add default juju model if needed'
+  shell:
+    cmd: |
+      /snap/bin/juju show-model default || /snap/bin/juju add-model default
+  args:
+    executable: /bin/bash
 - name: 'Configure cloudinit-userdata model-default'
   shell:
     cmd: |
