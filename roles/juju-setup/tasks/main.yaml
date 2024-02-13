@@ -105,6 +105,11 @@
           - systemctl daemon-reload
           - systemctl restart systemd-resolved
       EOF
-      /snap/bin/juju model-default /home/ubuntu/cloudinit-userdata.yaml
+      # juju>=3.0 expects the `--file` flag to pass default values in a file.
+      if dpkg --compare-versions $(juju --version | cut -d- -f1) ge 3.0.0; then
+          /snap/bin/juju model-defaults --file /home/ubuntu/cloudinit-userdata.yaml
+      else
+          /snap/bin/juju model-defaults /home/ubuntu/cloudinit-userdata.yaml
+      fi
   args:
     executable: /bin/bash
