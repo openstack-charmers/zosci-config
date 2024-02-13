@@ -224,8 +224,6 @@
     cleanup-run: playbooks/juju/cleanup.yaml
     secrets:
       - serverstack_cloud
-    vars:
-      juju_snap_channel: "2.9/stable"
 
 - job:
     name: func-target
