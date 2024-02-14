@@ -2,6 +2,7 @@
   roles:
     - setup-networking-env
     - charm-build
+    - handle-constraints-url
     - handle-func-test-pr
     - revoke-sudo
     - setup-test-fixtures

@@ -1,0 +1,22 @@
+- name: Create temporary file to store the constraints
+  ansible.builtin.tempfile:
+    path: /home/ubuntu/
+    prefix: "constraints."
+    suffix: ".txt"
+  when: pip_constraints_url is defined
+  register: constraints_file
+
+- name: GET the constraints file
+  get_url:
+    url: "{{ pip_constraints_url }}"
+    dest: "{{ constraints_file.path }}"
+    mode: 0444
+  when: constraints_file is defined and pip_constraints_url is defined
+
+- name: Record file location
+  set_fact:
+    tox_constraints_env:
+      TOX_CONSTRAINTS_FILE: "{{ constraints_file.path }}"
+      # Backward compatibility, to be removed
+      UPPER_CONSTRAINTS_FILE: "{{ constraints_file.path }}"
+  when: constraints_file is defined and pip_constraints_url is defined
