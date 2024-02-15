@@ -10,7 +10,7 @@
     url: "{{ pip_constraints_url }}"
     dest: "{{ constraints_file.path }}"
     mode: 0444
-  when: constraints_file is defined and pip_constraints_url is defined and pip_constraints_url is not None and pip_constraints_url|length > 0
+  when: constraints_file is defined and pip_constraints_url is defined and pip_constraints_url is not none and pip_constraints_url|length > 0
 
 - name: Get stat of temporary constraints file
   ansible.builtin.stat:
