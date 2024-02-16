@@ -23,4 +23,4 @@
       TOX_CONSTRAINTS_FILE: "{{ constraints_file.path }}"
       # Backward compatibility, to be removed
       UPPER_CONSTRAINTS_FILE: "{{ constraints_file.path }}"
-  when: constraints_stat.size > 0
+  when: constraints_stat.stat.exists and constraints_stat.stat.size > 0
