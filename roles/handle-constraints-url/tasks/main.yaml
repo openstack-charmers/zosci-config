@@ -20,7 +20,5 @@
 - name: Record file location
   set_fact:
     tox_constraints_env:
-      TOX_CONSTRAINTS_FILE: "{{ constraints_file.path }}"
-      # Backward compatibility, to be removed
-      UPPER_CONSTRAINTS_FILE: "{{ constraints_file.path }}"
+      TEST_CONSTRAINTS_FILE: "{{ constraints_file.path }}"
   when: constraints_stat.stat.exists and constraints_stat.stat.size > 0
