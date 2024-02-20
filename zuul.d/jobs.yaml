@@ -519,6 +519,12 @@
       - charm-build
     vars:
       tox_extra_args: '-- mantic-bobcat'
+      # NOTE: the next two variables need to be updated together, because the
+      # constraints have pinning to install the right version of python-libjuju
+      # based on what snap channel is being used to bootstrap the controller
+      # from.
+      juju_snap_channel: '2.9/stable'
+      pip_constraints_url: 'https://raw.githubusercontent.com/openstack-charmers/zaza/master/constraints-juju29.txt'
 - job:
     name: lunar-antelope
     description: Run a functional test against lunar-antelope
@@ -610,6 +616,12 @@
       - charm-build
     vars:
       tox_extra_args: '-- jammy-bobcat'
+      # NOTE: the next two variables need to be updated together, because the
+      # constraints have pinning to install the right version of python-libjuju
+      # based on what snap channel is being used to bootstrap the controller
+      # from.
+      juju_snap_channel: '2.9/stable'
+      pip_constraints_url: 'https://raw.githubusercontent.com/openstack-charmers/zaza/master/constraints-juju29.txt'
 - job:
     name: jammy-antelope
     description: Run a functional test against jammy-antelope
