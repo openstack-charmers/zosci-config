@@ -117,8 +117,6 @@
         - mantic-bobcat:
             voting: false
             branches:
-              - main
-              - master
               - stable/2023.2
               - stable/1.8
               - stable/23.09
@@ -132,14 +130,6 @@
               - stable/1.8
               - stable/23.09
               - stable/reef
-              - stable/jammy
-        - lunar-antelope:
-            voting: false
-            branches:
-              - stable/2023.1
-              - stable/1.8
-              - stable/23.03
-              - stable/quincy.2
               - stable/jammy
         - jammy-antelope:
             branches:
