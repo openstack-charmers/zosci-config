@@ -506,7 +506,7 @@
       # constraints have pinning to install the right version of python-libjuju
       # based on what snap channel is being used to bootstrap the controller
       # from.
-      juju_snap_channel: '3.1/stable'
+      juju_snap_channel: '3.3/stable'
       pip_constraints_url: 'https://raw.githubusercontent.com/openstack-charmers/zaza-openstack-tests/master/constraints/constraints-2024.1.txt'
 - job:
     name: mantic-bobcat
@@ -603,7 +603,7 @@
       # constraints have pinning to install the right version of python-libjuju
       # based on what snap channel is being used to bootstrap the controller
       # from.
-      juju_snap_channel: '3.1/stable'
+      juju_snap_channel: '3.3/stable'
       pip_constraints_url: 'https://raw.githubusercontent.com/openstack-charmers/zaza-openstack-tests/master/constraints/constraints-2024.1.txt'
 - job:
     name: jammy-bobcat
