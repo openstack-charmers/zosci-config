@@ -137,6 +137,7 @@
               - stable/2023.2
               - stable/1.8
               - stable/23.03
+              - stable/reef
               - stable/quincy.2
               - stable/jammy
         - jammy-zed:
