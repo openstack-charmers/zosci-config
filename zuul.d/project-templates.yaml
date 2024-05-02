@@ -107,13 +107,12 @@
               - stable/24.03   # OVN
               - stable/noble   # Ubuntu
         - jammy-caracal:
-            voting: false
             branches:
               - main
               - master
               - stable/2024.1  # OpenStack
               - stable/24.03   # OVN
-              - stable/noble   # Ubuntu
+              - stable/squid
         - mantic-bobcat:
             voting: false
             branches:
