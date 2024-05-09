@@ -133,6 +133,7 @@
               - stable/jammy
         - jammy-antelope:
             branches:
+              - master
               - stable/2023.1
               - stable/2023.2
               - stable/2024.1
