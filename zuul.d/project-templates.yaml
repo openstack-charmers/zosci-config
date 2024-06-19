@@ -113,7 +113,7 @@
               - stable/2024.1  # OpenStack
               - stable/24.03   # OVN
               - stable/squid
-              - stable/jammy-caracal
+              - stable/squid-jammy
         - mantic-bobcat:
             voting: false
             branches:
