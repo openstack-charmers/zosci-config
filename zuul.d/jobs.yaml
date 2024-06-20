@@ -936,6 +936,7 @@
       nodes:
         - name: focal-medium
           label: focal-medium
+
 - job:
     name: sqa-integration
     description: Sets up a sqalab connection for this test environment
@@ -944,3 +945,20 @@
     abstract: true
     secrets:
       - sqalab_environment
+
+- job:
+    name: charmhub-osci-sync
+    description: |
+      Run `charmhub-lp-tool osci-sync` to update the recipe's definition on
+      Launchpad.
+    timeout: 3600
+    parent: tox
+    provides: charm
+    post-review: true
+    run: playbooks/charm/charmhub-lp-tool-osci-sync.yaml
+    nodeset:
+      nodes:
+        - name: focal-medium
+          label: focal-medium
+    secrets:
+      - launchpad_token
