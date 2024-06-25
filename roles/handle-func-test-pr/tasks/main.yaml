@@ -23,9 +23,9 @@
   shell: |
     set -o pipefail
     {{ tmp_dir.path }}/process_func_test_pr.py \
-      -f "{{ zuul.project.src_dir }}/test-requirements.txt" \
-      -f "{{ zuul.project.src_dir }}/src/test-requirements.txt" \
-      -f "{{ zuul.project.src_dir }}/build/builds/{{ charm_name }}/test-requirements.txt" \
+      -f "{{ zuul.project.src_dir }}/test-requirements*.txt" \
+      -f "{{ zuul.project.src_dir }}/src/test-requirements*.txt" \
+      -f "{{ zuul.project.src_dir }}/build/builds/{{ charm_name }}/test-requirements*.txt" \
       {{ zuul.message }}
 
 
