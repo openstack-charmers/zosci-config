@@ -2,6 +2,7 @@
 
 import argparse
 import base64
+import glob
 import os
 import re
 import requests
@@ -45,34 +46,48 @@ def extract_lines(commit_message, match_pattern):
 def apply_updates(updates, files):
     """Update contents of files with supplied replacements.
 
+    The `files` param, which is a list of filenames, may have 'glob' (*)
+    characters in the filenames. These are expanded and then the updates are
+    applied across all the files that are globbed.
+
     :param updates: List of replacement tuples (pattern, repl)
     :type updates: List[(str, str)]
     :param files: List of file names.
     :type files: List[str]
     """
-    for file_name in files:
-        if not os.path.exists(file_name):
-            print("{} not found".format(file_name))
-            continue
-        with open(file_name, "r+") as f:
-            contents = f.read()
-            for update in updates:
-                print("Applying update {} {} to {}".format(
-                    update[0],
-                    update[1],
-                    file_name))
-                contents = re.sub(
-                    update[0],
-                    update[1],
-                    contents,
-                    flags=re.MULTILINE)
-            f.seek(0)
-            f.write(contents)
-            f.truncate()
+    for maybe_glob in files:
+        if '*' in maybe_glob:
+            _files = glob.glob(maybe_glob)
+        else:
+            _files = (maybe_glob,)
+        for file_name in _files:
+            if not os.path.exists(file_name):
+                print("{} not found".format(file_name))
+                continue
+            with open(file_name, "r+") as f:
+                contents = f.read()
+                for update in updates:
+                    print("Applying update {} {} to {}".format(
+                        update[0],
+                        update[1],
+                        file_name))
+                    contents = re.sub(
+                        update[0],
+                        update[1],
+                        contents,
+                        flags=re.MULTILINE)
+                f.seek(0)
+                f.write(contents)
+                f.truncate()
 
 
 def process_func_test_pr(commit_message, files):
     """Apply any func-test-pr directives to files.
+
+    Note that the `files` param may contain a glob character to enable
+    expansion of func-test-pr changes across multiple matching requirements
+    files.  This param is passed through unchanged to the apply_updates()
+    function that actually reads the files.
 
     :param commit_message: Commit Message
     :type commit_message: str

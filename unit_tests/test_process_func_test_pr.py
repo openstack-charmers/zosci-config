@@ -111,6 +111,36 @@ class TestProcessFuncTestPR(unittest.TestCase):
                 ('Good morning, please may I have a savoury scone with '
                  'Béchamel sauce'))
 
+    def test_apply_updates_globbed(self):
+        with tempfile.TemporaryDirectory() as tmpdirname:
+            file1 = '{}/file.txt'.format(tmpdirname)
+            file2 = '{}/file2.txt'.format(tmpdirname)
+            globbed_name = '{}/file*.txt'.format(tmpdirname)
+            with open(file1, 'w') as f:
+                f.write("Yo, hit me with some biscuits and gravy")
+            with open(file2, 'w') as f:
+                f.write("Yo, hit me with some biscuits and gravy")
+            process_func_test_pr.apply_updates(
+                [
+                    ('Im not there', 'foo'),
+                    ('Yo,', 'Good morning,'),
+                    (r'hit.*with', 'please may I have'),
+                    ('some ', ''),
+                    (r'bis.*vy', 'a savoury scone with Béchamel sauce')],
+                [globbed_name])
+            with open(file1, 'r') as f:
+                contents = f.read()
+            self.assertEqual(
+                contents,
+                ('Good morning, please may I have a savoury scone with '
+                 'Béchamel sauce'))
+            with open(file2, 'r') as f:
+                contents = f.read()
+            self.assertEqual(
+                contents,
+                ('Good morning, please may I have a savoury scone with '
+                 'Béchamel sauce'))
+
     @mock.patch.object(process_func_test_pr.requests, 'get')
     def _test_process_func_test_pr(self, locations, mock_get):
         with tempfile.TemporaryDirectory() as tmpdirname:
