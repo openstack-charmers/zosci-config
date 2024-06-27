@@ -120,8 +120,6 @@
               - stable/jammy
         - jammy-bobcat:
             branches:
-              - main
-              - master
               - stable/2024.1
               - stable/2023.2
               - stable/1.8
