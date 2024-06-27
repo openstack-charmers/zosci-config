@@ -212,8 +212,8 @@
       - serverstack_cloud
     nodeset:
       nodes:
-        - name: focal-medium
-          label: focal-medium
+        - name: jammy-medium
+          label: jammy-medium
 
 - job:
     name: configure-juju
