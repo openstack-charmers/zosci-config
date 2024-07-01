@@ -532,6 +532,8 @@
       # from.
       juju_snap_channel: '3.5/stable'
       pip_constraints_url: 'https://raw.githubusercontent.com/openstack-charmers/zaza-openstack-tests/master/constraints/constraints-noble.txt'
+      tox_environment:
+        TEST_JUJU3: 1
 - job:
     name: mantic-bobcat
     description: Run a functional test against mantic-bobcat
