@@ -99,7 +99,6 @@
     check:
       jobs:
         - noble-caracal:
-            voting: false
             branches:
               - main
               - master
