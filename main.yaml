@@ -54,6 +54,7 @@
           - openstack/charm-cinder-k8s: *default-project
           - openstack/charm-cinder-lvm: *default-project
           - openstack/charm-cinder-netapp: *default-project
+          - openstack/charm-cinder-nfs: *default-project
           - openstack/charm-cinder-nimblestorage: *default-project
           - openstack/charm-cinder-purestorage: *default-project
           - openstack/charm-cinder-solidfire: *default-project
