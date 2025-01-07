@@ -1447,45 +1447,31 @@ resource "kubernetes_deployment" "zuul_preview" {
     }
 }
 
-resource "kubernetes_ingress_v1" "zuul_web_ingress" {
-    wait_for_load_balancer = true
-    metadata {
-        name = "zuul-web-ingress"
-        namespace = kubernetes_namespace.zuul.metadata[0].name
+resource "kubernetes_service_v1" "zuul_web_service" {
+  metadata {
+    name = "zuul-web-service"
+    namespace = kubernetes_namespace.zuul.metadata[0].name
+    annotations = {
+      "service.beta.kubernetes.io/openstack-internal-load-balancer": "true"
     }
-
-    spec {
-        default_backend {
-            service {
-                name = kubernetes_service.zuul_web.metadata.0.name
-                port {
-                    number = kubernetes_service.zuul_web.spec.0.port.0.port
-                }
-            }
-        }
-        ingress_class_name = var.ingress_class_name
-        rule {
-            http {
-                path {
-                    backend {
-                        service {
-                            name = kubernetes_service.zuul_web.metadata.0.name
-                            port {
-                                number = kubernetes_service.zuul_web.spec.0.port.0.port
-                            }
-                        }
-                    }
-                    path = "/"
-                }
-            }
-        }
+    labels = {
+      k8s-app                         = "zuul"
+      "app.kubernetes.io/part-of"     = "zuul"
+      "app.kubernetes.io/component"   = "zuul-web"
     }
-}
+  }
 
-output "load_balancer_hostname" {
-    value = kubernetes_ingress_v1.zuul_web_ingress.status.0.load_balancer.0.ingress.0.hostname
-}
-
-output "load_balancer_ip" {
-    value = kubernetes_ingress_v1.zuul_web_ingress.status.0.load_balancer.0.ingress.0.ip
+  spec {
+    selector = {
+      k8s-app                         = "zuul"
+      "app.kubernetes.io/part-of"     = "zuul"
+      "app.kubernetes.io/component"   = "zuul-web"
+    }
+    session_affinity = "ClientIP"
+    type = "LoadBalancer"
+    port {
+      port        = "80"
+      target_port = "9000"
+    }
+  }
 }

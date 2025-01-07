@@ -46,7 +46,6 @@ The terraform plan offers the following variables to be overridden:
 | docker-password    |                            | Dockerhub password (or token)                   |
 | docker-server      | https://index.docker.io/v1 | Dockerhub server                                |
 | docker-email       |                            | Dockerhub email                                 |
-| ingress_class_name | nginx-ingress-controller   | Ingress class name                              |
 
 
 ## Images

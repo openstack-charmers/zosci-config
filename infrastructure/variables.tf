@@ -34,12 +34,6 @@ variable "docker-email" {
   description = "Dockerhub email"
 }
 
-variable "ingress_class_name" {
-  type = string
-  default = "nginx-ingress-controller"
-  description = "Ingress Class Name"
-}
-
 variable "clouds_yaml" {
   type        = string
   description = "Path to a clouds.yaml file used to authenticate against the OpenStack cloud."
