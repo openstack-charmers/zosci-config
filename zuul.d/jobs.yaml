@@ -817,7 +817,6 @@
     run: playbooks/charm/publish.yaml
     secrets:
       - ps6_cloud
-      - charmhub_token
     nodeset:
       nodes:
         - name: focal-medium

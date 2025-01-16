@@ -1,7 +1,7 @@
 - name: Publish charms to charmhub
   when: publish_charm
   environment:
-    CHARMCRAFT_AUTH: "{{ charmhub_token.value }}"
+    CHARMCRAFT_AUTH: ""
   block:
     - name: Install docker
       include_role:
