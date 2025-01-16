@@ -92,3 +92,15 @@ NODEPOOL_DEPLOYMENT="$(kubectl get deployments -n zuul | grep nodepool-launcher 
 kubectl scale --replicas=1 -n zuul deployment/$NODEPOOL_DEPLOYMENT
 ```
 
+### Reload zosci-config configuration
+
+When reconfiguring zosci (zuul) the config-projects get updated and all the
+configuration declared is loaded, this process takes around 10 minutes.
+
+``` bash
+kubectl exec --stdin --tty \
+    -n zuul zuul-scheduler-0 \
+    -- /usr/local/bin/python /usr/local/bin/zuul-scheduler full-reconfigure
+```
+
+Reference: https://zuul-ci.org/docs/zuul/latest/operation.html#reconfiguration
