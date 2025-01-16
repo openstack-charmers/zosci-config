@@ -21,9 +21,9 @@
                 - osci.yaml
                 - osci.d/
       opendev:
-        config-projects:
-          - openstack/charm-zuul-jobs  # provides charmbuild job
         untrusted-projects:
+          - openstack/charm-zuul-jobs:
+              shadow: openstack-charmers/zosci-config
           - zuul/zuul-jobs:
               shadow: openstack-charmers/zosci-config
       gerrit:
