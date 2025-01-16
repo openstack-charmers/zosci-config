@@ -30,7 +30,7 @@
   when: needs_charm_build and
           (charm_archived.rc is defined and charm_archived.rc == 0)
   zuul_swift_upload:
-    cloud: "{{ serverstack_cloud }}"
+    cloud: "{{ ps6_cloud }}"
     partition: "false"
     container: "zuul-built-charms"
     public: "yes"

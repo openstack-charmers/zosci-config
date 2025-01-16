@@ -54,9 +54,9 @@
       failed_when: false
     - name: 'destroy controller'
       shell: >
-        timeout 240 juju destroy-controller --destroy-all-models --destroy-storage -y {{ serverstack_cloud.region_name }}-{{ serverstack_cloud.region_name }}
+        timeout 240 juju destroy-controller --destroy-all-models --destroy-storage -y {{ ps6_cloud.region_name }}-{{ ps6_cloud.region_name }}
       failed_when: false
     - name: 'kill controller'
       shell: >
-        juju kill-controller -t 120s -y {{ serverstack_cloud.region_name }}-{{ serverstack_cloud.region_name }}
+        juju kill-controller -t 120s -y {{ ps6_cloud.region_name }}-{{ ps6_cloud.region_name }}
       failed_when: false
