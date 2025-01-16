@@ -5,10 +5,10 @@ source: https://github.com/charmed-kubernetes/bundle
 website: https://ubuntu.com/kubernetes/charmed-k8s
 name: kubernetes-core
 machines:
-  '0':
-    constraints: cores=4 mem=16G root-disk=40G
-  '1':
-    constraints: cores=4 mem=16G root-disk=40G
+  '0':  # kubernetes-control-plane
+    constraints: cores=4 mem=16G root-disk=50G
+  '1':  # kubernetes-worker
+    constraints: cores=4 mem=16G root-disk=50G
   '2':
     constraints: cores=2 mem=4G root-disk=20G
   '3':
@@ -68,7 +68,7 @@ applications:
       gui-y: '850'
     channel: 1.28/stable
     charm: kubernetes-worker
-    constraints: cores=2 mem=8G root-disk=16G
+    constraints: cores=4 mem=16G root-disk=50G
     expose: true
     num_units: 1
     options:
