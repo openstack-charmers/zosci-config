@@ -41,8 +41,8 @@
           comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*zosci-recheck
         - event: comment-added
           require:
-            - Verified: [-1, -2]
-              username: zuul
+            Verified: [-1, -2]
+            username: zuul
           approval:
             - Workflow: 1
     # TODO: Re-enable voting when we're confident
