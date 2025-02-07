@@ -1207,6 +1207,23 @@ resource "kubernetes_stateful_set" "zuul_executor" {
                   run_as_group = "10001"
                   fs_group     = "10001"
                 }
+                init_container {
+                  name                = "init-chown-data"
+                  image               = "busybox:latest"
+                  image_pull_policy   = "IfNotPresent"
+                  command             = ["/bin/sh", "-c"]
+                  args = ["mkdir /var/lib/zuul/.ssh && chmod 700 /var/lib/zuul/.ssh && cp /zuul/.ssh/id_rsa /var/lib/zuul/.ssh/ && chmod 600 /var/lib/zuul/.ssh/id_rsa"]
+
+                  volume_mount {
+                    name = "uosci-id-rsa"
+                    mount_path = "/zuul/.ssh"
+                    read_only = "true"
+                  }
+                  volume_mount {
+                    name = "zuul-var"
+                    mount_path = "/var/lib/zuul"
+                  }
+                }
                 container {
                     name = "executor"
                     image = "quay.io/zuul-ci/zuul-executor:9.1"
