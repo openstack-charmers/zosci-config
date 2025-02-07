@@ -10,6 +10,8 @@
       nodes:
         - name: focal-medium
           label: focal-medium
+    secrets: &log_clouds
+      - artifact_cloud
     branches: ^(?!stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2|reef)).*$
     # vars:
     #   tox_environment:
@@ -29,6 +31,7 @@
       nodes:
         - name: focal-medium
           label: focal-medium
+    secrets: *log_clouds
     branches: ^stable\/(1\.5|1\.6|1\.7|1\.8|4\.0|4\.1|4\.2|20\.03|20\.12|21\.09|22\.03|22\.09|21\.10|focal|jammy|train|ussuri|victoria|wallaby|xena|yoga|zed|luminous|mimic|nautilus|octopus|pacific|quincy|quincy\.2|reef).*$
     vars:
       # NOTE(coreycb): This job is for stable branches <= stable/zed. Tox 4
