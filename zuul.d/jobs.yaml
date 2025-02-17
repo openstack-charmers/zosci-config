@@ -256,7 +256,7 @@
         soft: true
     vars:
       tox_environment:
-        TEST_NET_ID: "94a87d6a-6d82-4931-878d-aedcf0e62962"
+        TEST_NET_ID: "b076cb92-6c00-49df-8b49-0747df2cfa96"  # net_stg-openstack-zosci
         TEST_CIDR_EXT: "{{ cidr_ext }}"
         TEST_CIDR_END: "{{ network }}.254"
         TEST_GATEWAY: 172.16.0.1
