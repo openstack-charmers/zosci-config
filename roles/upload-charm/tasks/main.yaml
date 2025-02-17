@@ -50,7 +50,7 @@
             artifacts:
             - name: built charm tarball
               type: charm
-              url: http://10.245.161.162:80/swift/v1/zuul/artifacts/built_charms/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2
+              url: https://radosgw.ps6.canonical.com:443/swift/v1/AUTH_2083b407a6754ab4b31ce1358b4f9bc8/zuul/artifacts/built_charms/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2
     - name: Print upload failures
       debug:
         var: upload_results_reactive.upload_failures
