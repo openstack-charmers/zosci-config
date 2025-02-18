@@ -172,7 +172,7 @@ resource "kubernetes_stateful_set" "mysql" {
                 init_container {
                     name                = "init-chown-data"
                     image               = "busybox:latest"
-                    image_pull_policy   = "IfNotPresent"
+                    image_pull_policy   = var.image_pull_policy
                     command             = ["chown", "-R", "65534:65534", "/var/lib/mysql"]
 
                     volume_mount {
@@ -185,7 +185,7 @@ resource "kubernetes_stateful_set" "mysql" {
                 container {
                     name                = "mariadb-server"
                     image               = "mariadb:jammy"
-                    image_pull_policy   = "IfNotPresent"
+                    image_pull_policy   = var.image_pull_policy
                     env {
                         name    = "MYSQL_ROOT_PASSWORD"
                         value   = "rootpassword"
@@ -429,8 +429,8 @@ resource "kubernetes_deployment" "nodepool_deployment" {
         container {
           name = "launcher"
           # image = "quay.io/zuul-ci/nodepool-launcher:9.1"
-          image = "freyes/nodepool-launcher:custom"
-          image_pull_policy = "Always"
+          image = var.nodepool_image
+          image_pull_policy = var.image_pull_policy
           #command = ["/bin/sh", "-c"]
           #args = ["until test -s /etc/openstack/clouds.yaml ;do echo -n '.'; sleep 5;done && cat /etc/openstack/clouds.yaml && ls -l /etc/openstack/clouds.yaml && echo ~nodepool && su - nodepool 'cat /etc/openstack/clouds.yaml' && id && /usr/local/bin/nodepool-launcher -f"]
           command = ["/bin/sh", "-c"]
@@ -952,7 +952,7 @@ resource "kubernetes_stateful_set" "zuul_scheduler" {
             spec {
                 container {
                     name = "scheduler"
-                    image = "quay.io/zuul-ci/zuul-scheduler:9.1"
+                    image = var.zuul_scheduler_image
                     args = [
                         "/usr/local/bin/zuul-scheduler",
                         "-f",
@@ -1070,7 +1070,7 @@ resource "kubernetes_deployment" "zuul_web" {
             spec {
                 container {
                     name = "web"
-                    image = "quay.io/zuul-ci/zuul-web:9.1"
+                    image = var.zuul_web_image
                     port {
                         name = "zuul-web"
                         container_port = "9000"
@@ -1136,7 +1136,7 @@ resource "kubernetes_deployment" "zuul_fingergw" {
             spec {
                 container {
                     name = "fingergw"
-                    image = "quay.io/zuul-ci/zuul-fingergw:9.1"
+                    image = var.zuul_fingergw_image
                     port {
                         name = "zuul-fingergw"
                         container_port = "9079"
@@ -1226,7 +1226,7 @@ resource "kubernetes_stateful_set" "zuul_executor" {
                 }
                 container {
                     name = "executor"
-                    image = "quay.io/zuul-ci/zuul-executor:9.1"
+                    image = var.zuul_executor_image
                   # command = ["/bin/sh", "-c"]
                   # args = ["while true; do echo 'yo' && sleep 5; done;"]
                     args = [
@@ -1334,7 +1334,7 @@ resource "kubernetes_stateful_set" "zuul_merger" {
                 }
                 container {
                     name = "merger"
-                    image = "quay.io/zuul-ci/zuul-merger:9.1"
+                    image = var.zuul_merger_image
                     args = [
                         "/usr/local/bin/zuul-merger",
                         "-f",
@@ -1449,7 +1449,7 @@ resource "kubernetes_deployment" "zuul_preview" {
             spec {
                 container {
                     name = "preview"
-                    image = "quay.io/zuul-ci/zuul-preview:latest"
+                    image = var.zuul_preview_image
                     port {
                         name = "zuul-preview"
                         container_port = "80"
