@@ -658,6 +658,7 @@ resource "kubernetes_stateful_set" "zookeeper" {
         container {
           name    = "zookeeper"
           image   = "docker.io/library/zookeeper:3.8.4"
+          image_pull_policy   = var.image_pull_policy
           command = ["/bin/bash", "-xec", "/config-scripts/run"]
 
           port {
@@ -959,6 +960,7 @@ resource "kubernetes_stateful_set" "zuul_scheduler" {
                 container {
                     name = "scheduler"
                     image = var.zuul_scheduler_image
+                    image_pull_policy   = var.image_pull_policy
                     args = [
                         "/usr/local/bin/zuul-scheduler",
                         "-f",
@@ -1080,6 +1082,7 @@ resource "kubernetes_deployment" "zuul_web" {
                 container {
                     name = "web"
                     image = var.zuul_web_image
+                    image_pull_policy   = var.image_pull_policy
                     port {
                         name = "zuul-web"
                         container_port = "9000"
@@ -1149,6 +1152,7 @@ resource "kubernetes_deployment" "zuul_fingergw" {
                 container {
                     name = "fingergw"
                     image = var.zuul_fingergw_image
+                    image_pull_policy   = var.image_pull_policy
                     port {
                         name = "zuul-fingergw"
                         container_port = "9079"
@@ -1242,6 +1246,7 @@ resource "kubernetes_stateful_set" "zuul_executor" {
                 container {
                     name = "executor"
                     image = var.zuul_executor_image
+                    image_pull_policy   = var.image_pull_policy
                   # command = ["/bin/sh", "-c"]
                   # args = ["while true; do echo 'yo' && sleep 5; done;"]
                     args = [
@@ -1353,6 +1358,7 @@ resource "kubernetes_stateful_set" "zuul_merger" {
                 container {
                     name = "merger"
                     image = var.zuul_merger_image
+                    image_pull_policy   = var.image_pull_policy
                     args = [
                         "/usr/local/bin/zuul-merger",
                         "-f",
@@ -1471,6 +1477,7 @@ resource "kubernetes_deployment" "zuul_preview" {
                 container {
                     name = "preview"
                     image = var.zuul_preview_image
+                    image_pull_policy   = var.image_pull_policy
                     port {
                         name = "zuul-preview"
                         container_port = "80"
