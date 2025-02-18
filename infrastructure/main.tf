@@ -794,8 +794,6 @@ resource "kubernetes_stateful_set" "zookeeper" {
             success_threshold     = 1
             failure_threshold     = 2
           }
-
-          image_pull_policy = var.image_pull_policy
         }
 
         termination_grace_period_seconds = 1800
