@@ -35,7 +35,7 @@
   zuul_return:
     data:
       zuul:
-        log_url: "https://openstack-ci-reports.ubuntu.com/artifacts{{ upload_results.url.split('zosci-artifacts') | list | last }}/index.html"
+        log_url: "https://openstack-ci-reports.ubuntu.com/artifacts{{ upload_results.url.split('zosci-artifacts') | list | last }}/"
   when: upload_results is defined
 
 # - name: Return logs
