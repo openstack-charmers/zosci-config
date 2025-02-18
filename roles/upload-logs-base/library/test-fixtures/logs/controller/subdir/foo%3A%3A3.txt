@@ -1,2 +1,0 @@
-This is a plan text file with a funny name.
-The index links should escape the :'s.

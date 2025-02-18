@@ -30,14 +30,18 @@
         delete_after: "{{ zuul_log_delete_after | default(omit) }}"
       register: upload_results
 
-- block:
+- name: Return logs
+  when: upload_results is defined
+  block:
     - name: Return log URL to Zuul
       delegate_to: localhost
       zuul_return:
         data:
           zuul:
             log_url: "https://openstack-ci-reports.ubuntu.com/artifacts{{ upload_results.url.split('zosci-artifacts') | last }}/"
+    - name: Print log URL
+      debug:
+        var: upload_results.url
     - name: Print upload failures
       debug:
         var: upload_results.upload_failures
-  when: upload_results is defined
