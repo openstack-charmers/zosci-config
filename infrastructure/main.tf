@@ -652,6 +652,9 @@ resource "kubernetes_stateful_set" "zookeeper" {
           }
         }
 
+        image_pull_secrets {
+          name = kubernetes_secret.docker_registry.metadata[0].name
+        }
         container {
           name    = "zookeeper"
           image   = "docker.io/library/zookeeper:3.8.4"
@@ -791,7 +794,7 @@ resource "kubernetes_stateful_set" "zookeeper" {
             failure_threshold     = 2
           }
 
-          image_pull_policy = "IfNotPresent"
+          image_pull_policy = var.image_pull_policy
         }
 
         termination_grace_period_seconds = 1800
@@ -950,6 +953,9 @@ resource "kubernetes_stateful_set" "zuul_scheduler" {
                 }
             }
             spec {
+              image_pull_secrets {
+                name = kubernetes_secret.docker_registry.metadata[0].name
+              }
                 container {
                     name = "scheduler"
                     image = var.zuul_scheduler_image
@@ -1068,6 +1074,9 @@ resource "kubernetes_deployment" "zuul_web" {
                 }
             }
             spec {
+              image_pull_secrets {
+                name = kubernetes_secret.docker_registry.metadata[0].name
+              }
                 container {
                     name = "web"
                     image = var.zuul_web_image
@@ -1134,6 +1143,9 @@ resource "kubernetes_deployment" "zuul_fingergw" {
                 }
             }
             spec {
+              image_pull_secrets {
+                name = kubernetes_secret.docker_registry.metadata[0].name
+              }
                 container {
                     name = "fingergw"
                     image = var.zuul_fingergw_image
@@ -1207,10 +1219,13 @@ resource "kubernetes_stateful_set" "zuul_executor" {
                   run_as_group = "10001"
                   fs_group     = "10001"
                 }
+              image_pull_secrets {
+                name = kubernetes_secret.docker_registry.metadata[0].name
+              }
                 init_container {
                   name                = "init-chown-data"
                   image               = "busybox:latest"
-                  image_pull_policy   = "IfNotPresent"
+                  image_pull_policy   = var.image_pull_policy
                   command             = ["/bin/sh", "-c"]
                   args = ["mkdir /var/lib/zuul/.ssh && chmod 700 /var/lib/zuul/.ssh && cp /zuul/.ssh/id_rsa /var/lib/zuul/.ssh/ && chmod 600 /var/lib/zuul/.ssh/id_rsa"]
 
@@ -1332,6 +1347,9 @@ resource "kubernetes_stateful_set" "zuul_merger" {
                   run_as_group    = "10001"
                   fs_group        = "10001"
                 }
+              image_pull_secrets {
+                name = kubernetes_secret.docker_registry.metadata[0].name
+              }
                 container {
                     name = "merger"
                     image = var.zuul_merger_image
@@ -1447,6 +1465,9 @@ resource "kubernetes_deployment" "zuul_preview" {
                 }
             }
             spec {
+              image_pull_secrets {
+                name = kubernetes_secret.docker_registry.metadata[0].name
+              }
                 container {
                     name = "preview"
                     image = var.zuul_preview_image
