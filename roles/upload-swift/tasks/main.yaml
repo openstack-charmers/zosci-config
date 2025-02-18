@@ -42,6 +42,12 @@
     - name: Print log URL
       debug:
         var: upload_results.url
+    - name: Print zuul log URL
+      debug:
+        var: "https://openstack-ci-reports.ubuntu.com/artifacts{{ upload_results.url.split('zosci-artifacts') | list | last }}/"
+    - name: Print zuul log URL 2
+      debug:
+        var: zuul_log_url
     - name: Print upload failures
       debug:
         var: upload_results.upload_failures
