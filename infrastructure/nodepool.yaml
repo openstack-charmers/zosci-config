@@ -37,7 +37,7 @@ providers:
       python-path: /usr/bin/python3
   pools:
     - name: main
-      max-servers: 3
+      max-servers: 10
       auto-floating-ip: false
       networks:
         - net_stg-openstack-zosci
