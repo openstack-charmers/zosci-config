@@ -79,8 +79,8 @@
       --bootstrap-constraints="virt-type=kvm cores=4 mem=8G" \
       --constraints=virt-type=kvm \
       --auto-upgrade=false \
-      --model-default=/home/ubuntu/charm-test-infra/juju-configs/model-default-serverstack.yaml \
-      --config=/home/ubuntu/charm-test-infra/juju-configs/controller-default.yaml \
+      --model-default=/home/ubuntu/charm-test-infra/juju-configs/model-default-ps6.yaml \
+      --config=/home/ubuntu/charm-test-infra/juju-configs/controller-default-ps6.yaml \
       {{ ps6_cloud.region_name }}/{{ ps6_cloud.region_name }}
 - name: 'Add default juju model if needed'
   shell:
