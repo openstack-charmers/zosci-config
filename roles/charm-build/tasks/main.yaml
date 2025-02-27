@@ -71,7 +71,7 @@
     executable: /bin/bash
   shell: |
     set -x
-    curl -o /tmp/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 http://10.245.161.162:80/swift/v1/zuul-built-charms/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 || true
+    curl -o /tmp/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 https://radosgw.ps6.canonical.com:443/swift/v1/AUTH_2083b407a6754ab4b31ce1358b4f9bc8/zuul-built-charms/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 || true
     tar -C {{ zuul.project.src_dir }} -xvjf /tmp/{{ charm_build_name }}-{{ zuul.buildset }}.tar.bz2 && \
       ls -l {{ zuul.project.src_dir }}/*.charm && \
       echo "successfully fetched built {{ charm_build_name }}" || \
