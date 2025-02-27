@@ -1,4 +1,4 @@
 - name: Setup Trilio Vault license
   get_url:
-    url: "http://10.245.161.162/swift/v1/licenses/Canonical_Partner_15compute_08112024.lic"
+    url: "https://radosgw.ps6.canonical.com:443/swift/v1/AUTH_2083b407a6754ab4b31ce1358b4f9bc8/openstack-licenses/Canonical_Partner_15compute_08112024.lic"
     dest: /tmp/tvault-license.lic
