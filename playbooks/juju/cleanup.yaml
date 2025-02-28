@@ -17,7 +17,7 @@
     - name: 'destroy controller'
       args:
         executable: /bin/bash
-      shell: >
+      shell: |
         set -x
         if [ "$(juju --version | cut -d. -f 1)" == "2" ]; then
             timeout 120 juju destroy-controller --destroy-all-models --destroy-storage -y {{ ps6_cloud.region_name }}-{{ ps6_cloud.region_name }}
@@ -28,7 +28,7 @@
     - name: 'kill controller'
       args:
         executable: /bin/bash
-      shell: >
+      shell: |
         set -x
         if [ "$(juju --version | cut -d. -f 1)" == "2" ]; then
             juju kill-controller -t 120s -y {{ ps6_cloud.region_name }}-{{ ps6_cloud.region_name }}
