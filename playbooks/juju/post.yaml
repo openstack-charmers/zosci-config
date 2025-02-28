@@ -75,6 +75,6 @@
         if [ "$(juju --version | cut -d. -f 1)" == "2" ]; then
           juju kill-controller -t 120s -y {{ ps6_cloud.region_name }}-{{ ps6_cloud.region_name }}
         else
-          juju kill-controller -t 120s -no-prompt {{ ps6_cloud.region_name }}-{{ ps6_cloud.region_name }}
+          juju kill-controller -t 120s --no-prompt {{ ps6_cloud.region_name }}-{{ ps6_cloud.region_name }}
         fi
       failed_when: false
