@@ -7,7 +7,7 @@
         set -o pipefail
         set -x
         for model in $(juju models | grep zaza- | awk '{gsub(/\*?/,""); print $1}'); do
-          if [ "$(juju --version | cut -d. -f 1)" == "2" ];
+          if [ "$(juju --version | cut -d. -f 1)" == "2" ]; then
             juju remove-machine --model $model --force $(seq 0 100)
           else
             juju remove-machine --model $model --force --no-prompt $(seq 0 100)
@@ -19,7 +19,7 @@
         executable: /bin/bash
       shell: >
         set -x
-        if [ "$(juju --version | cut -d. -f 1)" == "2" ];
+        if [ "$(juju --version | cut -d. -f 1)" == "2" ]; then
             timeout 120 juju destroy-controller --destroy-all-models --destroy-storage -y {{ ps6_cloud.region_name }}-{{ ps6_cloud.region_name }}
         else
             timeout 120 juju destroy-controller --destroy-all-models --destroy-storage --no-prompt {{ ps6_cloud.region_name }}-{{ ps6_cloud.region_name }}
@@ -30,7 +30,7 @@
         executable: /bin/bash
       shell: >
         set -x
-        if [ "$(juju --version | cut -d. -f 1)" == "2" ];
+        if [ "$(juju --version | cut -d. -f 1)" == "2" ]; then
             juju kill-controller -t 120s -y {{ ps6_cloud.region_name }}-{{ ps6_cloud.region_name }}
         else
             juju kill-controller -t 120s --no-prompt {{ ps6_cloud.region_name }}-{{ ps6_cloud.region_name }}
