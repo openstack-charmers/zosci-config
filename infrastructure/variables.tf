@@ -107,3 +107,13 @@ variable "image_pull_policy" {
   default     = "IfNotPresent"  # alternatively use "Always"
   description = "Image pull policy"
 }
+
+variable "vip_network_id" {
+  type        = string
+  description = "ID of the network that will be used to allocate VIP ports from"
+}
+
+variable "vip_subnet_id" {
+  type        = string
+  description = "ID of the subnet that will be used to allocate VIP ports from"
+}

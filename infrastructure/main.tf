@@ -38,6 +38,8 @@ module "openstack_bootstrap" {
   keypair_name         = "nodepool"
   keypair_public_key   = file("${var.nodepool_ssh_key_path}")
   k8s_cluster_secgroup = var.k8s_cluster_secgroup
+  vip_network_id       = var.vip_network_id
+  vip_subnet_id        = var.vip_subnet_id
 }
 
 data "template_file" "docker_config_script" {
@@ -1517,4 +1519,9 @@ resource "kubernetes_service_v1" "zuul_web_service" {
       target_port = "9000"
     }
   }
+}
+
+output "vip_addresses" {
+  description = "List of IP addresses allocated to be used as virtual IPs"
+  value       = module.openstack_bootstrap.vip_addresses
 }
