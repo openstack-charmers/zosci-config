@@ -22,8 +22,9 @@
                 - osci.d/
       opendev:
         untrusted-projects:
-          - openstack/charm-zuul-jobs
           - zuul/zuul-jobs:
+              shadow: openstack-charmers/zosci-config
+          - openstack/charm-zuul-jobs:
               shadow: openstack-charmers/zosci-config
       gerrit:
         untrusted-projects:
