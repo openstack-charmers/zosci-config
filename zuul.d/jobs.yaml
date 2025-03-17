@@ -265,27 +265,11 @@
         TEST_FIP_END: "{{ network }}.229"
         TEST_FIP_RANGE: "{{ network }}.200:{{ network }}.229"
         TEST_SWIFT_IP: 10.245.161.162
-        TEST_VIP00: "{{network }}.230"
-        TEST_VIP01: "{{ network }}.231"
-        TEST_VIP02: "{{ network }}.232"
-        TEST_VIP03: "{{ network }}.233"
-        TEST_VIP04: "{{ network }}.234"
-        TEST_VIP05: "{{ network }}.235"
-        TEST_VIP06: "{{ network }}.236"
-        TEST_VIP07: "{{ network }}.237"
-        TEST_VIP08: "{{ network }}.238"
-        TEST_VIP09: "{{ network }}.239"
-        TEST_VIP10: "{{ network }}.240"
-        TEST_VIP11: "{{ network }}.241"
-        TEST_VIP12: "{{ network }}.242"
-        TEST_VIP13: "{{ network }}.243"
-        TEST_VIP14: "{{ network }}.244"
-        TEST_VIP15: "{{ network }}.245"
-        TEST_VIP16: "{{ network }}.246"
-        TEST_VIP17: "{{ network }}.247"
-        TEST_VIP18: "{{ network }}.248"
-        TEST_VIP19: "{{ network }}.249"
-        TEST_VIP20: "{{ network }}.250"
+        TEST_VIP00: 10.142.142.177
+        TEST_VIP01: 10.142.142.138
+        TEST_VIP02: 10.142.142.220
+        TEST_VIP03: 10.142.142.159
+        TEST_VIP04: 10.142.142.73
         TEST_VIP: "{{ network }}.230"
         TEST_VIP_RANGE: "{{ network }}.230:{{ network }}.250"
         # Legacy variables
@@ -296,27 +280,11 @@
         FIP_START: "{{ network }}.200"
         FIP_END: "{{ network }}.229"
         FIP_RANGE: "{{ network }}.200:{{ network }}.229"
-        OS_VIP00: "{{network }}.230"
-        OS_VIP01: "{{ network }}.231"
-        OS_VIP02: "{{ network }}.232"
-        OS_VIP03: "{{ network }}.233"
-        OS_VIP04: "{{ network }}.234"
-        OS_VIP05: "{{ network }}.235"
-        OS_VIP06: "{{ network }}.236"
-        OS_VIP07: "{{ network }}.237"
-        OS_VIP08: "{{ network }}.238"
-        OS_VIP09: "{{ network }}.239"
-        OS_VIP10: "{{ network }}.240"
-        OS_VIP11: "{{ network }}.241"
-        OS_VIP12: "{{ network }}.242"
-        OS_VIP13: "{{ network }}.243"
-        OS_VIP14: "{{ network }}.244"
-        OS_VIP15: "{{ network }}.245"
-        OS_VIP16: "{{ network }}.246"
-        OS_VIP17: "{{ network }}.247"
-        OS_VIP18: "{{ network }}.248"
-        OS_VIP19: "{{ network }}.249"
-        OS_VIP20: "{{ network }}.250"
+        OS_VIP00: 10.142.142.177
+        OS_VIP01: 10.142.142.138
+        OS_VIP02: 10.142.142.220
+        OS_VIP03: 10.142.142.159
+        OS_VIP04: 10.142.142.73
         VIP_RANGE: "{{ network }}.230:{{ network }}.250"
         OS_AUTH_URL: "{{ ps6_cloud.auth.auth_url }}"
         OS_USERNAME: "{{ ps6_cloud.auth.username }}"
