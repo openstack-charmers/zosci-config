@@ -40,6 +40,7 @@ module "openstack_bootstrap" {
   k8s_cluster_secgroup = var.k8s_cluster_secgroup
   vip_network_id       = var.vip_network_id
   vip_subnet_id        = var.vip_subnet_id
+  num_vips             = var.num_vips
 }
 
 data "template_file" "docker_config_script" {
@@ -1519,6 +1520,11 @@ resource "kubernetes_service_v1" "zuul_web_service" {
       target_port = "9000"
     }
   }
+}
+
+resource "local_file" "file_vips" {
+  filename = "${path.module}/vips.txt"
+  content  = join("\n", [for k, v in module.openstack_bootstrap.vip_addresses: "${k}: ${v}"])
 }
 
 output "vip_addresses" {

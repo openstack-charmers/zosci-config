@@ -38,7 +38,7 @@ resource "openstack_networking_secgroup_rule_v2" "zosci_secgroup_rule_allow_k8s"
 # the ip address can be used as virtual ip address (VIP).
 resource "openstack_networking_port_v2" "vip_port" {
   count                 = var.num_vips
-  name                  = "${format("zosci_port_vip_%02d", count.index)}"
+  name                  = "${format("TEST_VIP%02d", count.index)}"
   network_id            = var.vip_network_id
   admin_state_up        = false
   port_security_enabled = false
@@ -62,6 +62,6 @@ resource "openstack_networking_port_v2" "vip_port" {
 # }
 
 output "vip_addresses" {
-  value       = openstack_network_port_v2.vip_port[*].fixed_ip.ip_address
+  value       = {for item in openstack_networking_port_v2.vip_port : item.name => item.all_fixed_ips[0]}
   description = "Ports allocated to be used as virtual IP addresses"
 }

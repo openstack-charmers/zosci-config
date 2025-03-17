@@ -21,7 +21,7 @@ variable "k8s_cluster_secgroup" {
 
 variable "num_vips" {
   type        = number
-  default     = 3
+  default     = 0
   description = "Number of IP addresses to allocate and use as VIPs"
 }
 

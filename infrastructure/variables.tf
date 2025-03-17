@@ -117,3 +117,9 @@ variable "vip_subnet_id" {
   type        = string
   description = "ID of the subnet that will be used to allocate VIP ports from"
 }
+
+variable "num_vips" {
+  type        = number
+  default     = 0
+  description = "Number of ports to allocate that will be used as virtual IP addresses"
+}
