@@ -490,7 +490,7 @@
         soft: true
       - osci-lint
       - charm-build
-    vars: !inherit
+    vars:
       tox_extra_args: '-- noble-caracal'
       charmcraft_channel: '3.x/stable'
       # NOTE: the next two variables need to be updated together, because the
