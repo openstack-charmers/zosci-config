@@ -492,14 +492,14 @@
       - charm-build
     vars:
       tox_extra_args: '-- noble-caracal'
-      charmcraft_channel: '3.x/beta'
+      charmcraft_channel: '3.x/stable'
       # NOTE: the next two variables need to be updated together, because the
       # constraints have pinning to install the right version of python-libjuju
       # based on what snap channel is being used to bootstrap the controller
       # from.
       juju_snap_channel: '3.5/stable'
       pip_constraints_url: 'https://raw.githubusercontent.com/openstack-charmers/zaza-openstack-tests/master/constraints/constraints-noble.txt'
-      tox_environment:
+      tox_environment: !inherit
         TEST_JUJU3: "1"
 - job:
     name: mantic-bobcat
