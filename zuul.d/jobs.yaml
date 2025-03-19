@@ -848,6 +848,15 @@
     secrets:
       - sqalab_environment
 
+- job:
+    name: openstack-tox
+    abstract: true
+    parent: tox
+    nodeset: noble-medium
+    description: |
+      Base job to run tox jobs with OpenStack project specific updates.
+
+      Processing upper-constraints files from openstack/requirements.
 # python versions
 - job:
     name: openstack-tox-py36
