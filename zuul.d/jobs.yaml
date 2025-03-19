@@ -61,6 +61,88 @@
       tox_envlist: linters
       bindep_profile: test linters
 - job:
+    name: openstack-tox-pep8
+    parent: openstack-tox
+    description: |
+      Runs code pep8 tests.
+
+      Uses tox with the ``pep8`` environment.
+    vars:
+      tox_envlist: pep8
+      bindep_profile: test pep8
+      test_setup_skip: true
+- job:
+    name: openstack-tox-cover
+    parent: tox-cover
+    description: |
+      Run code coverage tests.
+
+      Uses tox with the ``cover`` environment.
+    nodeset: ubuntu-noble
+    branches:
+      regex: ^.*/(victoria|wallaby|xena|yoga|zed|2023.1|2023.2|2024.1|2024.2)$
+      negate: true
+    required-projects:
+      - name: openstack/requirements
+    irrelevant-files:  &common-irrelevant-files
+      - ^.*\.rst$
+      - ^api-ref/.*$
+      - ^doc/.*$
+      - ^releasenotes/.*$
+      - ^deliverables/.*$
+      - ^\.pre-commit-config\.yaml$
+    vars:
+      tox_constraints_file: '{{ ansible_user_dir }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
+    timeout: 3000
+
+- job:
+    name: openstack-tox-cover
+    parent: tox-cover
+    description: |
+      Run code coverage tests.
+
+      Uses tox with the ``cover`` environment.
+    nodeset: ubuntu-jammy
+    branches:
+      - ^.*/2023.1
+      - ^.*/2023.2
+      - ^.*/2024.1
+      - ^.*/2024.2
+    required-projects:
+      - name: openstack/requirements
+    irrelevant-files: *common-irrelevant-files
+    vars:
+      tox_constraints_file: '{{ ansible_user_dir }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
+    timeout: 3000
+
+- job:
+    name: openstack-tox-cover
+    parent: tox-cover
+    description: |
+      Run code coverage tests.
+
+      Uses tox with the ``cover`` environment.
+
+      This job runs on focal from stable/victoria until stable/zed.
+    nodeset: ubuntu-focal
+    branches:
+      - ^.*/victoria
+      - ^.*/wallaby
+      - ^.*/xena
+      - ^.*/yoga
+      - ^.*/zed
+    required-projects:
+      - name: openstack/requirements
+    irrelevant-files: *common-irrelevant-files
+    vars:
+      tox_constraints_file: '{{ ansible_user_dir }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
+      # NOTE(gmann): This is stable branch (<=(stable|unmaintained)/zed) job and new
+      # tox 4 require some changes in tox.ini to be compatible with it. Let's
+      # pin tox <4 for stable branches testing (<=(stable|unmaintained)/zed).
+      ensure_tox_version: '<4'
+    timeout: 3000
+
+- job:
     name: openstack-tox-with-sudo
     parent: tox
     timeout: 14400
