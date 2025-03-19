@@ -1,0 +1,8 @@
+---
+tox_environment: {}
+tox_executable: tox
+tox_extra_args: -vv --skip-missing-interpreters=false
+tox_install_siblings: true
+tox_inline_comments: true
+
+zuul_work_dir: "{{ zuul.project.src_dir }}"

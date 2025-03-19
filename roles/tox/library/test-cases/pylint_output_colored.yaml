@@ -1,0 +1,21 @@
+---
+workdir: .
+output: "\
+  tests/__init__.py:2808:8: E1120: \e[1;31mNo value for argument 'get_storage_profile_id' in method call\e[0m (\e[1;31mno-value-for-parameter\e[0m)\n\
+  tests/__init__.py:2808:8: E1120: \e[1;31mNo value for argument 'select_ds_for_volume' in method call\e[0m (\e[1;31mno-value-for-parameter\e[0m)\n\
+  tests/__init__.py:2812:8: E1120: \e[1;31mNo value for argument 'get_adapter_type' in method call\e[0m (\e[1;31mno-value-for-parameter\e[0m)\n\
+  tests/__init__.py:2812:8: E1120: \e[1;31mNo value for argument 'get_disk_type' in method call\e[0m (\e[1;31mno-value-for-parameter\e[0m)\n\
+  tests/__init__.py:2812:8: E1120: \e[1;31mNo value for argument 'vops' in method call\e[0m (\e[1;31mno-value-for-parameter\e[0m)\n\
+  "
+comments:
+  tests/__init__.py:
+    - line: 2808
+      message: "E1120: No value for argument 'get_storage_profile_id' in method call (no-value-for-parameter)"
+    - line: 2808
+      message: "E1120: No value for argument 'select_ds_for_volume' in method call (no-value-for-parameter)"
+    - line: 2812
+      message: "E1120: No value for argument 'get_adapter_type' in method call (no-value-for-parameter)"
+    - line: 2812
+      message: "E1120: No value for argument 'get_disk_type' in method call (no-value-for-parameter)"
+    - line: 2812
+      message: "E1120: No value for argument 'vops' in method call (no-value-for-parameter)"

@@ -1,0 +1,86 @@
+- name: Check to see if the constraints file exists
+  stat:
+    path: "{{ tox_constraints_file }}"
+    get_checksum: false
+    get_mime: false
+  register: stat_results
+  when: tox_constraints_file is defined
+
+- name: Fail if constraints file is missing
+  when: tox_constraints_file is defined and not stat_results.stat.exists
+  fail:
+    msg: tox_constraints_file is defined but was not found
+
+- name: Record file location
+  set_fact:
+    tox_constraints_env:
+      TOX_CONSTRAINTS_FILE: "{{ tox_constraints_file }}"
+      # Backward compatibility, to be removed
+      UPPER_CONSTRAINTS_FILE: "{{ tox_constraints_file }}"
+  when: tox_constraints_file is defined
+
+- name: Install tox siblings
+  include_tasks: siblings.yaml
+  when: tox_install_siblings
+
+- name: Emit tox command
+  debug:
+    msg: >-
+      {{ tox_executable }}
+      {% if tox_config_file is defined and tox_config_file %}
+      -c{{ tox_config_file }}
+      {% endif %}
+      {% if tox_envlist is defined and tox_envlist %}
+      -e{{ tox_envlist }}
+      {% endif %}
+      {{ tox_extra_args }}
+
+- name: Run tox
+  block:
+    - name: Debug env vars
+      args:
+        chdir: "{{ zuul_work_dir }}"
+      environment: "{{ tox_environment | combine(tox_constraints_env | default({})) }}"
+      command: |
+        env
+    - name: Print tox_environment
+      debug:
+        var: tox_environment
+    - name: Run tox
+      args:
+        chdir: "{{ zuul_work_dir }}"
+      environment: "{{ tox_environment | combine(tox_constraints_env | default({})) }}"
+      command: >-
+        {{ tox_executable }}
+        {% if tox_config_file is defined and tox_config_file %}
+        -c{{ tox_config_file }}
+        {% endif %}
+        {% if tox_envlist is defined and tox_envlist %}
+        -e{{ tox_envlist }}
+        {% endif %}
+        {{ tox_extra_args }}
+      register: tox_output
+
+  # Even though any test environment in tox failed we want to
+  # return file comments produced so always run this.
+  always:
+    - name: Look for output
+      tox_parse_output:
+        tox_output: '{{ tox_output.stdout }}'
+        tox_envlist: '{{ tox_envlist | default("default") }}'
+        workdir: '{{ zuul_work_dir }}'
+      when: tox_inline_comments
+      register: file_comments
+      failed_when: false
+
+    - name: Return file comments to Zuul
+      when:
+        - tox_inline_comments
+        - file_comments.file_comments is defined
+        - file_comments.file_comments
+      delegate_to: localhost
+      zuul_return:
+        data:
+          zuul:
+            file_comments: '{{ file_comments.file_comments }}'
+      failed_when: false

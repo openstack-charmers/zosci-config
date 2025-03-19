@@ -1,0 +1,10 @@
+---
+workdir: .
+output: |
+  tests/test_discovery.py:25: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+    config = yaml.load(open('hiera/common.yaml', 'r'))
+  tests/test_discovery.py:714: UserWarning: Policy "foo:create_bar":"role:fizz" was deprecated in N in favor of "foo:create_bar":"". Reason: because of reasons. Either ensure your deployment is ready for the new default or copy/paste the deprecated policy into your policy file and maintain it manually.
+    warnings.warn(deprecated_msg)
+   WARNING [oslo_policy.policy] Policies ['foo', 'bar'] are part of a cyclical reference.
+   WARNING [oslo_policy.policy] Policies ['foo', 'bar'] are part of a cyclical reference.
+comments: {}

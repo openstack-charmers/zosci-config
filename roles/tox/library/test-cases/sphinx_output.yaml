@@ -1,0 +1,23 @@
+---
+workdir: .
+output: |
+  reading sources... [ 95%] reference/web
+  reading sources... [ 97%] tutorials/admin
+  reading sources... [ 98%] tutorials/quick-start
+  reading sources... [100%] tutorials/user
+
+  unable to find release notes file associated with unique id '4b4ecb4678c11470', skipping
+  unable to find release notes file associated with unique id 'df1645c63e82f65c', skipping
+
+  Warning, treated as error:
+  {workdir}/CONTRIBUTING.rst:96:Unknown directive type "code-blockf".
+
+  .. code-blockf:: shell
+
+     echo "test" > README.txt
+     git add .
+     git commit -m "First commit"
+comments:
+  CONTRIBUTING.rst:
+    - line: 96
+      message: Unknown directive type "code-blockf".

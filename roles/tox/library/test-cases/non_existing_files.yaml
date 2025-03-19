@@ -1,0 +1,7 @@
+---
+workdir: .
+output: |
+  {{1}} keystoneauth1.tests.unit.test_fair_sempahore.SemaphoreTests.test_semaphore_fast_multiple_concurrency [0.004427s] ... ok
+  stdin:1:1: K333  'import oslo_utils' must be used instead of 'import oslo.utils'.
+  /dev/stdin:3:1: K333  'import oslo_utils.encodeutils' must be used instead of 'import oslo.utils.encodeutils'.
+comments: {}

@@ -1,0 +1,48 @@
+# Install sibling with tox so we can replace them later
+- name: Run tox without tests
+  command: >-
+    {{ tox_executable }}
+    {% if tox_config_file is defined and tox_config_file %}
+    -c{{ tox_config_file }}
+    {% endif %}
+    --notest
+    {% if tox_envlist is defined and tox_envlist %}
+    -e{{ tox_envlist }}
+    {% endif %}
+    {{ tox_extra_args }}
+  args:
+    chdir: "{{ zuul_work_dir }}"
+  environment: "{{ tox_environment | combine(tox_constraints_env | default({})) }}"
+
+# This is needed since python < 3.2 can't parse ini files from strings
+- name: Create a tempfile to save tox showconfig
+  tempfile:
+  register: _tox_show_config_tempfile
+
+- name: Get tox envlist config
+  shell: >-
+    {{ tox_executable }}
+    {% if tox_config_file is defined and tox_config_file %}
+    -c{{ tox_config_file }}
+    {% endif %}
+    --showconfig
+    {% if tox_envlist is defined and tox_envlist %}
+    -e{{ tox_envlist }}
+    {% endif %}
+    > {{ _tox_show_config_tempfile.path }}
+  args:
+    chdir: "{{ zuul_work_dir }}"
+  environment: "{{ tox_environment | combine(tox_constraints_env | default({})) }}"
+
+- name: Install any sibling python packages
+  tox_install_sibling_packages:
+    tox_show_config: "{{ _tox_show_config_tempfile.path }}"
+    tox_constraints_file: "{{ tox_constraints_file | default(omit) }}"
+    tox_package_name: "{{ tox_package_name | default(omit) }}"
+    project_dir: "{{ zuul_work_dir }}"
+    projects: "{{ zuul.projects.values() | selectattr('required') | list }}"
+
+- name: Remove tempfile
+  file:
+    state: absent
+    path: "{{ _tox_show_config_tempfile.path }}"

@@ -1,0 +1,25 @@
+---
+workdir: .
+output: |
+  tests/__init__.py:86:12: E111 indentation is not a multiple of four
+             return self._normalize_machine(self.baremetal.get_node(name_or_id))
+             ^
+  ./tests/__init__.py:90:32: E231 missing whitespace after ','
+      def get_machine_by_mac(self,mac):
+                                 ^
+  # This should be ignored
+  /openstack/cloud/_baremetal.py:218:46: E128 continuation line under-indented for visual indent
+                                              json=kwargs,
+                                              ^
+  tests/test_discovery.py:219:46: E128 continuation line under-indented for visual indent
+                                               error_message=msg,
+                                               ^
+comments:
+  tests/__init__.py:
+    - line: 86
+      message: E111 indentation is not a multiple of four
+    - line: 90
+      message: E231 missing whitespace after ','
+  tests/test_discovery.py:
+    - line: 219
+      message: E128 continuation line under-indented for visual indent
