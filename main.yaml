@@ -24,8 +24,8 @@
         untrusted-projects:
           - zuul/zuul-jobs:
               shadow: openstack-charmers/zosci-config
-          - openstack/openstack-zuul-jobs:
-              shadow: openstack-charmers/zosci-config
+          # - openstack/openstack-zuul-jobs:
+          #     shadow: openstack-charmers/zosci-config
           - openstack/charm-zuul-jobs:
               shadow: openstack-charmers/zosci-config
       gerrit:
