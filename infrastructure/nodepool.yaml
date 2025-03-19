@@ -44,6 +44,10 @@ providers:
       security-groups:
         - zosci-sec-group
       labels:
+        - name: noble-medium
+          flavor-name: 'staging-cpu4-ram8-disk50'
+          cloud-image: noble
+          key-name: nodepool
         - name: jammy-medium
           flavor-name: 'staging-cpu4-ram8-disk50'
           cloud-image: jammy
@@ -58,6 +62,7 @@ providers:
           key-name: nodepool
 
 labels:
+  - name: noble-medium
   - name: jammy-medium
     min-ready: 1
   - name: focal-medium # defines label that will be used in jobs
