@@ -78,41 +78,7 @@
       Run code coverage tests.
 
       Uses tox with the ``cover`` environment.
-    nodeset: ubuntu-noble
-    branches:
-      regex: ^.*/(victoria|wallaby|xena|yoga|zed|2023.1|2023.2|2024.1|2024.2)$
-      negate: true
-    required-projects:
-      - name: openstack/requirements
-    irrelevant-files:  &common-irrelevant-files
-      - ^.*\.rst$
-      - ^api-ref/.*$
-      - ^doc/.*$
-      - ^releasenotes/.*$
-      - ^deliverables/.*$
-      - ^\.pre-commit-config\.yaml$
-    vars:
-      tox_constraints_file: '{{ ansible_user_dir }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
-    timeout: 3000
-
-- job:
-    name: openstack-tox-cover
-    parent: tox-cover
-    description: |
-      Run code coverage tests.
-
-      Uses tox with the ``cover`` environment.
-    nodeset: ubuntu-jammy
-    branches:
-      - ^.*/2023.1
-      - ^.*/2023.2
-      - ^.*/2024.1
-      - ^.*/2024.2
-    required-projects:
-      - name: openstack/requirements
-    irrelevant-files: *common-irrelevant-files
-    vars:
-      tox_constraints_file: '{{ ansible_user_dir }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
+    nodeset: jammy-medium
     timeout: 3000
 
 - job:
@@ -133,7 +99,6 @@
       - ^.*/zed
     required-projects:
       - name: openstack/requirements
-    irrelevant-files: *common-irrelevant-files
     vars:
       tox_constraints_file: '{{ ansible_user_dir }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
       # NOTE(gmann): This is stable branch (<=(stable|unmaintained)/zed) job and new
@@ -882,3 +847,118 @@
     abstract: true
     secrets:
       - sqalab_environment
+
+# python versions
+- job:
+    name: openstack-tox-py36
+    parent: openstack-tox
+    nodeset: ubuntu-bionic
+    timeout: 2400
+    description: |
+
+      Run unit tests for an OpenStack Python project under cPython
+      version 3.6.
+
+      Uses tox with the ``py36`` environment.
+    vars:
+      tox_envlist: py36
+      bindep_profile: test py36
+
+- job:
+    name: openstack-tox-py37
+    parent: openstack-tox
+    nodeset: bionic-medium
+    timeout: 2400
+    description: |
+
+      Run unit tests for an OpenStack Python project under cPython
+      version 3.7.
+
+      Uses tox with the ``py37`` environment.
+    vars:
+      tox_envlist: py37
+      bindep_profile: test py37
+      python_version: '3.7'
+
+- job:
+    name: openstack-tox-py38
+    parent: openstack-tox
+    nodeset: ubuntu-focal
+    timeout: 2400
+    description: |
+
+      Run unit tests for an OpenStack Python project under cPython
+      version 3.8 on ubuntu focal.
+
+      This job runs with tox<4 from stable/victortia till stable/zed.
+
+      Uses tox with the ``py38`` environment.
+    vars:
+      tox_envlist: py38
+      bindep_profile: test py38
+      python_version: '3.8'
+
+- job:
+    name: openstack-tox-py39
+    parent: openstack-tox
+    nodeset: ubuntu-focal
+    timeout: 2400
+    description: |
+
+      Run unit tests for an OpenStack Python project under cPython
+      version 3.9.
+
+      Uses tox with the ``py39`` environment.
+    vars:
+      tox_envlist: py39
+      bindep_profile: test py39
+      python_version: '3.9'
+
+- job:
+    name: openstack-tox-py310
+    parent: openstack-tox
+    nodeset: jammy-medium
+    timeout: 2400
+    description: |
+
+      Run unit tests for an OpenStack Python project under cPython
+      version 3.10.
+
+      Uses tox with the ``py310`` environment.
+    vars:
+      tox_envlist: py310
+      bindep_profile: test py310
+      python_version: '3.10'
+
+- job:
+    name: openstack-tox-py312
+    parent: openstack-tox
+    nodeset: noble-medium
+    timeout: 2400
+    description: |
+
+      Run unit tests for an OpenStack Python project under cPython
+      version 3.12.
+
+      Uses tox with the ``py312`` environment.
+    vars:
+      tox_envlist: py312
+      bindep_profile: test py312
+      python_version: '3.12'
+
+- job:
+    name: openstack-tox-py313
+    parent: openstack-tox
+    nodeset: noble-medium
+    timeout: 2400
+    description: |
+
+      Run unit tests for an OpenStack Python project under cPython
+      version 3.13.
+
+      Uses tox with the ``py313`` environment.
+    vars:
+      tox_envlist: py313
+      bindep_profile: test py313
+      python_use_pyenv: True
+      python_version: '3.13'
