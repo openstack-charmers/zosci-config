@@ -82,32 +82,6 @@
     timeout: 3000
 
 - job:
-    name: openstack-tox-cover
-    parent: tox-cover
-    description: |
-      Run code coverage tests.
-
-      Uses tox with the ``cover`` environment.
-
-      This job runs on focal from stable/victoria until stable/zed.
-    nodeset: focal-medium
-    branches:
-      - ^.*/victoria
-      - ^.*/wallaby
-      - ^.*/xena
-      - ^.*/yoga
-      - ^.*/zed
-    required-projects:
-      - name: openstack/requirements
-    vars:
-      tox_constraints_file: '{{ ansible_user_dir }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
-      # NOTE(gmann): This is stable branch (<=(stable|unmaintained)/zed) job and new
-      # tox 4 require some changes in tox.ini to be compatible with it. Let's
-      # pin tox <4 for stable branches testing (<=(stable|unmaintained)/zed).
-      ensure_tox_version: '<4'
-    timeout: 3000
-
-- job:
     name: openstack-tox-with-sudo
     parent: tox
     timeout: 14400
