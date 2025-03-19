@@ -90,7 +90,7 @@
       Uses tox with the ``cover`` environment.
 
       This job runs on focal from stable/victoria until stable/zed.
-    nodeset: ubuntu-focal
+    nodeset: focal-medium
     branches:
       - ^.*/victoria
       - ^.*/wallaby
@@ -892,7 +892,7 @@
 - job:
     name: openstack-tox-py38
     parent: openstack-tox
-    nodeset: ubuntu-focal
+    nodeset: focal-medium
     timeout: 2400
     description: |
 
@@ -910,7 +910,7 @@
 - job:
     name: openstack-tox-py39
     parent: openstack-tox
-    nodeset: ubuntu-focal
+    nodeset: focal-medium
     timeout: 2400
     description: |
 
