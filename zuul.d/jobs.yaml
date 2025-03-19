@@ -304,35 +304,35 @@
     vars:
       tox_environment:
         TEST_NET_ID: "b076cb92-6c00-49df-8b49-0747df2cfa96"  # net_stg-openstack-zosci
-        TEST_CIDR_EXT: "{{ cidr_ext }}"
-        TEST_CIDR_END: "{{ network }}.254"
+        # TEST_CIDR_EXT: "{{ cidr_ext }}"
+        # TEST_CIDR_END: "{{ network }}.254"
         TEST_GATEWAY: 172.16.0.1
         TEST_NAME_SERVER: 10.245.160.2
-        TEST_FIP_START: "{{ network }}.200"
-        TEST_FIP_END: "{{ network }}.229"
-        TEST_FIP_RANGE: "{{ network }}.200:{{ network }}.229"
+        # TEST_FIP_START: "{{ network }}.200"
+        # TEST_FIP_END: "{{ network }}.229"
+        # TEST_FIP_RANGE: "{{ network }}.200:{{ network }}.229"
         TEST_SWIFT_IP: 10.245.161.162
         TEST_VIP00: 10.142.142.177
         TEST_VIP01: 10.142.142.138
         TEST_VIP02: 10.142.142.220
         TEST_VIP03: 10.142.142.159
         TEST_VIP04: 10.142.142.73
-        TEST_VIP: "{{ network }}.230"
-        TEST_VIP_RANGE: "{{ network }}.230:{{ network }}.250"
+        # TEST_VIP: "{{ network }}.230"
+        # TEST_VIP_RANGE: "{{ network }}.230:{{ network }}.250"
         # Legacy variables
-        CIDR_EXT: "{{ cidr_ext }}"
-        CIDR_END: "{{ network }}.254"
+        # CIDR_EXT: "{{ cidr_ext }}"
+        # CIDR_END: "{{ network }}.254"
         GATEWAY: 172.16.0.1
         NAME_SERVER: 10.245.160.2
-        FIP_START: "{{ network }}.200"
-        FIP_END: "{{ network }}.229"
-        FIP_RANGE: "{{ network }}.200:{{ network }}.229"
+        # FIP_START: "{{ network }}.200"
+        # FIP_END: "{{ network }}.229"
+        # FIP_RANGE: "{{ network }}.200:{{ network }}.229"
         OS_VIP00: 10.142.142.177
         OS_VIP01: 10.142.142.138
         OS_VIP02: 10.142.142.220
         OS_VIP03: 10.142.142.159
         OS_VIP04: 10.142.142.73
-        VIP_RANGE: "{{ network }}.230:{{ network }}.250"
+        # VIP_RANGE: "{{ network }}.230:{{ network }}.250"
         OS_AUTH_URL: "{{ ps6_cloud.auth.auth_url }}"
         OS_USERNAME: "{{ ps6_cloud.auth.username }}"
         OS_PASSWORD: "{{ ps6_cloud.auth.password }}"
