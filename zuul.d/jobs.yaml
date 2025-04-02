@@ -221,6 +221,21 @@
       tox_envlist: py312
       python_version: '3.12'
 
+# NOTE(freyes): charmbuild job is defined in openstack/charm-zuul-jobs, it's
+# upstream's repo owned by the OpenStack Charms team, it doesn't define a
+# nodeset making it use the default, which for the case of upstream that's noble
+# at the moment of writing this, although zosci-config used focal by default,
+# hence we override the job definition to force noble-medium
+- job:
+    name: charmbuild
+    run: playbooks/charmbuild.yaml
+    provides: charm
+    timeout: 3600
+    nodeset:
+      nodes:
+        - name: noble-medium
+          label: noble-medium
+
 - job:
     name: charm-build
     description: Build a source charm into a deployable charm
