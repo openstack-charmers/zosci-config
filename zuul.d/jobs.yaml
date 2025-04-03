@@ -233,8 +233,8 @@
     timeout: 3600
     nodeset:
       nodes:
-        - name: jammy-medium
-          label: jammy-medium
+        - name: noble-medium
+          label: noble-medium
 
 - job:
     name: charm-build
