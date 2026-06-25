@@ -109,14 +109,6 @@
               - stable/24.03   # OVN
               - stable/squid
               - stable/squid-jammy
-        - mantic-bobcat:
-            voting: false
-            branches:
-              - stable/2023.2
-              - stable/1.8
-              - stable/23.09
-              - stable/reef
-              - stable/jammy
         - jammy-bobcat:
             branches:
               - stable/2024.1
