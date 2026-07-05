@@ -26,6 +26,9 @@
       -f "{{ zuul.project.src_dir }}/test-requirements*.txt" \
       -f "{{ zuul.project.src_dir }}/src/test-requirements*.txt" \
       -f "{{ zuul.project.src_dir }}/build/builds/{{ charm_name }}/test-requirements*.txt" \
+      -f "{{ zuul.project.src_dir }}/merged-requirements*.txt" \
+      -f "{{ zuul.project.src_dir }}/src/merged-requirements*.txt" \
+      -f "{{ zuul.project.src_dir }}/build/builds/{{ charm_name }}/merged-requirements*.txt" \
       {{ zuul.message }}
 
 
