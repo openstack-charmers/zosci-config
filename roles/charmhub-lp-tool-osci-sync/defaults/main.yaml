@@ -1,0 +1,3 @@
+# allow repos to use a different source to facilitate testing of new features
+# in charmhub-lp-tools branches.
+charmhub_lp_tools_pkg: "git+https://github.com/openstack-charmers/charmhub-lp-tools.git@main#egg=charmhub-lp-tools"

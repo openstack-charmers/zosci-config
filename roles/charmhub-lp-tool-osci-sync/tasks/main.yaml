@@ -1,0 +1,20 @@
+- name: Sync charm recipe definitions to Launchpad
+  environment:
+    LP_CREDENTIALS: "{{ launchpad_token.value }}"
+  block:
+    - name: Install zosci-tools
+      become: true
+      ansible.builtin.pip:
+        name: "{{ charmhub_lp_tools_pkg }}"
+      register: result
+      until: result is not failed
+      retries: 10
+      delay: 10
+    - name: Run charmhub-lp-tool osci-sync
+      args:
+        executable: /bin/bash
+        chdir: "{{ zuul.project.src_dir }}"
+      shell: |
+        export LP_CREDENTIALS_FILE=$(mktemp)
+        echo "{{ LP_CREDENTIALS }}" > $LP_CREDENTIALS_FILE
+        charmhub-lp-tool osci-sync --repo-dir '{{ zuul.project.src_dir }}' --i-really-mean-it
